@@ -58,3 +58,10 @@ Execute o projeto com Python
 | `neighborhood` | `string` | **Obrigatório** |
 | `city` | `fk` | **Obrigatório** |
 | `federal_unit` | `string` | **Obrigatório** |
+
+
+## Imagens do Projeto
+
+<img width="1480" height="913" alt="image" src="https://github.com/user-attachments/assets/3bbc221f-1733-461e-a98d-bcc8c3269955" />
+
+
