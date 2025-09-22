@@ -1,4 +1,4 @@
-# 💳🛒 Mercado Livre Payment API Integration
+# 💳 Mercado Livre Payment API Integration
 
 
 ### English Version
@@ -88,6 +88,7 @@ GET  https://api.mercadopago.com/
 POST https://api.mercadopago.com/create_payment
 ```
 GET — Base endpoint for MercadoPago API / Endpoint base da API do MercadoPago
+
 POST — Creates a payment transaction / Cria uma transação de pagamento
 
 ---
@@ -111,7 +112,6 @@ Este endpoint permite criar um pagamento usando dados de cartão de crédito via
 | `payment_method_id` | string   | ✅       | Payment method (e.g. visa) / Bandeira do cartão |
 | `payer_email`       | string   | ✅       | Customer email / Email do cliente           |
 
----
 
 ### ✅ Example Payload | Exemplo de Payload
 
@@ -159,7 +159,6 @@ Este endpoint permite que usuários realizem pagamentos usando o sistema de paga
 | `email`   | string | ✅       | Customer email / Email do cliente |
 | `CPF`     | number | ✅       | Brazilian tax ID / CPF do cliente |
 
----
 
 ### ✅ Example Payload | Exemplo de Payload
 
@@ -212,6 +211,6 @@ Este endpoint permite gerar um boleto bancário para pagamento offline.
 
 ---
 
-## Imagens do Projeto
+## Project Images / Imagens do Projeto
 
 <img width="1480" height="913" alt="image" src="https://github.com/user-attachments/assets/3bbc221f-1733-461e-a98d-bcc8c3269955" />
