@@ -368,6 +368,6 @@ Pull requests are welcome!  For large changes, consider opening an issue first t
 
 ---
 
-## Project Images / Imagens do Projeto
+## Project Images
 
 <img width="1480" height="913" alt="image" src="https://github.com/user-attachments/assets/3bbc221f-1733-461e-a98d-bcc8c3269955" />
