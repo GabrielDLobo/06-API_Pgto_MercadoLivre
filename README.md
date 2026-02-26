@@ -1,6 +1,6 @@
 # 06-API_Pgto_MercadoLivre
 
-A FastAPI-based payment integration API that connects with Mercado Pago (Mercado Livre's payment system), enabling secure and automated handling of transactions, order creation, and webhook notifications.  This project simulates a real-world e-commerce payment flow with RESTful architecture and external service communication. 
+A **FastAPI-based payment integration API** that connects with **Mercado Pago** (Mercado Livre’s payment system), enabling secure and automated handling of transactions, order creation, and webhook notifications. This project simulates a real-world e-commerce payment flow using a RESTful architecture and external service communication.
 
 ## Main Features
 
@@ -18,13 +18,44 @@ A FastAPI-based payment integration API that connects with Mercado Pago (Mercado
 
 ## Table of Contents
 
-- [Technologies](#technologies)
-- [Requirements](#requirements)
-- [Setup Instructions](#setup-instructions)
-- [Running Locally](#running-locally)
-- [API Endpoints](#api-endpoints)
-- [Configuration](#configuration)
-- [License](#license)
+- [06-API\_Pgto\_MercadoLivre](#06-api_pgto_mercadolivre)
+  - [Main Features](#main-features)
+  - [Table of Contents](#table-of-contents)
+  - [Technologies](#technologies)
+  - [Requirements](#requirements)
+  - [Setup Instructions](#setup-instructions)
+    - [Clone the Repository](#clone-the-repository)
+    - [Install Dependencies](#install-dependencies)
+    - [Configure Environment Variables](#configure-environment-variables)
+    - [Obtain Mercado Pago Credentials](#obtain-mercado-pago-credentials)
+  - [Running Locally](#running-locally)
+    - [Start the Application](#start-the-application)
+    - [API Documentation](#api-documentation)
+  - [API Endpoints](#api-endpoints)
+    - [Payment Endpoints](#payment-endpoints)
+      - [Create Payment Preference](#create-payment-preference)
+      - [Payment Notification Webhook](#payment-notification-webhook)
+      - [Get Payment Status](#get-payment-status)
+  - [Configuration](#configuration)
+    - [Webhook Setup](#webhook-setup)
+    - [Payment Flow](#payment-flow)
+  - [Project Structure](#project-structure)
+  - [Payment Status Types](#payment-status-types)
+  - [Security Considerations](#security-considerations)
+    - [Best Practices](#best-practices)
+    - [Webhook Signature Validation](#webhook-signature-validation)
+  - [Testing](#testing)
+    - [Test Cards (Sandbox Mode)](#test-cards-sandbox-mode)
+    - [Example Request (Create a Test Payment)](#example-request-create-a-test-payment)
+  - [Deployment](#deployment)
+    - [Production Deployment](#production-deployment)
+    - [Environment Configuration](#environment-configuration)
+  - [Error Handling](#error-handling)
+  - [Monitoring and Logging](#monitoring-and-logging)
+  - [License](#license)
+  - [Contributing](#contributing)
+  - [Resources](#resources)
+  - [Project Images](#project-images)
 
 ---
 
@@ -32,26 +63,26 @@ A FastAPI-based payment integration API that connects with Mercado Pago (Mercado
 
 This project leverages the following key technologies:
 
-- **Backend**: 
+- **Backend**
   - FastAPI 0.115.12
   - Uvicorn 0.34.2
   - Python 3.8+
   - Starlette 0.46.2
-  
-- **Data Validation**:
+
+- **Data Validation**
   - Pydantic 2.11.4
   - Pydantic Core 2.33.2
-  
-- **HTTP Client**:
+
+- **HTTP Client**
   - Requests 2.32.3
-  
-- **Template Engine**:
+
+- **Template Engine**
   - Jinja2 3.1.6
-  
-- **Configuration**:
+
+- **Configuration**
   - python-decouple 3.8
-  
-- **Additional Libraries**:
+
+- **Additional Libraries**
   - certifi 2025.4.26
   - urllib3 2.4.0
 
@@ -59,7 +90,7 @@ This project leverages the following key technologies:
 
 ## Requirements
 
-Make sure you have the following installed: 
+Make sure you have the following installed:
 
 - Python 3.8+
 - pip (Python package manager)
@@ -80,12 +111,12 @@ cd 06-API_Pgto_MercadoLivre
 ### Install Dependencies
 
 ```bash
-pip install -r requirements. txt
+pip install -r requirements.txt
 ```
 
 ### Configure Environment Variables
 
-Create a `.env` file in the project root: 
+Create a `.env` file in the project root:
 
 ```env
 # Mercado Pago Credentials
@@ -107,9 +138,9 @@ SECRET_KEY=your-secret-key-here
 
 ### Obtain Mercado Pago Credentials
 
-1. Create a Mercado Pago developer account at [developers.mercadopago.com](https://developers.mercadopago.com)
+1. Create a Mercado Pago developer account at https://developers.mercadopago.com
 2. Create a new application
-3. Copy your Access Token and Public Key
+3. Copy your **Access Token** and **Public Key**
 4. Add them to your `.env` file
 
 ---
@@ -119,14 +150,14 @@ SECRET_KEY=your-secret-key-here
 ### Start the Application
 
 ```bash
-uvicorn app: app --reload --host 0.0.0.0 --port 8000
+uvicorn app:app --reload --host 0.0.0.0 --port 8000
 ```
 
 The API will be available at `http://localhost:8000`.
 
 ### API Documentation
 
-Access the interactive API documentation: 
+Access the interactive API documentation:
 
 - Swagger UI: `http://localhost:8000/docs`
 - ReDoc: `http://localhost:8000/redoc`
@@ -139,11 +170,11 @@ Access the interactive API documentation:
 
 #### Create Payment Preference
 
-```
+```http
 POST /create-preference
 ```
 
-Creates a payment preference in Mercado Pago. 
+Creates a payment preference in Mercado Pago.
 
 **Request Body:**
 ```json
@@ -159,27 +190,27 @@ Creates a payment preference in Mercado Pago.
 ```json
 {
   "preference_id": "123456789",
-  "init_point": "https://www.mercadopago.com. br/checkout/v1/redirect? pref_id=123456789"
+  "init_point": "https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=123456789"
 }
 ```
 
 #### Payment Notification Webhook
 
-```
+```http
 POST /webhook
 ```
 
 Receives payment notifications from Mercado Pago.
 
 **Headers:**
-```
+```text
 x-signature: <signature>
 x-request-id: <request-id>
 ```
 
 #### Get Payment Status
 
-```
+```http
 GET /payment/{payment_id}
 ```
 
@@ -212,10 +243,10 @@ Copy the generated URL and configure it in your Mercado Pago application setting
 ### Payment Flow
 
 1. User initiates a purchase on your application
-2. Application calls `/create-preference` endpoint
+2. Application calls `/create-preference`
 3. User is redirected to Mercado Pago checkout
 4. User completes payment
-5. Mercado Pago sends notification to `/webhook` endpoint
+5. Mercado Pago sends a notification to `/webhook`
 6. Application processes payment status
 7. User is redirected back to success/failure page
 
@@ -223,9 +254,9 @@ Copy the generated URL and configure it in your Mercado Pago application setting
 
 ## Project Structure
 
-```
+```text
 .
-|-- app. py                  # Main FastAPI application
+|-- app.py                  # Main FastAPI application
 |-- requirements.txt        # Python dependencies
 |-- services/               # Business logic and external services
 |-- templates/              # HTML templates for payment pages
@@ -263,7 +294,7 @@ The API handles the following payment statuses:
 
 ### Webhook Signature Validation
 
-Mercado Pago sends a signature with each webhook request.  Always validate this signature before processing the notification.
+Mercado Pago sends a signature with each webhook request. Always validate this signature before processing the notification.
 
 ---
 
@@ -271,28 +302,27 @@ Mercado Pago sends a signature with each webhook request.  Always validate this 
 
 ### Test Cards (Sandbox Mode)
 
-Mercado Pago provides test cards for development: 
+Mercado Pago provides test cards for development.
 
-**Approved:**
-- Card:  5031 7557 3453 0604
+**Approved**
+- Card: 5031 7557 3453 0604
 - CVV: 123
 - Expiration: 11/25
 
-**Rejected:**
+**Rejected**
 - Card: 5031 4332 1540 6351
 - CVV: 123
 - Expiration: 11/25
 
-### Running Tests
+### Example Request (Create a Test Payment)
 
 ```bash
-# Create a test payment
 curl -X POST http://localhost:8000/create-preference \
   -H "Content-Type: application/json" \
   -d '{
     "title": "Test Product",
     "quantity": 1,
-    "unit_price":  10.00
+    "unit_price": 10.00
   }'
 ```
 
@@ -302,17 +332,17 @@ curl -X POST http://localhost:8000/create-preference \
 
 ### Production Deployment
 
-Recommended platforms: 
+Recommended platforms:
 
-- **Render** - [render.com](https://render.com)
-- **Railway** - [railway.app](https://railway.app)
-- **Heroku** - [heroku.com](https://heroku.com)
-- **AWS Elastic Beanstalk**
-- **DigitalOcean App Platform**
+- Render — https://render.com
+- Railway — https://railway.app
+- Heroku — https://heroku.com
+- AWS Elastic Beanstalk
+- DigitalOcean App Platform
 
 ### Environment Configuration
 
-Ensure the following for production:
+For production, ensure that you:
 
 - Set `DEBUG=False`
 - Use production Mercado Pago credentials
@@ -326,17 +356,17 @@ Ensure the following for production:
 
 The API implements comprehensive error handling:
 
-- `400 Bad Request` - Invalid payment data
-- `401 Unauthorized` - Invalid credentials
-- `404 Not Found` - Payment not found
-- `422 Unprocessable Entity` - Validation error
-- `500 Internal Server Error` - Server error
+- `400 Bad Request` — Invalid payment data
+- `401 Unauthorized` — Invalid credentials
+- `404 Not Found` — Payment not found
+- `422 Unprocessable Entity` — Validation error
+- `500 Internal Server Error` — Server error
 
 ---
 
 ## Monitoring and Logging
 
-Implement logging for: 
+Implement logging for:
 
 - All payment creation requests
 - Webhook notifications received
@@ -348,23 +378,24 @@ Implement logging for:
 
 ## License
 
-This project is open source, but no license was explicitly defined. 
+This project is open source, but no license was explicitly defined.
 
-Feel free to clone, use, and contribute back! 
+Feel free to clone, use, and contribute back!
 
 ---
 
 ## Contributing
 
-Pull requests are welcome!  For large changes, consider opening an issue first to discuss what you would like to change.
+Pull requests are welcome. For large changes, consider opening an issue first to discuss what you would like to change.
 
 ---
 
 ## Resources
 
-- [Mercado Pago API Documentation](https://www.mercadopago.com. br/developers)
-- [FastAPI Documentation](https://fastapi.tiangolo.com/)
-- [Webhook Integration Guide](https://www.mercadopago.com. br/developers/en/guides/notifications/webhooks)
+- Mercado Pago API Documentation: https://www.mercadopago.com.br/developers
+- FastAPI Documentation: https://fastapi.tiangolo.com/
+- Webhook Integration Guide: https://www.mercadopago.com.br/developers/en/guides/notifications/webhooks
+
 
 ---
 
