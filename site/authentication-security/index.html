@@ -15,14 +15,14 @@
         <link rel="canonical" href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/authentication-security/">
       
       
-        <link rel="prev" href="../system-modeling/">
+        <link rel="prev" href="../api-endpoints/">
       
       
         <link rel="next" href="../development/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
     
     
       
@@ -30,7 +30,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.35f28582.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -126,13 +126,11 @@
     
     
     
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
@@ -164,7 +162,6 @@
     </div>
   </div>
 </div>
-      
     
     
   </nav>
@@ -213,10 +210,8 @@
       <a href=".." class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Home
-    
   </span>
   
 
@@ -235,10 +230,8 @@
       <a href="../installation/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Installation
-    
   </span>
   
 
@@ -257,54 +250,8 @@
       <a href="../configuration/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Configuration
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../guidelines/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Guidelines and Standards
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../project-structure/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Project Structure
-    
   </span>
   
 
@@ -323,32 +270,8 @@
       <a href="../api-endpoints/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     API Endpoints
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../system-modeling/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    System Modeling
-    
   </span>
   
 
@@ -376,10 +299,8 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
-  
   <span class="md-ellipsis">
     Authentication and Security
-    
   </span>
   
 
@@ -389,10 +310,8 @@
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
-  
   <span class="md-ellipsis">
     Authentication and Security
-    
   </span>
   
 
@@ -478,6 +397,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#security-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Headers
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -485,6 +413,381 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authorization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authorization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#access-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access Control
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Permissions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Protection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Protection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sensitive-data-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sensitive Data Handling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sensitive Data Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Classification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#card-tokenization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Card Tokenization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-storage-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Storage Rules
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secure-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secure Communication
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Secure Communication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#httpstls" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTPS/TLS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tls-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      TLS Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idempotency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Idempotency
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Validation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Rules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sanitization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sanitization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#secure-error-responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secure Error Responses
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-code-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Code Mapping
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging-auditing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logging &amp; Auditing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Logging & Auditing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#secure-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secure Logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audit-trail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Audit Trail
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log-retention" class="md-nav__link">
+    <span class="md-ellipsis">
+      Log Retention
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dos" class="md-nav__link">
+    <span class="md-ellipsis">
+      DO's ✅
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#donts" class="md-nav__link">
+    <span class="md-ellipsis">
+      DON'Ts ❌
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Checklist
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compliance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Compliance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pci-dss-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      PCI-DSS Compliance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lgpd-brazilian-gdpr" class="md-nav__link">
+    <span class="md-ellipsis">
+      LGPD (Brazilian GDPR)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-standards-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Standards Reference
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#threat-mitigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Threat Mitigation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Threat Mitigation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-threats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Threats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Architecture
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
   
 </li>
       
@@ -506,10 +809,68 @@
       <a href="../development/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guidelines/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guidelines and Standards
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-structure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Project Structure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-modeling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    System Modeling
   </span>
   
 
@@ -528,10 +889,8 @@
       <a href="../testing/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Testing
-    
   </span>
   
 
@@ -550,10 +909,8 @@
       <a href="../deploy/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Deploy
-    
   </span>
   
 
@@ -572,10 +929,8 @@
       <a href="../contributing/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Contributing
-    
   </span>
   
 
@@ -594,10 +949,8 @@
       <a href="../release-notes/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Release Notes
-    
   </span>
   
 
@@ -697,6 +1050,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#security-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Headers
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -704,6 +1066,381 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authorization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authorization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#access-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access Control
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token Permissions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Protection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Protection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sensitive-data-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sensitive Data Handling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sensitive Data Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Classification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#card-tokenization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Card Tokenization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-storage-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Storage Rules
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secure-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secure Communication
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Secure Communication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#httpstls" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTPS/TLS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tls-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      TLS Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idempotency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Idempotency
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Validation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Rules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sanitization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sanitization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#secure-error-responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secure Error Responses
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-code-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Code Mapping
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging-auditing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logging &amp; Auditing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Logging & Auditing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#secure-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secure Logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audit-trail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Audit Trail
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log-retention" class="md-nav__link">
+    <span class="md-ellipsis">
+      Log Retention
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dos" class="md-nav__link">
+    <span class="md-ellipsis">
+      DO's ✅
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#donts" class="md-nav__link">
+    <span class="md-ellipsis">
+      DON'Ts ❌
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Checklist
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compliance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Compliance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pci-dss-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      PCI-DSS Compliance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lgpd-brazilian-gdpr" class="md-nav__link">
+    <span class="md-ellipsis">
+      LGPD (Brazilian GDPR)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-standards-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Standards Reference
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#threat-mitigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Threat Mitigation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Threat Mitigation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-threats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Threats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Architecture
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
   
 </li>
       
@@ -720,7 +1457,6 @@
               <article class="md-content__inner md-typeset">
                 
                   
-
 
 
 <h1 id="authentication-security">Authentication &amp; Security</h1>
@@ -818,24 +1554,24 @@
         MP--&gt;&gt;App: Response (200/401)
     end</code></pre>
 <h4 id="implementation">Implementation</h4>
-<p>```python</p>
-<h1 id="servicesmercadopagopy">services/mercadopago.py</h1>
-<p>from decouple import config</p>
-<p>class MercadoPago:
-    def <strong>init</strong>(self):
-        self.__access_token = config('MP_ACCESS_TOKEN')
-        self.__headers = {
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {self.__access_token}',
-        }
-```</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># services/mercadopago.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">decouple</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MercadoPago</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__access_token</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s1">&#39;MP_ACCESS_TOKEN&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Bearer </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__access_token</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+</code></pre></div>
 <h4 id="security-headers">Security Headers</h4>
-<p><code>http
-POST /v1/payments HTTP/1.1
-Host: api.mercadopago.com
-Authorization: Bearer APP_USR-xxxxxxxxxxxxxxxx
-Content-Type: application/json
-X-Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000</code></p>
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/v1/payments</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">api.mercadopago.com</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer APP_USR-xxxxxxxxxxxxxxxx</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">X-Idempotency-Key</span><span class="o">:</span> <span class="l">550e8400-e29b-41d4-a716-446655440000</span>
+</code></pre></div>
 <hr />
 <h2 id="authorization">Authorization</h2>
 <h3 id="access-control">Access Control</h3>
@@ -941,24 +1677,24 @@ X-Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000</code></p>
     style A fill:#ffebee
     style D fill:#e8f5e9</code></pre>
 <p><strong>Implementation:</strong></p>
-<p>```python
-def __get_card_token(self, card_data: dict) -&gt; str:
-    """Tokenize card data - raw card number never stored."""
-    response = self.__post('/v1/card_tokens', card_data)
-    return response.get('id')  # Returns token, not card data</p>
-<p>def pay_with_card(self, amount: float, installments: int, 
-                  description: str, card_data: dict, payer: dict) -&gt; dict:
-    """Create payment using tokenized card."""
-    token = self.__get_card_token(card_data)  # Get token first
-    payload = {
-        'transaction_amount': amount,
-        'token': token,  # Use token, not raw card data
-        'description': description,
-        'installments': int(installments),
-        'payer': payer,
-    }
-    return self.__create_payment(payload)
-```</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">__get_card_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">card_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tokenize card data - raw card number never stored.&quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__post</span><span class="p">(</span><span class="s1">&#39;/v1/card_tokens&#39;</span><span class="p">,</span> <span class="n">card_data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>  <span class="c1"># Returns token, not card data</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pay_with_card</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">installments</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
+                  <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">card_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">payer</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create payment using tokenized card.&quot;&quot;&quot;</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_card_token</span><span class="p">(</span><span class="n">card_data</span><span class="p">)</span>  <span class="c1"># Get token first</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="n">amount</span><span class="p">,</span>
+        <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">token</span><span class="p">,</span>  <span class="c1"># Use token, not raw card data</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+        <span class="s1">&#39;installments&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">installments</span><span class="p">),</span>
+        <span class="s1">&#39;payer&#39;</span><span class="p">:</span> <span class="n">payer</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__create_payment</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</code></pre></div>
 <h4 id="data-storage-rules">Data Storage Rules</h4>
 <table>
 <thead>
@@ -1036,13 +1772,13 @@ def __get_card_token(self, card_data: dict) -&gt; str:
 </table>
 <h3 id="idempotency">Idempotency</h3>
 <p>Prevent duplicate transactions with idempotency keys:</p>
-<p><code>python
-def __post(self, path: str, payload: dict) -&gt; dict:
-    url = f'{self.BASE_URL}{path}'
-    # Generate unique idempotency key for each request
-    headers = {**self.__headers, 'X-Idempotency-Key': str(uuid.uuid4())}
-    response = requests.post(url=url, json=payload, headers=headers)
-    return response.json()</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">__post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">BASE_URL</span><span class="si">}{</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="c1"># Generate unique idempotency key for each request</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">__headers</span><span class="p">,</span> <span class="s1">&#39;X-Idempotency-Key&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Benefits:</strong>
 - Prevents duplicate charges on network retries
 - Ensures payment safety on connection failures
@@ -1051,29 +1787,28 @@ def __post(self, path: str, payload: dict) -&gt; dict:
 <h2 id="input-validation">Input Validation</h2>
 <h3 id="request-validation">Request Validation</h3>
 <p>All incoming requests are validated:</p>
-<p>```python
-@app.post('/create_payment')
-async def create_payment(request: Request):
-    data = await request.json()</p>
-<pre><code># Validate payment method
-method = data.get('payment_method')
-if method not in ['card', 'pix', 'boleto']:
-    raise HTTPException(status_code=400, 
-                      detail='Invalid payment method')
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/create_payment&#39;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">create_payment</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
-# Validate amount
-amount = float(data.get('transaction_amount', 0))
-if amount &lt;= 0:
-    raise HTTPException(status_code=400, 
-                      detail='Amount must be greater than zero')
+    <span class="c1"># Validate payment method</span>
+    <span class="n">method</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;payment_method&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;card&#39;</span><span class="p">,</span> <span class="s1">&#39;pix&#39;</span><span class="p">,</span> <span class="s1">&#39;boleto&#39;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> 
+                          <span class="n">detail</span><span class="o">=</span><span class="s1">&#39;Invalid payment method&#39;</span><span class="p">)</span>
 
-# Validate required fields based on payment method
-if method == 'card':
-    self._validate_card_data(data)
-elif method == 'boleto':
-    self._validate_boleto_data(data)
-</code></pre>
-<p>```</p>
+    <span class="c1"># Validate amount</span>
+    <span class="n">amount</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;transaction_amount&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> 
+                          <span class="n">detail</span><span class="o">=</span><span class="s1">&#39;Amount must be greater than zero&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Validate required fields based on payment method</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;card&#39;</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_card_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;boleto&#39;</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_boleto_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
 <h3 id="validation-rules">Validation Rules</h3>
 <table>
 <thead>
@@ -1127,30 +1862,29 @@ elif method == 'boleto':
 </tbody>
 </table>
 <h3 id="sanitization">Sanitization</h3>
-<p>```python</p>
-<h1 id="string-sanitization">String sanitization</h1>
-<p>def sanitize_string(value: str) -&gt; str:
-    """Remove potentially harmful characters."""
-    if not isinstance(value, str):
-        return value
-    # Remove null bytes and control characters
-    return ''.join(char for char in value if ord(char) &gt;= 32)
-```</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># String sanitization</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sanitize_string</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove potentially harmful characters.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span>
+    <span class="c1"># Remove null bytes and control characters</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">char</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">value</span> <span class="k">if</span> <span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">32</span><span class="p">)</span>
+</code></pre></div>
 <hr />
 <h2 id="error-handling">Error Handling</h2>
 <h3 id="secure-error-responses">Secure Error Responses</h3>
 <p>Error messages don't expose sensitive information:</p>
-<p>```python</p>
-<h1 id="good-generic-error-message">✅ Good - Generic error message</h1>
-<p>try:
-    result = mp.pay_with_card(...)
-except RuntimeError as err:
-    logger.error(f"Payment processing error: {err}")
-    raise HTTPException(status_code=502, detail="Payment processing failed")</p>
-<h1 id="bad-exposes-internal-details">❌ Bad - Exposes internal details</h1>
-<p>except RuntimeError as err:
-    raise HTTPException(status_code=502, detail=f"Error: {err}")
-```</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ✅ Good - Generic error message</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">pay_with_card</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Payment processing error: </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">502</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;Payment processing failed&quot;</span><span class="p">)</span>
+
+<span class="c1"># ❌ Bad - Exposes internal details  </span>
+<span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">502</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
 <h3 id="error-code-mapping">Error Code Mapping</h3>
 <table>
 <thead>
@@ -1192,14 +1926,16 @@ except RuntimeError as err:
 <h2 id="logging-auditing">Logging &amp; Auditing</h2>
 <h3 id="secure-logging">Secure Logging</h3>
 <p>Log transactions without sensitive data:</p>
-<p>```python
-import logging</p>
-<p>logger = logging.getLogger(<strong>name</strong>)</p>
-<h1 id="good-safe-logging">✅ Good - Safe logging</h1>
-<p>logger.info(f"Payment created: method={method}, amount={amount}, status={status}")</p>
-<h1 id="bad-never-log-sensitive-data">❌ Bad - Never log sensitive data</h1>
-<p>logger.info(f"Payment with card={card_number}, cvv={security_code}")  # NEVER!
-```</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># ✅ Good - Safe logging</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Payment created: method=</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">, amount=</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">, status=</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ❌ Bad - Never log sensitive data</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Payment with card=</span><span class="si">{</span><span class="n">card_number</span><span class="si">}</span><span class="s2">, cvv=</span><span class="si">{</span><span class="n">security_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># NEVER!</span>
+</code></pre></div>
 <h3 id="audit-trail">Audit Trail</h3>
 <table>
 <thead>
@@ -1515,12 +2251,10 @@ import logging</p>
     </div>
     
     
-    
-      
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../assets/javascripts/bundle.56dfad97.min.js"></script>
       
     
   </body>

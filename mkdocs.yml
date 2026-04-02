@@ -29,12 +29,12 @@ nav:
   - Home: index.md
   - Installation: installation.md
   - Configuration: configuration.md
-  - Guidelines and Standards: guidelines.md
-  - Project Structure: project-structure.md
   - API Endpoints: api-endpoints.md
-  - System Modeling: system-modeling.md
   - Authentication and Security: authentication-security.md
   - Development: development.md
+  - Guidelines and Standards: guidelines.md
+  - Project Structure: project-structure.md
+  - System Modeling: system-modeling.md
   - Testing: testing.md
   - Deploy: deploy.md
   - Contributing: contributing.md

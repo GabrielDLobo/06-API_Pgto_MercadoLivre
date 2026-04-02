@@ -15,14 +15,14 @@
         <link rel="canonical" href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/api-endpoints/">
       
       
-        <link rel="prev" href="../project-structure/">
+        <link rel="prev" href="../configuration/">
       
       
-        <link rel="next" href="../system-modeling/">
+        <link rel="next" href="../authentication-security/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
     
     
       
@@ -30,7 +30,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.35f28582.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -126,13 +126,11 @@
     
     
     
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
@@ -164,7 +162,6 @@
     </div>
   </div>
 </div>
-      
     
     
   </nav>
@@ -213,10 +210,8 @@
       <a href=".." class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Home
-    
   </span>
   
 
@@ -235,10 +230,8 @@
       <a href="../installation/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Installation
-    
   </span>
   
 
@@ -257,54 +250,8 @@
       <a href="../configuration/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Configuration
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../guidelines/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Guidelines and Standards
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../project-structure/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Project Structure
-    
   </span>
   
 
@@ -332,10 +279,8 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
-  
   <span class="md-ellipsis">
     API Endpoints
-    
   </span>
   
 
@@ -345,10 +290,8 @@
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
-  
   <span class="md-ellipsis">
     API Endpoints
-    
   </span>
   
 
@@ -588,6 +531,123 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#error-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Codes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Codes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#http-status-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP Status Codes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-response-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Response Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Errors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rate-limiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rate Limiting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rate Limiting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mercado-pago-api-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mercado Pago API Limits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retry-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retry Strategy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-documentation-interactive" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Documentation (Interactive)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Documentation (Interactive)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#swagger-ui-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Swagger UI Features
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -603,35 +663,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../system-modeling/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    System Modeling
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../authentication-security/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Authentication and Security
-    
   </span>
   
 
@@ -650,10 +686,68 @@
       <a href="../development/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guidelines/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guidelines and Standards
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-structure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Project Structure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-modeling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    System Modeling
   </span>
   
 
@@ -672,10 +766,8 @@
       <a href="../testing/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Testing
-    
   </span>
   
 
@@ -694,10 +786,8 @@
       <a href="../deploy/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Deploy
-    
   </span>
   
 
@@ -716,10 +806,8 @@
       <a href="../contributing/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Contributing
-    
   </span>
   
 
@@ -738,10 +826,8 @@
       <a href="../release-notes/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
     Release Notes
-    
   </span>
   
 
@@ -995,6 +1081,123 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#error-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Codes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Codes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#http-status-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP Status Codes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-response-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Response Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Errors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rate-limiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rate Limiting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rate Limiting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mercado-pago-api-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mercado Pago API Limits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retry-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retry Strategy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-documentation-interactive" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Documentation (Interactive)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Documentation (Interactive)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#swagger-ui-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Swagger UI Features
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1008,7 +1211,6 @@
               <article class="md-content__inner md-typeset">
                 
                   
-
 
 
 <h1 id="api-endpoints">API Endpoints</h1>
@@ -1079,7 +1281,8 @@
 <h2 id="endpoints">Endpoints</h2>
 <h3 id="checkout-page">Checkout Page</h3>
 <p>Renders the payment checkout HTML page.</p>
-<p><code>GET /</code></p>
+<div class="highlight"><pre><span></span><code>GET /
+</code></pre></div>
 <p><strong>Headers:</strong>
 | Header | Value | Required |
 |--------|-------|----------|
@@ -1088,13 +1291,14 @@
 - <strong>Content-Type</strong>: <code>text/html; charset=utf-8</code>
 - <strong>Status</strong>: <code>200 OK</code></p>
 <p><strong>Example:</strong>
-<code>bash
-curl -X GET http://localhost:8000/</code></p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://localhost:8000/
+</code></pre></div></p>
 <p><strong>Response:</strong> HTML page with payment form</p>
 <hr />
 <h3 id="create-payment">Create Payment</h3>
 <p>Creates a new payment transaction with Mercado Pago.</p>
-<p><code>POST /create_payment</code></p>
+<div class="highlight"><pre><span></span><code>POST /create_payment
+</code></pre></div>
 <p><strong>Headers:</strong>
 | Header | Value | Required |
 |--------|-------|----------|
@@ -1188,45 +1392,45 @@ curl -X GET http://localhost:8000/</code></p>
 </tbody>
 </table>
 <p><strong>Example Request:</strong>
-<code>json
-{
-  "payment_method": "card",
-  "transaction_amount": 100.00,
-  "description": "Test Payment",
-  "email": "test@example.com",
-  "card_number": "5031755734530604",
-  "expiration_month": "11",
-  "expiration_year": "2025",
-  "security_code": "123",
-  "cardholder_name": "John Doe",
-  "identification_number": "12345678900",
-  "installments": 1
-}</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;payment_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;card&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transaction_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">100.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test Payment&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;card_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5031755734530604&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;expiration_month&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;11&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;expiration_year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;security_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;cardholder_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;identification_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;installments&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <p><strong>Example Response (Success):</strong>
-<code>json
-{
-  "id": "12345678901",
-  "status": "approved",
-  "status_detail": "accredited",
-  "transaction_amount": 100.00,
-  "payment_method_id": "visa",
-  "date_created": "2026-04-01T10:00:00.000-03:00",
-  "date_approved": "2026-04-01T10:00:01.000-03:00",
-  "payer": {
-    "email": "test@example.com",
-    "identification": {
-      "type": "CPF",
-      "number": "12345678900"
-    }
-  },
-  "card": {
-    "first_six_digits": "503175",
-    "last_four_digits": "0604",
-    "cardholder": {
-      "name": "John Doe"
-    }
-  }
-}</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678901&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;approved&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status_detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;accredited&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transaction_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">100.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;payment_method_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;visa&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;date_created&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-01T10:00:00.000-03:00&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;date_approved&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-01T10:00:01.000-03:00&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;payer&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;identification&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CPF&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;card&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;first_six_digits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;503175&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_four_digits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0604&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;cardholder&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <hr />
 <h3 id="payment-method-pix">Payment Method: PIX</h3>
 <p><strong>Additional Required Fields:</strong></p>
@@ -1247,38 +1451,38 @@ curl -X GET http://localhost:8000/</code></p>
 </tbody>
 </table>
 <p><strong>Example Request:</strong>
-<code>json
-{
-  "payment_method": "pix",
-  "transaction_amount": 100.00,
-  "description": "Test PIX Payment",
-  "email": "test@example.com",
-  "identification_number": "12345678900"
-}</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;payment_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pix&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transaction_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">100.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test PIX Payment&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;identification_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <p><strong>Example Response (Success):</strong>
-<code>json
-{
-  "id": "12345678902",
-  "status": "pending",
-  "status_detail": "pending_payment",
-  "transaction_amount": 100.00,
-  "payment_method_id": "pix",
-  "date_created": "2026-04-01T10:00:00.000-03:00",
-  "point_of_interaction": {
-    "transaction_data": {
-      "qr_code": "00020126580014BR.GOV.BCB.PIX...",
-      "qr_code_base64": "iVBORw0KGgoAAAANSUhEUgAA...",
-      "ticket_url": "https://www.mercadopago.com.br/qr/..."
-    }
-  },
-  "payer": {
-    "email": "test@example.com",
-    "identification": {
-      "type": "CPF",
-      "number": "12345678900"
-    }
-  }
-}</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678902&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pending&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status_detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pending_payment&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transaction_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">100.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;payment_method_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pix&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;date_created&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-01T10:00:00.000-03:00&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;point_of_interaction&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;transaction_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;qr_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00020126580014BR.GOV.BCB.PIX...&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;qr_code_base64&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;iVBORw0KGgoAAAANSUhEUgAA...&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;ticket_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://www.mercadopago.com.br/qr/...&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;payer&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;identification&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CPF&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <hr />
 <h3 id="payment-method-boleto">Payment Method: Boleto</h3>
 <p><strong>Additional Required Fields:</strong></p>
@@ -1339,42 +1543,42 @@ curl -X GET http://localhost:8000/</code></p>
 </tbody>
 </table>
 <p><strong>Example Request:</strong>
-<code>json
-{
-  "payment_method": "boleto",
-  "transaction_amount": 100.00,
-  "description": "Test Boleto Payment",
-  "email": "test@example.com",
-  "first_name": "John",
-  "last_name": "Doe",
-  "identification_number": "12345678900",
-  "zip_code": "01001-000",
-  "street_name": "Praça da Sé",
-  "street_number": "100",
-  "neighborhood": "Sé",
-  "city": "São Paulo",
-  "federal_unit": "SP"
-}</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;payment_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boleto&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transaction_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">100.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test Boleto Payment&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Doe&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;identification_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;zip_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01001-000&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;street_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Praça da Sé&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;street_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;100&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;neighborhood&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sé&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;São Paulo&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;federal_unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SP&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <p><strong>Example Response (Success):</strong>
-<code>json
-{
-  "id": "12345678903",
-  "status": "pending",
-  "status_detail": "pending_payment",
-  "transaction_amount": 100.00,
-  "payment_method_id": "bolbradesco",
-  "date_created": "2026-04-01T10:00:00.000-03:00",
-  "transaction_details": {
-    "external_resource_url": "https://www.mercadopago.com.br/boleto/..."
-  },
-  "payer": {
-    "email": "test@example.com",
-    "identification": {
-      "type": "CPF",
-      "number": "12345678900"
-    }
-  }
-}</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678903&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pending&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status_detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pending_payment&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transaction_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">100.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;payment_method_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bolbradesco&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;date_created&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-01T10:00:00.000-03:00&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transaction_details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;external_resource_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://www.mercadopago.com.br/boleto/...&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;payer&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;identification&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CPF&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <hr />
 <h2 id="payment-methods">Payment Methods</h2>
 <h3 id="summary">Summary</h3>
@@ -1448,108 +1652,113 @@ curl -X GET http://localhost:8000/</code></p>
 <h2 id="requestresponse-examples">Request/Response Examples</h2>
 <h3 id="curl-examples">cURL Examples</h3>
 <h4 id="credit-card-payment">Credit Card Payment</h4>
-<p><code>bash
-curl -X POST http://localhost:8000/create_payment \
-  -H "Content-Type: application/json" \
-  -d '{
-    "payment_method": "card",
-    "transaction_amount": 100.00,
-    "description": "Test Payment",
-    "email": "test@example.com",
-    "card_number": "5031755734530604",
-    "expiration_month": "11",
-    "expiration_year": "2025",
-    "security_code": "123",
-    "cardholder_name": "John Doe",
-    "identification_number": "12345678900",
-    "installments": 1
-  }'</code></p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/create_payment<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;payment_method&quot;: &quot;card&quot;,</span>
+<span class="s1">    &quot;transaction_amount&quot;: 100.00,</span>
+<span class="s1">    &quot;description&quot;: &quot;Test Payment&quot;,</span>
+<span class="s1">    &quot;email&quot;: &quot;test@example.com&quot;,</span>
+<span class="s1">    &quot;card_number&quot;: &quot;5031755734530604&quot;,</span>
+<span class="s1">    &quot;expiration_month&quot;: &quot;11&quot;,</span>
+<span class="s1">    &quot;expiration_year&quot;: &quot;2025&quot;,</span>
+<span class="s1">    &quot;security_code&quot;: &quot;123&quot;,</span>
+<span class="s1">    &quot;cardholder_name&quot;: &quot;John Doe&quot;,</span>
+<span class="s1">    &quot;identification_number&quot;: &quot;12345678900&quot;,</span>
+<span class="s1">    &quot;installments&quot;: 1</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
 <h4 id="pix-payment">PIX Payment</h4>
-<p><code>bash
-curl -X POST http://localhost:8000/create_payment \
-  -H "Content-Type: application/json" \
-  -d '{
-    "payment_method": "pix",
-    "transaction_amount": 50.00,
-    "description": "PIX Test",
-    "email": "pix@example.com",
-    "identification_number": "12345678900"
-  }'</code></p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/create_payment<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;payment_method&quot;: &quot;pix&quot;,</span>
+<span class="s1">    &quot;transaction_amount&quot;: 50.00,</span>
+<span class="s1">    &quot;description&quot;: &quot;PIX Test&quot;,</span>
+<span class="s1">    &quot;email&quot;: &quot;pix@example.com&quot;,</span>
+<span class="s1">    &quot;identification_number&quot;: &quot;12345678900&quot;</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
 <h4 id="boleto-payment">Boleto Payment</h4>
-<p><code>bash
-curl -X POST http://localhost:8000/create_payment \
-  -H "Content-Type: application/json" \
-  -d '{
-    "payment_method": "boleto",
-    "transaction_amount": 75.50,
-    "description": "Boleto Test",
-    "email": "boleto@example.com",
-    "first_name": "Jane",
-    "last_name": "Smith",
-    "identification_number": "98765432100",
-    "zip_code": "20000-000",
-    "street_name": "Rua do Comércio",
-    "street_number": "500",
-    "neighborhood": "Centro",
-    "city": "Rio de Janeiro",
-    "federal_unit": "RJ"
-  }'</code></p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/create_payment<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;payment_method&quot;: &quot;boleto&quot;,</span>
+<span class="s1">    &quot;transaction_amount&quot;: 75.50,</span>
+<span class="s1">    &quot;description&quot;: &quot;Boleto Test&quot;,</span>
+<span class="s1">    &quot;email&quot;: &quot;boleto@example.com&quot;,</span>
+<span class="s1">    &quot;first_name&quot;: &quot;Jane&quot;,</span>
+<span class="s1">    &quot;last_name&quot;: &quot;Smith&quot;,</span>
+<span class="s1">    &quot;identification_number&quot;: &quot;98765432100&quot;,</span>
+<span class="s1">    &quot;zip_code&quot;: &quot;20000-000&quot;,</span>
+<span class="s1">    &quot;street_name&quot;: &quot;Rua do Comércio&quot;,</span>
+<span class="s1">    &quot;street_number&quot;: &quot;500&quot;,</span>
+<span class="s1">    &quot;neighborhood&quot;: &quot;Centro&quot;,</span>
+<span class="s1">    &quot;city&quot;: &quot;Rio de Janeiro&quot;,</span>
+<span class="s1">    &quot;federal_unit&quot;: &quot;RJ&quot;</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
 <h3 id="javascript-fetch-api">JavaScript (Fetch API)</h3>
-<p>```javascript
-async function createPayment(paymentData) {
-  const response = await fetch('/create_payment', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(paymentData),
-  });</p>
-<p>if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.detail);
-  }</p>
-<p>return await response.json();
-}</p>
-<p>// Usage
-const payment = {
-  payment_method: 'card',
-  transaction_amount: 100.00,
-  description: 'Test Payment',
-  email: 'test@example.com',
-  card_number: '5031755734530604',
-  expiration_month: '11',
-  expiration_year: '2025',
-  security_code: '123',
-  cardholder_name: 'John Doe',
-  identification_number: '12345678900',
-  installments: 1,
-};</p>
-<p>createPayment(payment)
-  .then(result =&gt; console.log('Payment created:', result))
-  .catch(error =&gt; console.error('Payment failed:', error));
-```</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">createPayment</span><span class="p">(</span><span class="nx">paymentData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/create_payment&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">paymentData</span><span class="p">),</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">payment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">payment_method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;card&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">transaction_amount</span><span class="o">:</span><span class="w"> </span><span class="mf">100.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Test Payment&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">card_number</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;5031755734530604&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">expiration_month</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;11&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">expiration_year</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;2025&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">security_code</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;123&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">cardholder_name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;John Doe&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">identification_number</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;12345678900&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">installments</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">createPayment</span><span class="p">(</span><span class="nx">payment</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Payment created:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Payment failed:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
 <h3 id="python-requests">Python (Requests)</h3>
-<p>```python
-import requests</p>
-<p>def create_payment(payment_data):
-    response = requests.post(
-        'http://localhost:8000/create_payment',
-        json=payment_data,
-        headers={'Content-Type': 'application/json'}
-    )
-    response.raise_for_status()
-    return response.json()</p>
-<h1 id="usage">Usage</h1>
-<p>payment = {
-    'payment_method': 'pix',
-    'transaction_amount': 100.00,
-    'description': 'Test Payment',
-    'email': 'test@example.com',
-    'identification_number': '12345678900'
-}</p>
-<p>result = create_payment(payment)
-print(f"Payment ID: {result['id']}")
-```</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_payment</span><span class="p">(</span><span class="n">payment_data</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+        <span class="s1">&#39;http://localhost:8000/create_payment&#39;</span><span class="p">,</span>
+        <span class="n">json</span><span class="o">=</span><span class="n">payment_data</span><span class="p">,</span>
+        <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="c1"># Usage</span>
+<span class="n">payment</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;pix&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mf">100.00</span><span class="p">,</span>
+    <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Payment&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;identification_number&#39;</span><span class="p">:</span> <span class="s1">&#39;12345678900&#39;</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">create_payment</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Payment ID: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
 <hr />
 <h2 id="error-codes">Error Codes</h2>
 <h3 id="http-status-codes">HTTP Status Codes</h3>
@@ -1600,10 +1809,10 @@ print(f"Payment ID: {result['id']}")
 </tbody>
 </table>
 <h3 id="error-response-format">Error Response Format</h3>
-<p><code>json
-{
-  "detail": "Error description here"
-}</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error description here&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="common-errors">Common Errors</h3>
 <table>
 <thead>
@@ -1686,24 +1895,24 @@ print(f"Payment ID: {result['id']}")
 <li><strong>Monitor API usage</strong> to avoid hitting limits</li>
 </ol>
 <h3 id="retry-strategy">Retry Strategy</h3>
-<p>```python
-import time
-from requests.exceptions import RequestException</p>
-<p>def create_payment_with_retry(payment_data, max_retries=3):
-    for attempt in range(max_retries):
-        try:
-            result = mp.pay_with_pix(
-                amount=payment_data['amount'],
-                description=payment_data['description'],
-                payer=payment_data['payer']
-            )
-            return result
-        except RequestException as e:
-            if attempt == max_retries - 1:
-                raise
-            wait_time = 2 ** attempt  # Exponential backoff
-            time.sleep(wait_time)
-```</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">requests.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">RequestException</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_payment_with_retry</span><span class="p">(</span><span class="n">payment_data</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_retries</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">pay_with_pix</span><span class="p">(</span>
+                <span class="n">amount</span><span class="o">=</span><span class="n">payment_data</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">],</span>
+                <span class="n">description</span><span class="o">=</span><span class="n">payment_data</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">],</span>
+                <span class="n">payer</span><span class="o">=</span><span class="n">payment_data</span><span class="p">[</span><span class="s1">&#39;payer&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">except</span> <span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">attempt</span> <span class="o">==</span> <span class="n">max_retries</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span>
+            <span class="n">wait_time</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">attempt</span>  <span class="c1"># Exponential backoff</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait_time</span><span class="p">)</span>
+</code></pre></div>
 <hr />
 <h2 id="api-documentation-interactive">API Documentation (Interactive)</h2>
 <p>The API includes interactive documentation:</p>
@@ -1794,12 +2003,10 @@ from requests.exceptions import RequestException</p>
     </div>
     
     
-    
-      
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../assets/javascripts/bundle.56dfad97.min.js"></script>
       
     
   </body>
