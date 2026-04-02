@@ -1,0 +1,1993 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A FastAPI-based payment integration API with Mercado Pago for secure transaction processing, order creation, and webhook notifications.">
+      
+      
+        <meta name="author" content="GabrielDLobo">
+      
+      
+        <link rel="canonical" href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/contributing/">
+      
+      
+        <link rel="prev" href="../deploy/">
+      
+      
+        <link rel="next" href="../release-notes/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
+    
+    
+      
+        <title>Contributing - Mercado Pago Payment API</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.35f28582.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="navy-blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#contributing-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mercado Pago Payment API" class="md-header__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mercado Pago Payment API
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Contributing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mercado Pago Payment API" class="md-nav__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    Mercado Pago Payment API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-endpoints/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Endpoints
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authentication-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authentication and Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guidelines/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guidelines and Standards
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-structure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Project Structure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-modeling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    System Modeling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deploy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-of-conduct" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code of Conduct
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code of Conduct">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#our-pledge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Our Pledge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expected Behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unacceptable-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unacceptable Behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enforcement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enforcement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Started
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fork-and-clone" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fork and Clone
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-development-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Development Environment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-contribute" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Contribute
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Contribute">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ways-to-contribute" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ways to Contribute
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contribution-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contribution Flow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pull-request-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pull Request Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pull Request Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-submitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Before Submitting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pull-request-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pull Request Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pr-title-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      PR Title Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Review Process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Review Time
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coding-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coding Standards
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coding Standards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-style-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python Style Guide
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-hints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Type Hints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docstrings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docstrings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-quality-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Quality Tools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issue-reporting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue Reporting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Issue Reporting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-creating-an-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Before Creating an Issue
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-report-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bug Report Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-request-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Feature Request Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue Labels
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#branch-naming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branch Naming
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commit-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commit Messages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Commit Messages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keeping-branch-updated" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keeping Branch Updated
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recognition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recognition
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recognition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contribution-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contribution Levels
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questions?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thank-you" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thank You!
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-of-conduct" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code of Conduct
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code of Conduct">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#our-pledge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Our Pledge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expected Behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unacceptable-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unacceptable Behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enforcement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enforcement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Started
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fork-and-clone" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fork and Clone
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-development-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Development Environment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-contribute" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Contribute
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Contribute">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ways-to-contribute" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ways to Contribute
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contribution-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contribution Flow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pull-request-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pull Request Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pull Request Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-submitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Before Submitting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pull-request-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pull Request Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pr-title-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      PR Title Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Review Process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Review Time
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coding-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coding Standards
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coding Standards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-style-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python Style Guide
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-hints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Type Hints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docstrings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docstrings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-quality-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Quality Tools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issue-reporting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue Reporting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Issue Reporting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-creating-an-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Before Creating an Issue
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-report-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bug Report Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature-request-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Feature Request Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issue Labels
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#branch-naming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branch Naming
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commit-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commit Messages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Commit Messages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keeping-branch-updated" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keeping Branch Updated
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recognition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recognition
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recognition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contribution-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contribution Levels
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questions?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thank-you" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thank You!
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="contributing-guide">Contributing Guide</h1>
+<p>Thank you for your interest in contributing to the Mercado Libre Payment API! This guide provides comprehensive instructions for contributing to the project.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#code-of-conduct">Code of Conduct</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#how-to-contribute">How to Contribute</a></li>
+<li><a href="#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li><a href="#coding-standards">Coding Standards</a></li>
+<li><a href="#issue-reporting">Issue Reporting</a></li>
+<li><a href="#development-workflow">Development Workflow</a></li>
+<li><a href="#recognition">Recognition</a></li>
+</ul>
+<hr />
+<h2 id="code-of-conduct">Code of Conduct</h2>
+<h3 id="our-pledge">Our Pledge</h3>
+<p>We pledge to make participation in our project a harassment-free experience for everyone. We welcome contributors of all backgrounds and identities.</p>
+<h3 id="expected-behavior">Expected Behavior</h3>
+<ul>
+<li>Be respectful and inclusive</li>
+<li>Accept constructive criticism</li>
+<li>Focus on what's best for the community</li>
+<li>Show empathy towards others</li>
+</ul>
+<h3 id="unacceptable-behavior">Unacceptable Behavior</h3>
+<ul>
+<li>Harassment or discrimination</li>
+<li>Offensive comments</li>
+<li>Trolling or insulting</li>
+<li>Publishing others' private information</li>
+</ul>
+<h3 id="enforcement">Enforcement</h3>
+<p>Report unacceptable behavior to the project maintainers. All complaints will be reviewed and investigated.</p>
+<hr />
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Before contributing, ensure you have:</p>
+<ul>
+<li>[ ] Git installed and configured</li>
+<li>[ ] Python 3.8+ installed</li>
+<li>[ ] GitHub account</li>
+<li>[ ] Read the <a href="../README.md">README</a></li>
+<li>[ ] Reviewed the <a href="../">Documentation</a></li>
+</ul>
+<h3 id="fork-and-clone">Fork and Clone</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Fork the repository on GitHub</span>
+<span class="c1"># Visit https://github.com/GabrielDLobo/06-API_Pgto_MercadoLivre and click &quot;Fork&quot;</span>
+
+<span class="c1"># 2. Clone your fork</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/YOUR_USERNAME/06-API_Pgto_MercadoLivre.git
+<span class="nb">cd</span><span class="w"> </span><span class="m">06</span>-API_Pgto_MercadoLivre
+
+<span class="c1"># 3. Add upstream remote</span>
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/GabrielDLobo/06-API_Pgto_MercadoLivre.git
+
+<span class="c1"># 4. Verify remotes</span>
+git<span class="w"> </span>remote<span class="w"> </span>-v
+<span class="c1"># origin    https://github.com/YOUR_USERNAME/06-API_Pgto_MercadoLivre.git (fetch)</span>
+<span class="c1"># origin    https://github.com/YOUR_USERNAME/06-API_Pgto_MercadoLivre.git (push)</span>
+<span class="c1"># upstream  https://github.com/GabrielDLobo/06-API_Pgto_MercadoLivre.git (fetch)</span>
+<span class="c1"># upstream  https://github.com/GabrielDLobo/06-API_Pgto_MercadoLivre.git (push)</span>
+</code></pre></div>
+<h3 id="setup-development-environment">Setup Development Environment</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Create virtual environment</span>
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+
+<span class="c1"># 2. Activate virtual environment</span>
+<span class="c1"># Windows</span>
+venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+<span class="c1"># macOS/Linux</span>
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+
+<span class="c1"># 3. Install dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c1"># 4. Install development dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-test.txt
+
+<span class="c1"># 5. Create .env file with sandbox credentials</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">MP_BASE_API_URL</span><span class="o">=</span>https://api.mercadopago.com<span class="w"> </span>&gt;<span class="w"> </span>.env
+<span class="nb">echo</span><span class="w"> </span><span class="nv">MP_ACCESS_TOKEN</span><span class="o">=</span>TEST-your-sandbox-token<span class="w"> </span>&gt;&gt;<span class="w"> </span>.env
+<span class="nb">echo</span><span class="w"> </span><span class="nv">DEBUG</span><span class="o">=</span>True<span class="w"> </span>&gt;&gt;<span class="w"> </span>.env
+</code></pre></div>
+<hr />
+<h2 id="how-to-contribute">How to Contribute</h2>
+<h3 id="ways-to-contribute">Ways to Contribute</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Code</strong></td>
+<td>Write code for features or fixes</td>
+<td>New payment methods, bug fixes</td>
+</tr>
+<tr>
+<td><strong>Documentation</strong></td>
+<td>Improve documentation</td>
+<td>Fix typos, add examples</td>
+</tr>
+<tr>
+<td><strong>Testing</strong></td>
+<td>Write or improve tests</td>
+<td>Add test cases, improve coverage</td>
+</tr>
+<tr>
+<td><strong>Design</strong></td>
+<td>Improve UI/UX</td>
+<td>Better checkout interface</td>
+</tr>
+<tr>
+<td><strong>Issues</strong></td>
+<td>Report bugs or suggest features</td>
+<td>Detailed bug reports</td>
+</tr>
+<tr>
+<td><strong>Review</strong></td>
+<td>Review pull requests</td>
+<td>Code review feedback</td>
+</tr>
+</tbody>
+</table>
+<h3 id="contribution-flow">Contribution Flow</h3>
+<pre class="mermaid"><code>flowchart LR
+    A[Find Issue or Feature] --&gt; B[Fork Repository]
+    B --&gt; C[Create Branch]
+    C --&gt; D[Make Changes]
+    D --&gt; E[Write Tests]
+    E --&gt; F[Run Tests]
+    F --&gt; G{Tests Pass?}
+    G --&gt;|No| D
+    G --&gt;|Yes| H[Commit Changes]
+    H --&gt; I[Push to Fork]
+    I --&gt; J[Create Pull Request]
+    J --&gt; K[Code Review]
+    K --&gt; L{Approved?}
+    L --&gt;|No| D
+    L --&gt;|Yes| M[Merge to Main]</code></pre>
+<hr />
+<h2 id="pull-request-guidelines">Pull Request Guidelines</h2>
+<h3 id="before-submitting">Before Submitting</h3>
+<ul>
+<li>[ ] Code follows project style guidelines</li>
+<li>[ ] Tests are written and passing</li>
+<li>[ ] Documentation is updated</li>
+<li>[ ] No sensitive data in code</li>
+<li>[ ] Commit messages follow convention</li>
+<li>[ ] Branch is up to date with main</li>
+</ul>
+<h3 id="pull-request-template">Pull Request Template</h3>
+<div class="highlight"><pre><span></span><code><span class="gu">## Description</span>
+&lt;!-- Describe your changes in detail --&gt;
+
+<span class="gu">## Related Issue</span>
+&lt;!-- Link to related issue if applicable --&gt;
+Fixes #&lt;issue-number&gt;
+
+<span class="gu">## Type of Change</span>
+&lt;!-- Mark the appropriate option with an [x] --&gt;
+<span class="k">- [ ]</span> Bug fix (non-breaking change that fixes an issue)
+<span class="k">- [ ]</span> New feature (non-breaking change that adds functionality)
+<span class="k">- [ ]</span> Breaking change (fix or feature that would cause existing functionality to change)
+<span class="k">- [ ]</span> Documentation update
+
+<span class="gu">## Testing</span>
+&lt;!-- Describe the tests you ran --&gt;
+<span class="k">- [ ]</span> Unit tests pass
+<span class="k">- [ ]</span> Integration tests pass
+<span class="k">- [ ]</span> Manual testing completed
+
+<span class="gu">## Checklist</span>
+<span class="k">- [ ]</span> My code follows the style guidelines
+<span class="k">- [ ]</span> I have performed a self-review
+<span class="k">- [ ]</span> I have commented my code where necessary
+<span class="k">- [ ]</span> I have updated the documentation
+<span class="k">- [ ]</span> My changes generate no new warnings
+<span class="k">- [ ]</span> I have added tests that prove my fix/feature works
+<span class="k">- [ ]</span> All tests pass locally
+</code></pre></div>
+<h3 id="pr-title-format">PR Title Format</h3>
+<div class="highlight"><pre><span></span><code>&lt;type&gt;(&lt;scope&gt;): &lt;description&gt;
+
+# Examples
+feat(payment): add support for new card brand
+fix(validation): correct CPF validation edge case
+docs(readme): add deployment instructions
+refactor(service): improve error handling
+test(api): add integration tests for PIX
+</code></pre></div>
+<h3 id="review-process">Review Process</h3>
+<pre class="mermaid"><code>sequenceDiagram
+    participant Contributor
+    participant Maintainer
+    participant CI
+
+    Contributor-&gt;&gt;CI: Submit Pull Request
+    CI--&gt;&gt;Contributor: Run automated checks
+
+    Contributor-&gt;&gt;Maintainer: Request review
+    Maintainer-&gt;&gt;Maintainer: Code review
+
+    alt Changes requested
+        Maintainer--&gt;&gt;Contributor: Request changes
+        Contributor-&gt;&gt;Contributor: Make changes
+        Contributor-&gt;&gt;Maintainer: Resubmit
+    else Approved
+        Maintainer--&gt;&gt;Contributor: Approve
+        Maintainer-&gt;&gt;Maintainer: Merge to main
+    end</code></pre>
+<h3 id="review-time">Review Time</h3>
+<ul>
+<li><strong>Small PRs</strong> (&lt; 100 lines): 1-2 days</li>
+<li><strong>Medium PRs</strong> (100-500 lines): 2-4 days</li>
+<li><strong>Large PRs</strong> (&gt; 500 lines): 4-7 days</li>
+</ul>
+<hr />
+<h2 id="coding-standards">Coding Standards</h2>
+<h3 id="python-style-guide">Python Style Guide</h3>
+<p>Follow <a href="https://pep8.org/">PEP 8</a> with these specifics:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ✅ Good</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_payment</span><span class="p">(</span>
+    <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">payment_method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a new payment transaction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        amount: Transaction amount in BRL</span>
+<span class="sd">        description: Payment description</span>
+<span class="sd">        payment_method: Payment method code</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Payment response dictionary</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If amount is invalid</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Amount must be positive&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;approved&quot;</span><span class="p">}</span>
+
+
+<span class="c1"># ❌ Bad</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">CreatePayment</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span><span class="n">description</span><span class="p">,</span><span class="n">payment_method</span><span class="p">):</span>
+    <span class="c1"># bad formatting</span>
+    <span class="k">if</span> <span class="n">amount</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span><span class="s2">&quot;approved&quot;</span><span class="p">}</span>
+</code></pre></div>
+<h3 id="type-hints">Type Hints</h3>
+<p>Use type hints for all function signatures:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ✅ Good - With type hints</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">pay_with_pix</span><span class="p">(</span>
+    <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">payer</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="c1"># ❌ Bad - No type hints</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">pay_with_pix</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">payer</span><span class="p">):</span>
+    <span class="k">pass</span>
+</code></pre></div>
+<h3 id="docstrings">Docstrings</h3>
+<p>Use Google-style docstrings:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate_payment_method</span><span class="p">(</span><span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate if payment method is supported.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        method: Payment method code (card, pix, boleto)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        True if method is supported</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If method is not supported</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">supported</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;card&#39;</span><span class="p">,</span> <span class="s1">&#39;pix&#39;</span><span class="p">,</span> <span class="s1">&#39;boleto&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">supported</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported method: </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+<h3 id="code-quality-tools">Code Quality Tools</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install pre-commit hooks</span>
+pip<span class="w"> </span>install<span class="w"> </span>pre-commit
+pre-commit<span class="w"> </span>install
+
+<span class="c1"># Run linters manually</span>
+black<span class="w"> </span>app.py<span class="w"> </span>services/<span class="w">           </span><span class="c1"># Format code</span>
+isort<span class="w"> </span>app.py<span class="w"> </span>services/<span class="w">           </span><span class="c1"># Sort imports</span>
+flake8<span class="w"> </span>app.py<span class="w"> </span>services/<span class="w">          </span><span class="c1"># Lint</span>
+mypy<span class="w"> </span>app.py<span class="w"> </span>services/<span class="w">            </span><span class="c1"># Type check</span>
+
+<span class="c1"># Run all checks</span>
+pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
+</code></pre></div>
+<hr />
+<h2 id="issue-reporting">Issue Reporting</h2>
+<h3 id="before-creating-an-issue">Before Creating an Issue</h3>
+<ul>
+<li>[ ] Search existing issues (open and closed)</li>
+<li>[ ] Check the documentation</li>
+<li>[ ] Verify the issue exists in the latest version</li>
+<li>[ ] Gather relevant information</li>
+</ul>
+<h3 id="bug-report-template">Bug Report Template</h3>
+<div class="highlight"><pre><span></span><code><span class="gu">## Bug Description</span>
+&lt;!-- Clear and concise description of the bug --&gt;
+
+<span class="gu">## To Reproduce</span>
+Steps to reproduce the behavior:
+<span class="k">1.</span> Go to &#39;...&#39;
+<span class="k">2.</span> Click on &#39;...&#39;
+<span class="k">3.</span> Scroll down to &#39;...&#39;
+<span class="k">4.</span> See error
+
+<span class="gu">## Expected Behavior</span>
+&lt;!-- What you expected to happen --&gt;
+
+<span class="gu">## Actual Behavior</span>
+&lt;!-- What actually happened --&gt;
+
+<span class="gu">## Environment</span>
+<span class="k">-</span><span class="w"> </span>OS: [e.g., Windows 11, macOS 14, Ubuntu 22.04]
+<span class="k">-</span><span class="w"> </span>Python version: [e.g., 3.11.5]
+<span class="k">-</span><span class="w"> </span>Package version: [e.g., 1.0.0]
+
+<span class="gu">## Screenshots</span>
+&lt;!-- If applicable, add screenshots --&gt;
+
+<span class="gu">## Additional Context</span>
+&lt;!-- Any other context about the problem --&gt;
+
+<span class="gu">## Possible Solution</span>
+&lt;!-- If you have ideas on how to fix it --&gt;
+</code></pre></div>
+<h3 id="feature-request-template">Feature Request Template</h3>
+<div class="highlight"><pre><span></span><code><span class="gu">## Problem Statement</span>
+&lt;!-- What problem does this feature solve? --&gt;
+
+<span class="gu">## Proposed Solution</span>
+&lt;!-- Describe the solution you&#39;d like --&gt;
+
+<span class="gu">## Alternatives Considered</span>
+&lt;!-- Any alternative solutions you&#39;ve considered --&gt;
+
+<span class="gu">## Use Case</span>
+&lt;!-- Who will use this feature and how? --&gt;
+
+<span class="gu">## Additional Context</span>
+&lt;!-- Any other context, mockups, or examples --&gt;
+</code></pre></div>
+<h3 id="issue-labels">Issue Labels</h3>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bug</code></td>
+<td>Something isn't working</td>
+</tr>
+<tr>
+<td><code>enhancement</code></td>
+<td>New feature or request</td>
+</tr>
+<tr>
+<td><code>documentation</code></td>
+<td>Documentation improvements</td>
+</tr>
+<tr>
+<td><code>good first issue</code></td>
+<td>Good for newcomers</td>
+</tr>
+<tr>
+<td><code>help wanted</code></td>
+<td>Extra attention needed</td>
+</tr>
+<tr>
+<td><code>question</code></td>
+<td>Further information needed</td>
+</tr>
+<tr>
+<td><code>wontfix</code></td>
+<td>Will not be fixed</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="development-workflow">Development Workflow</h2>
+<h3 id="branch-naming">Branch Naming</h3>
+<div class="highlight"><pre><span></span><code># Feature branches
+feature/add-new-payment-method
+feature/improve-error-messages
+
+# Bug fixes
+bugfix/fix-pix-validation
+bugfix/resolve-token-expiry
+
+# Documentation
+docs/add-api-examples
+docs/update-installation-guide
+
+# Tests
+test/add-integration-tests
+test/improve-coverage
+</code></pre></div>
+<h3 id="commit-messages">Commit Messages</h3>
+<p>Follow <a href="https://www.conventionalcommits.org/">Conventional Commits</a>:</p>
+<div class="highlight"><pre><span></span><code>&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+
+&lt;body&gt;
+
+&lt;footer&gt;
+</code></pre></div>
+<h4 id="types">Types</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>feat</code></td>
+<td>New feature</td>
+</tr>
+<tr>
+<td><code>fix</code></td>
+<td>Bug fix</td>
+</tr>
+<tr>
+<td><code>docs</code></td>
+<td>Documentation</td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td>Formatting</td>
+</tr>
+<tr>
+<td><code>refactor</code></td>
+<td>Code refactoring</td>
+</tr>
+<tr>
+<td><code>test</code></td>
+<td>Tests</td>
+</tr>
+<tr>
+<td><code>chore</code></td>
+<td>Maintenance</td>
+</tr>
+</tbody>
+</table>
+<h4 id="examples">Examples</h4>
+<div class="highlight"><pre><span></span><code>feat<span class="o">(</span>payment<span class="o">)</span>:<span class="w"> </span>add<span class="w"> </span>boleto<span class="w"> </span>payment<span class="w"> </span>support
+
+Added<span class="w"> </span>support<span class="w"> </span><span class="k">for</span><span class="w"> </span>boleto<span class="w"> </span>bancario<span class="w"> </span>payments.
+-<span class="w"> </span>New<span class="w"> </span>validation<span class="w"> </span><span class="k">for</span><span class="w"> </span>payer<span class="w"> </span>address<span class="w"> </span>fields
+-<span class="w"> </span>Integration<span class="w"> </span>with<span class="w"> </span>boleto<span class="w"> </span>API<span class="w"> </span>endpoint
+-<span class="w"> </span>Updated<span class="w"> </span>checkout<span class="w"> </span>form<span class="w"> </span>with<span class="w"> </span>boleto<span class="w"> </span>option
+
+Closes<span class="w"> </span><span class="c1">#42</span>
+
+---
+
+fix<span class="o">(</span>validation<span class="o">)</span>:<span class="w"> </span>correct<span class="w"> </span>CPF<span class="w"> </span>validation<span class="w"> </span>logic
+
+The<span class="w"> </span>CPF<span class="w"> </span>validation<span class="w"> </span>was<span class="w"> </span>rejecting<span class="w"> </span>valid<span class="w"> </span>numbers.
+Updated<span class="w"> </span>the<span class="w"> </span>algorithm<span class="w"> </span>to<span class="w"> </span>match<span class="w"> </span>official<span class="w"> </span>specification.
+
+Fixes<span class="w"> </span><span class="c1">#38</span>
+
+---
+
+docs<span class="o">(</span>readme<span class="o">)</span>:<span class="w"> </span>update<span class="w"> </span>installation<span class="w"> </span>instructions
+
+Added<span class="w"> </span>detailed<span class="w"> </span>steps<span class="w"> </span><span class="k">for</span><span class="w"> </span>Windows<span class="w"> </span>users.
+Included<span class="w"> </span>troubleshooting<span class="w"> </span>section.
+</code></pre></div>
+<h3 id="keeping-branch-updated">Keeping Branch Updated</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Fetch upstream changes</span>
+git<span class="w"> </span>fetch<span class="w"> </span>upstream
+
+<span class="c1"># Rebase your branch</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>merge<span class="w"> </span>upstream/main
+git<span class="w"> </span>checkout<span class="w"> </span>your-branch
+git<span class="w"> </span>rebase<span class="w"> </span>main
+
+<span class="c1"># Or merge</span>
+git<span class="w"> </span>checkout<span class="w"> </span>your-branch
+git<span class="w"> </span>merge<span class="w"> </span>main
+</code></pre></div>
+<hr />
+<h2 id="recognition">Recognition</h2>
+<h3 id="contributors">Contributors</h3>
+<p>Contributors are recognized in:</p>
+<ul>
+<li><a href="CONTRIBUTORS.md">CONTRIBUTORS.md</a> file</li>
+<li>Release notes</li>
+<li>Project documentation</li>
+</ul>
+<h3 id="contribution-levels">Contribution Levels</h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Requirements</th>
+<th>Recognition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>First-time</strong></td>
+<td>First merged PR</td>
+<td>Welcome message</td>
+</tr>
+<tr>
+<td><strong>Contributor</strong></td>
+<td>3+ merged PRs</td>
+<td>Listed in CONTRIBUTORS.md</td>
+</tr>
+<tr>
+<td><strong>Regular</strong></td>
+<td>10+ merged PRs</td>
+<td>Featured in release notes</td>
+</tr>
+<tr>
+<td><strong>Maintainer</strong></td>
+<td>Consistent contributions</td>
+<td>Invite to maintainer team</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="questions">Questions?</h2>
+<p>If you have questions about contributing:</p>
+<ol>
+<li>Check existing <a href="../">documentation</a></li>
+<li>Search closed issues for similar questions</li>
+<li>Open a new issue with the <code>question</code> label</li>
+<li>Join project discussions (if available)</li>
+</ol>
+<hr />
+<h2 id="thank-you">Thank You!</h2>
+<p>Every contribution, no matter how small, helps make this project better. We appreciate your time and effort in improving the Mercado Libre Payment API!</p>
+<hr />
+<p><strong>Last Updated</strong>: April 2026<br />
+<strong>Version</strong>: 1.0.0</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56dfad97.min.js"></script>
+      
+    
+  </body>
+</html>
