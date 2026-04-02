@@ -1,0 +1,56 @@
+site_name: Mercado Pago Payment API
+site_description: A FastAPI-based payment integration API with Mercado Pago for secure transaction processing, order creation, and webhook notifications.
+site_author: GabrielDLobo
+site_url: https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+  palette:
+    primary: navy blue
+    accent: indigo
+  font:
+    text: Roboto
+  icon:
+    logo: material/credit-card-check-outline
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Configuration: configuration.md
+  - Guidelines and Standards: guidelines.md
+  - Project Structure: project-structure.md
+  - API Endpoints: api-endpoints.md
+  - System Modeling: system-modeling.md
+  - Authentication and Security: authentication-security.md
+  - Development: development.md
+  - Testing: testing.md
+  - Deploy: deploy.md
+  - Contributing: contributing.md
+  - Release Notes: release-notes.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid

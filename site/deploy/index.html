@@ -1,0 +1,1711 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A FastAPI-based payment integration API with Mercado Pago for secure transaction processing, order creation, and webhook notifications.">
+      
+      
+        <meta name="author" content="GabrielDLobo">
+      
+      
+        <link rel="canonical" href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/deploy/">
+      
+      
+        <link rel="prev" href="../testing/">
+      
+      
+        <link rel="next" href="../contributing/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Deploy - Mercado Pago Payment API</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="navy-blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deployment-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mercado Pago Payment API" class="md-header__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mercado Pago Payment API
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Deploy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mercado Pago Payment API" class="md-nav__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    Mercado Pago Payment API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guidelines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guidelines and Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Project Structure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-endpoints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Endpoints
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    System Modeling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authentication-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Authentication and Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Deploy
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deploy
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Strategies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pre-deployment-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-Deployment Checklist
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pre-Deployment Checklist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Quality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-platforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Platforms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment Platforms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#supported-platforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Platforms
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docker Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dockerfile
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Strategies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pre-deployment-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-Deployment Checklist
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pre-Deployment Checklist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Quality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-platforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Platforms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment Platforms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#supported-platforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Platforms
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docker Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dockerfile
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="deployment-guide">Deployment Guide</h1>
+<p>This guide provides comprehensive instructions for deploying the Mercado Libre Payment API to production environments.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#deployment-overview">Deployment Overview</a></li>
+<li><a href="#pre-deployment-checklist">Pre-Deployment Checklist</a></li>
+<li><a href="#deployment-platforms">Deployment Platforms</a></li>
+<li><a href="#docker-deployment">Docker Deployment</a></li>
+<li><a href="#platform-specific-guides">Platform-Specific Guides</a></li>
+<li><a href="#environment-configuration">Environment Configuration</a></li>
+<li><a href="#sslhttps-setup">SSL/HTTPS Setup</a></li>
+<li><a href="#monitoring--logging">Monitoring &amp; Logging</a></li>
+<li><a href="#post-deployment-verification">Post-Deployment Verification</a></li>
+<li><a href="#rollback-procedures">Rollback Procedures</a></li>
+</ul>
+<hr />
+<h2 id="deployment-overview">Deployment Overview</h2>
+<h3 id="deployment-architecture">Deployment Architecture</h3>
+<pre class="mermaid"><code>flowchart TB
+    subgraph Internet["Internet"]
+        User[End Users]
+        MP[Mercado Pago API]
+    end
+
+    subgraph CDN["CDN / Static Assets"]
+        Tailwind[Tailwind CSS CDN]
+    end
+
+    subgraph Platform["Deployment Platform"]
+        LB[Load Balancer]
+
+        subgraph Containers["Application Containers"]
+            App1[FastAPI Instance 1]
+            App2[FastAPI Instance 2]
+            App3[FastAPI Instance 3]
+        end
+
+        subgraph Config["Configuration"]
+            Env[Environment Variables]
+            Secrets[Secrets Manager]
+        end
+    end
+
+    User --&gt;|HTTPS| LB
+    LB --&gt; App1
+    LB --&gt; App2
+    LB --&gt; App3
+
+    App1 --&gt;|HTTPS| MP
+    App2 --&gt;|HTTPS| MP
+    App3 --&gt;|HTTPS| MP
+
+    App1 --&gt; Tailwind
+    App2 --&gt; Tailwind
+    App3 --&gt; Tailwind
+
+    App1 --&gt; Env
+    App2 --&gt; Env
+    App3 --&gt; Env
+
+    Env --&gt; Secrets
+
+    style Internet fill:#e3f2fd
+    style Platform fill:#e8f5e9
+    style Containers fill:#fff3e0</code></pre>
+<h3 id="deployment-strategies">Deployment Strategies</h3>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Description</th>
+<th>Downtime</th>
+<th>Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Recreate</strong></td>
+<td>Stop old, start new</td>
+<td>Yes</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><strong>Rolling</strong></td>
+<td>Gradual replacement</td>
+<td>No</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>Blue-Green</strong></td>
+<td>Two environments</td>
+<td>No</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>Canary</strong></td>
+<td>Gradual traffic shift</td>
+<td>No</td>
+<td>High</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="pre-deployment-checklist">Pre-Deployment Checklist</h2>
+<p>Before deploying to production, verify:</p>
+<h3 id="code-quality">Code Quality</h3>
+<ul>
+<li>[ ] All tests passing (minimum 85% coverage)</li>
+<li>[ ] Code reviewed and approved</li>
+<li>[ ] No debug statements in code</li>
+<li>[ ] Linting passes (flake8, black, isort)</li>
+<li>[ ] Type checking passes (mypy)</li>
+</ul>
+<h3 id="security">Security</h3>
+<ul>
+<li>[ ] Production access token configured</li>
+<li>[ ] Sandbox tokens removed</li>
+<li>[ ] <code>.env</code> file not committed</li>
+<li>[ ] Secrets stored in secure manager</li>
+<li>[ ] HTTPS enabled</li>
+<li>[ ] Security headers configured</li>
+</ul>
+<h3 id="configuration">Configuration</h3>
+<ul>
+<li>[ ] <code>DEBUG=False</code> in production</li>
+<li>[ ] Correct <code>APP_HOST</code> and <code>APP_PORT</code></li>
+<li>[ ] Database connections configured (if applicable)</li>
+<li>[ ] Logging configured</li>
+<li>[ ] Rate limiting enabled</li>
+</ul>
+<h3 id="infrastructure">Infrastructure</h3>
+<ul>
+<li>[ ] SSL certificate valid</li>
+<li>[ ] Domain configured</li>
+<li>[ ] Firewall rules set</li>
+<li>[ ] Monitoring enabled</li>
+<li>[ ] Backup strategy in place</li>
+</ul>
+<hr />
+<h2 id="deployment-platforms">Deployment Platforms</h2>
+<h3 id="supported-platforms">Supported Platforms</h3>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Type</th>
+<th>Best For</th>
+<th>Pricing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Render</strong></td>
+<td>PaaS</td>
+<td>Small-Medium apps</td>
+<td>Free tier available</td>
+</tr>
+<tr>
+<td><strong>Railway</strong></td>
+<td>PaaS</td>
+<td>Small-Medium apps</td>
+<td>Free tier available</td>
+</tr>
+<tr>
+<td><strong>Heroku</strong></td>
+<td>PaaS</td>
+<td>Medium apps</td>
+<td>Paid</td>
+</tr>
+<tr>
+<td><strong>AWS Elastic Beanstalk</strong></td>
+<td>PaaS</td>
+<td>Enterprise</td>
+<td>Pay-as-you-go</td>
+</tr>
+<tr>
+<td><strong>Google Cloud Run</strong></td>
+<td>Serverless</td>
+<td>Variable traffic</td>
+<td>Pay-as-you-go</td>
+</tr>
+<tr>
+<td><strong>DigitalOcean App Platform</strong></td>
+<td>PaaS</td>
+<td>Small-Medium</td>
+<td>Starting $5/mo</td>
+</tr>
+<tr>
+<td><strong>VPS (Docker)</strong></td>
+<td>IaaS</td>
+<td>Full control</td>
+<td>Varies</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="docker-deployment">Docker Deployment</h2>
+<h3 id="dockerfile">Dockerfile</h3>
+<p>```dockerfile</p>
+<h1 id="dockerfile_1">Dockerfile</h1>
+<p>FROM python:3.11-slim</p>
+<h1 id="set-working-directory">Set working directory</h1>
+<p>WORKDIR /app</p>
+<h1 id="set-environment-variables">Set environment variables</h1>
+<p>ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1</p>
+<h1 id="install-system-dependencies">Install system dependencies</h1>
+<p>RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends \
+    gcc \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*</p>
+<h1 id="copy-requirements-first-for-better-caching">Copy requirements first for better caching</h1>
+<p>COPY requirements.txt .</p>
+<h1 id="install-python-dependencies">Install Python dependencies</h1>
+<p>RUN pip install --no-cache-dir -r requirements.txt</p>
+<h1 id="copy-application-code">Copy application code</h1>
+<p>COPY app.py .
+COPY services/ ./services/
+COPY templates/ ./templates/</p>
+<h1 id="create-non-root-user">Create non-root user</h1>
+<p>RUN useradd --create-home --shell /bin/bash app
+USER app</p>
+<h1 id="expose-port">Expose port</h1>
+<p>EXPOSE 8000</p>
+<h1 id="health-check">Health check</h1>
+<p>HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import requests; requests.get('http://localhost:8000/')"</p>
+<h1 id="run-application">Run application</h1>
+<p>CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+```</p>
+<h3 id="docker-compose">Docker Compose</h3>
+<p>```yaml</p>
+<h1 id="docker-composeyml">docker-compose.yml</h1>
+<p>version: '3.8'</p>
+<p>services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MP_BASE_API_URL=https://api.mercadopago.com
+      - MP_ACCESS_TOKEN=${MP_ACCESS_TOKEN}
+      - DEBUG=False
+    env_file:
+      - .env.production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - app-network</p>
+<p>networks:
+  app-network:
+    driver: bridge
+```</p>
+<h3 id="dockerignore">.dockerignore</h3>
+<p>```</p>
+<h1 id="dockerignore_1">.dockerignore</h1>
+<p><strong>pycache</strong>/
+<em>.pyc
+</em>.pyo
+<em>.pyd
+.env
+.env.</em>
+!.env.example
+venv/
+.venv/
+.git
+.gitignore
+*.md
+docs/
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+```</p>
+<h3 id="build-and-run">Build and Run</h3>
+<p>```bash</p>
+<h1 id="build-docker-image">Build Docker image</h1>
+<p>docker build -t mercado-pago-api:latest .</p>
+<h1 id="run-container">Run container</h1>
+<p>docker run -d \
+  -p 8000:8000 \
+  -e MP_ACCESS_TOKEN=your-production-token \
+  -e DEBUG=False \
+  --name mp-api \
+  mercado-pago-api:latest</p>
+<h1 id="using-docker-compose">Using Docker Compose</h1>
+<p>docker-compose up -d</p>
+<h1 id="view-logs">View logs</h1>
+<p>docker logs -f mp-api</p>
+<h1 id="stop-container">Stop container</h1>
+<p>docker-compose down
+```</p>
+<hr />
+<h2 id="platform-specific-guides">Platform-Specific Guides</h2>
+<h3 id="render">Render</h3>
+<h4 id="steps">Steps</h4>
+<ol>
+<li>
+<p><strong>Create Account</strong>: Sign up at <a href="https://render.com">render.com</a></p>
+</li>
+<li>
+<p><strong>Create Web Service</strong>:</p>
+</li>
+<li>Click "New +" → "Web Service"</li>
+<li>Connect your GitHub repository</li>
+<li>
+<p>Configure service settings</p>
+</li>
+<li>
+<p><strong>Configuration</strong>:</p>
+</li>
+</ol>
+<p>```yaml</p>
+<h1 id="renderyaml">render.yaml</h1>
+<p>services:
+  - type: web
+    name: mercado-pago-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MP_BASE_API_URL
+        value: https://api.mercadopago.com
+      - key: MP_ACCESS_TOKEN
+        sync: false
+      - key: DEBUG
+        value: false
+    healthCheckPath: /
+    numInstances: 1
+```</p>
+<ol>
+<li><strong>Add Environment Variables</strong>:</li>
+<li>Go to Environment tab</li>
+<li>Add <code>MP_ACCESS_TOKEN</code> (mark as Secret)</li>
+<li>
+<p>Add other configuration</p>
+</li>
+<li>
+<p><strong>Deploy</strong>: Click "Create Web Service"</p>
+</li>
+</ol>
+<h3 id="railway">Railway</h3>
+<h4 id="steps_1">Steps</h4>
+<ol>
+<li>
+<p><strong>Create Account</strong>: Sign up at <a href="https://railway.app">railway.app</a></p>
+</li>
+<li>
+<p><strong>Deploy from GitHub</strong>:</p>
+</li>
+<li>Click "New Project"</li>
+<li>Select "Deploy from GitHub repo"</li>
+<li>
+<p>Choose your repository</p>
+</li>
+<li>
+<p><strong>Configure</strong>:</p>
+</li>
+<li>Railway auto-detects Python</li>
+<li>
+<p>Add environment variables</p>
+</li>
+<li>
+<p><strong>Environment Variables</strong>:
+<code>MP_BASE_API_URL=https://api.mercadopago.com
+MP_ACCESS_TOKEN=your-production-token
+DEBUG=False
+PORT=8000</code></p>
+</li>
+<li>
+<p><strong>Deploy</strong>: Railway deploys automatically on push</p>
+</li>
+</ol>
+<h3 id="heroku">Heroku</h3>
+<h4 id="steps_2">Steps</h4>
+<ol>
+<li><strong>Create Procfile</strong>:
+```</li>
+</ol>
+<h1 id="procfile">Procfile</h1>
+<p>web: uvicorn app:app --host 0.0.0.0 --port $PORT --workers 4
+```</p>
+<ol>
+<li><strong>Install Heroku CLI</strong>:
+```bash</li>
+</ol>
+<h1 id="login-to-heroku">Login to Heroku</h1>
+<p>heroku login</p>
+<h1 id="create-app">Create app</h1>
+<p>heroku create your-app-name</p>
+<h1 id="set-environment-variables_1">Set environment variables</h1>
+<p>heroku config:set MP_BASE_API_URL=https://api.mercadopago.com
+heroku config:set MP_ACCESS_TOKEN=your-production-token
+heroku config:set DEBUG=False</p>
+<h1 id="deploy">Deploy</h1>
+<p>git push heroku main</p>
+<h1 id="open-app">Open app</h1>
+<p>heroku open
+```</p>
+<h3 id="aws-elastic-beanstalk">AWS Elastic Beanstalk</h3>
+<h4 id="steps_3">Steps</h4>
+<ol>
+<li><strong>Create Application Configuration</strong>:
+```yaml</li>
+</ol>
+<h1 id="ebextensions01_packagesconfig">.ebextensions/01_packages.config</h1>
+<p>packages:
+  yum:
+    python3-devel: []
+    gcc: []</p>
+<h1 id="ebextensions02_pythonconfig">.ebextensions/02_python.config</h1>
+<p>option_settings:
+  aws:elasticbeanstalk:container:python:
+    WSGIPath: app:app
+  aws:elasticbeanstalk:application:environment:
+    MP_BASE_API_URL: https://api.mercadopago.com
+    DEBUG: "false"
+```</p>
+<ol>
+<li><strong>Deploy</strong>:
+```bash</li>
+</ol>
+<h1 id="install-eb-cli">Install EB CLI</h1>
+<p>pip install awsebcli</p>
+<h1 id="initialize">Initialize</h1>
+<p>eb init -p python-3.11 mercado-pago-api --region us-east-1</p>
+<h1 id="create-environment">Create environment</h1>
+<p>eb create production</p>
+<h1 id="deploy_1">Deploy</h1>
+<p>eb deploy</p>
+<h1 id="open">Open</h1>
+<p>eb open
+```</p>
+<h3 id="google-cloud-run">Google Cloud Run</h3>
+<h4 id="steps_4">Steps</h4>
+<ol>
+<li><strong>Build and Push to Container Registry</strong>:
+```bash</li>
+</ol>
+<h1 id="set-project">Set project</h1>
+<p>export PROJECT_ID=your-project-id
+gcloud config set project $PROJECT_ID</p>
+<h1 id="build-container">Build container</h1>
+<p>gcloud builds submit --tag gcr.io/$PROJECT_ID/mercado-pago-api</p>
+<h1 id="deploy-to-cloud-run">Deploy to Cloud Run</h1>
+<p>gcloud run deploy mercado-pago-api \
+  --image gcr.io/$PROJECT_ID/mercado-pago-api \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --set-env-vars MP_BASE_API_URL=https://api.mercadopago.com,DEBUG=false \
+  --set-secrets MP_ACCESS_TOKEN=mp-access-token:latest
+```</p>
+<hr />
+<h2 id="environment-configuration">Environment Configuration</h2>
+<h3 id="production-environment-variables">Production Environment Variables</h3>
+<p>```bash</p>
+<h1 id="envproduction">.env.production</h1>
+<h1 id="_1">=============================================================================</h1>
+<h1 id="mercado-pago-configuration">MERCADO PAGO CONFIGURATION</h1>
+<h1 id="_2">=============================================================================</h1>
+<p>MP_BASE_API_URL=https://api.mercadopago.com
+MP_ACCESS_TOKEN=APP_USR-your-production-token-here</p>
+<h1 id="_3">=============================================================================</h1>
+<h1 id="application-configuration">APPLICATION CONFIGURATION</h1>
+<h1 id="_4">=============================================================================</h1>
+<p>APP_HOST=0.0.0.0
+APP_PORT=8000
+DEBUG=False</p>
+<h1 id="_5">=============================================================================</h1>
+<h1 id="security_1">SECURITY</h1>
+<h1 id="_6">=============================================================================</h1>
+<p>SECRET_KEY=your-secret-key-here
+ALLOWED_HOSTS=your-domain.com,www.your-domain.com</p>
+<h1 id="_7">=============================================================================</h1>
+<h1 id="logging">LOGGING</h1>
+<h1 id="_8">=============================================================================</h1>
+<p>LOG_LEVEL=INFO
+LOG_FORMAT=json</p>
+<h1 id="_9">=============================================================================</h1>
+<h1 id="rate-limiting">RATE LIMITING</h1>
+<h1 id="_10">=============================================================================</h1>
+<p>RATE_LIMIT_PER_MINUTE=100
+```</p>
+<h3 id="secret-management">Secret Management</h3>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Secret Management</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Render</strong></td>
+<td>Environment Variables (Secret)</td>
+</tr>
+<tr>
+<td><strong>Railway</strong></td>
+<td>Variables (Private)</td>
+</tr>
+<tr>
+<td><strong>Heroku</strong></td>
+<td>Config Vars</td>
+</tr>
+<tr>
+<td><strong>AWS</strong></td>
+<td>Secrets Manager / Parameter Store</td>
+</tr>
+<tr>
+<td><strong>GCP</strong></td>
+<td>Secret Manager</td>
+</tr>
+<tr>
+<td><strong>Azure</strong></td>
+<td>Key Vault</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sslhttps-setup">SSL/HTTPS Setup</h2>
+<h3 id="automatic-ssl-paas">Automatic SSL (PaaS)</h3>
+<p>Most PaaS platforms provide automatic SSL:</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>SSL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Render</td>
+<td>Automatic (Let's Encrypt)</td>
+</tr>
+<tr>
+<td>Railway</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>Heroku</td>
+<td>Automatic (with ACM)</td>
+</tr>
+<tr>
+<td>Cloud Run</td>
+<td>Automatic</td>
+</tr>
+</tbody>
+</table>
+<h3 id="manual-ssl-vps">Manual SSL (VPS)</h3>
+<p>For VPS deployments with Nginx:</p>
+<p>```nginx</p>
+<h1 id="etcnginxsites-availablemercado-pago-api">/etc/nginx/sites-available/mercado-pago-api</h1>
+<p>server {
+    listen 80;
+    server_name your-domain.com;
+    return 301 https://$server_name$request_uri;
+}</p>
+<p>server {
+    listen 443 ssl http2;
+    server_name your-domain.com;</p>
+<pre><code>ssl_certificate /etc/letsencrypt/live/your-domain.com/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/your-domain.com/privkey.pem;
+
+ssl_protocols TLSv1.2 TLSv1.3;
+ssl_ciphers HIGH:!aNULL:!MD5;
+
+location / {
+    proxy_pass http://127.0.0.1:8000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+</code></pre>
+<p>}
+```</p>
+<h3 id="lets-encrypt-setup">Let's Encrypt Setup</h3>
+<p>```bash</p>
+<h1 id="install-certbot">Install Certbot</h1>
+<p>sudo apt install certbot python3-certbot-nginx</p>
+<h1 id="obtain-certificate">Obtain certificate</h1>
+<p>sudo certbot --nginx -d your-domain.com -d www.your-domain.com</p>
+<h1 id="auto-renewal-already-configured-by-certbot">Auto-renewal (already configured by Certbot)</h1>
+<p>sudo certbot renew --dry-run
+```</p>
+<hr />
+<h2 id="monitoring-logging">Monitoring &amp; Logging</h2>
+<h3 id="application-logging">Application Logging</h3>
+<p>```python</p>
+<h1 id="configure-logging-for-production">Configure logging for production</h1>
+<p>import logging
+import sys</p>
+<p>logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+    ]
+)</p>
+<p>logger = logging.getLogger(<strong>name</strong>)
+```</p>
+<h3 id="health-check-endpoint">Health Check Endpoint</h3>
+<p>```python</p>
+<h1 id="apppy">app.py</h1>
+<p>@app.get('/health')
+async def health_check():
+    """Health check endpoint for monitoring."""
+    return {
+        'status': 'healthy',
+        'service': 'mercado-pago-api',
+        'version': '1.0.0'
+    }
+```</p>
+<h3 id="monitoring-tools">Monitoring Tools</h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Purpose</th>
+<th>Integration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>New Relic</strong></td>
+<td>APM</td>
+<td>Python agent</td>
+</tr>
+<tr>
+<td><strong>Datadog</strong></td>
+<td>Monitoring</td>
+<td>Python agent</td>
+</tr>
+<tr>
+<td><strong>Sentry</strong></td>
+<td>Error tracking</td>
+<td>Python SDK</td>
+</tr>
+<tr>
+<td><strong>Prometheus</strong></td>
+<td>Metrics</td>
+<td>Python client</td>
+</tr>
+<tr>
+<td><strong>Grafana</strong></td>
+<td>Dashboards</td>
+<td>Prometheus datasource</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sentry-integration">Sentry Integration</h3>
+<p><code>bash
+pip install sentry-sdk[fastapi]</code></p>
+<p>```python</p>
+<h1 id="apppy_1">app.py</h1>
+<p>import sentry_sdk
+from sentry_sdk.integrations.fastapi import FastApiIntegration</p>
+<p>sentry_sdk.init(
+    dsn="your-sentry-dsn",
+    integrations=[FastApiIntegration()],
+    traces_sample_rate=1.0,
+    environment="production",
+)
+```</p>
+<hr />
+<h2 id="post-deployment-verification">Post-Deployment Verification</h2>
+<h3 id="verification-checklist">Verification Checklist</h3>
+<p>After deployment, verify:</p>
+<p>```bash</p>
+<h1 id="1-check-health-endpoint">1. Check health endpoint</h1>
+<p>curl https://your-domain.com/health</p>
+<h1 _healthy_="&quot;healthy&quot;," _status_:="&quot;status&quot;:" class=".." id="expected">Expected:</h1>
+<h1 id="2-check-main-page">2. Check main page</h1>
+<p>curl https://your-domain.com/</p>
+<h1 id="expected-html-checkout-page">Expected: HTML checkout page</h1>
+<h1 id="3-test-api-documentation">3. Test API documentation</h1>
+<p>curl https://your-domain.com/docs</p>
+<h1 id="expected-swagger-ui">Expected: Swagger UI</h1>
+<h1 id="4-test-payment-creation-sandbox-mode-first">4. Test payment creation (sandbox mode first)</h1>
+<p>curl -X POST https://your-domain.com/create_payment \
+  -H "Content-Type: application/json" \
+  -d '{
+    "payment_method": "pix",
+    "transaction_amount": 1.00,
+    "description": "Deployment test",
+    "email": "test@example.com",
+    "identification_number": "12345678900"
+  }'</p>
+<h1 id="expected-payment-response-with-status">Expected: Payment response with status</h1>
+<p>```</p>
+<h3 id="monitoring-dashboard">Monitoring Dashboard</h3>
+<p>Verify monitoring shows:</p>
+<ul>
+<li>[ ] Application is up</li>
+<li>[ ] Response times are acceptable (&lt; 500ms)</li>
+<li>[ ] Error rate is low (&lt; 1%)</li>
+<li>[ ] Memory usage is normal</li>
+<li>[ ] CPU usage is normal</li>
+</ul>
+<hr />
+<h2 id="rollback-procedures">Rollback Procedures</h2>
+<h3 id="docker-rollback">Docker Rollback</h3>
+<p>```bash</p>
+<h1 id="list-previous-images">List previous images</h1>
+<p>docker images mercado-pago-api</p>
+<h1 id="stop-current-container">Stop current container</h1>
+<p>docker stop mp-api
+docker rm mp-api</p>
+<h1 id="run-previous-version">Run previous version</h1>
+<p>docker run -d \
+  -p 8000:8000 \
+  --name mp-api \
+  mercado-pago-api:previous-tag
+```</p>
+<h3 id="platform-rollback">Platform Rollback</h3>
+<h4 id="render_1">Render</h4>
+<ol>
+<li>Go to service dashboard</li>
+<li>Click "Deployments"</li>
+<li>Select previous version</li>
+<li>Click "Rollback"</li>
+</ol>
+<h4 id="heroku_1">Heroku</h4>
+<p>```bash</p>
+<h1 id="list-releases">List releases</h1>
+<p>heroku releases</p>
+<h1 id="rollback-to-previous">Rollback to previous</h1>
+<p>heroku rollback</p>
+<h1 id="rollback-to-specific-version">Rollback to specific version</h1>
+<p>heroku rollback v42
+```</p>
+<h4 id="railway_1">Railway</h4>
+<ol>
+<li>Go to project dashboard</li>
+<li>Click "Deployments"</li>
+<li>Select previous deployment</li>
+<li>Click "Redeploy"</li>
+</ol>
+<h3 id="rollback-checklist">Rollback Checklist</h3>
+<ul>
+<li>[ ] Identify issue requiring rollback</li>
+<li>[ ] Notify team members</li>
+<li>[ ] Execute rollback procedure</li>
+<li>[ ] Verify service is healthy</li>
+<li>[ ] Monitor for issues</li>
+<li>[ ] Document incident</li>
+<li>[ ] Create post-mortem</li>
+</ul>
+<hr />
+<h2 id="production-best-practices">Production Best Practices</h2>
+<h3 id="dos">DO's ✅</h3>
+<ol>
+<li><strong>Use production tokens</strong> - Never use sandbox in production</li>
+<li><strong>Enable HTTPS</strong> - Always use SSL/TLS</li>
+<li><strong>Set DEBUG=False</strong> - Disable debug mode</li>
+<li><strong>Implement logging</strong> - Log all transactions</li>
+<li><strong>Set up monitoring</strong> - Track errors and performance</li>
+<li><strong>Use environment variables</strong> - Never hardcode secrets</li>
+<li><strong>Enable health checks</strong> - For load balancers</li>
+<li><strong>Configure backups</strong> - Regular data backups</li>
+<li><strong>Set up alerts</strong> - Get notified of issues</li>
+<li><strong>Document procedures</strong> - Runbooks for common tasks</li>
+</ol>
+<h3 id="donts">DON'Ts ❌</h3>
+<ol>
+<li><strong>Don't skip testing</strong> - Always test before deploying</li>
+<li><strong>Don't deploy on Friday</strong> - Avoid weekend incidents</li>
+<li><strong>Don't ignore logs</strong> - Monitor application logs</li>
+<li><strong>Don't skip SSL</strong> - Never run production without HTTPS</li>
+<li><strong>Don't hardcode secrets</strong> - Use secret management</li>
+<li><strong>Don't ignore alerts</strong> - Respond to monitoring alerts</li>
+<li><strong>Don't skip rollback plan</strong> - Always have rollback ready</li>
+<li><strong>Don't deploy without monitoring</strong> - Watch metrics during deploy</li>
+</ol>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<ol>
+<li><a href="../contributing/">Contributing Guide</a> - Contribution guidelines</li>
+<li><a href="../release-notes/">Release Notes</a> - Version history</li>
+<li><a href="../api-endpoints/">API Endpoints</a> - API reference</li>
+</ol>
+<hr />
+<p><strong>Last Updated</strong>: April 2026<br />
+<strong>Version</strong>: 1.0.0</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

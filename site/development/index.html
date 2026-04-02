@@ -1,0 +1,1286 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A FastAPI-based payment integration API with Mercado Pago for secure transaction processing, order creation, and webhook notifications.">
+      
+      
+        <meta name="author" content="GabrielDLobo">
+      
+      
+        <link rel="canonical" href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/development/">
+      
+      
+        <link rel="prev" href="../authentication-security/">
+      
+      
+        <link rel="next" href="../testing/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Development - Mercado Pago Payment API</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="navy-blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#development-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mercado Pago Payment API" class="md-header__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mercado Pago Payment API
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Development
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mercado Pago Payment API" class="md-nav__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    Mercado Pago Payment API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guidelines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guidelines and Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Project Structure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-endpoints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Endpoints
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    System Modeling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authentication-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Authentication and Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Environment Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Environment Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initial Setup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deploy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Environment Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Environment Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initial Setup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="development-guide">Development Guide</h1>
+<p>This guide provides comprehensive instructions for developing features, debugging, and maintaining the Mercado Libre Payment API.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#development-environment-setup">Development Environment Setup</a></li>
+<li><a href="#running-the-application">Running the Application</a></li>
+<li><a href="#code-structure">Code Structure</a></li>
+<li><a href="#adding-new-features">Adding New Features</a></li>
+<li><a href="#debugging">Debugging</a></li>
+<li><a href="#hot-reload">Hot Reload</a></li>
+<li><a href="#api-documentation">API Documentation</a></li>
+<li><a href="#version-control">Version Control</a></li>
+<li><a href="#code-quality">Code Quality</a></li>
+</ul>
+<hr />
+<h2 id="development-environment-setup">Development Environment Setup</h2>
+<h3 id="prerequisites-checklist">Prerequisites Checklist</h3>
+<p>Before starting development, ensure you have:</p>
+<ul>
+<li>[ ] Python 3.8+ installed</li>
+<li>[ ] Git installed and configured</li>
+<li>[ ] Code editor (VS Code, PyCharm, etc.)</li>
+<li>[ ] Mercado Pago developer account</li>
+<li>[ ] Sandbox access token</li>
+</ul>
+<h3 id="initial-setup">Initial Setup</h3>
+<p>```bash</p>
+<h1 id="1-clone-the-repository">1. Clone the repository</h1>
+<p>git clone https://github.com/GabrielDLobo/06-API_Pgto_MercadoLivre.git
+cd 06-API_Pgto_MercadoLivre</p>
+<h1 id="2-create-virtual-environment">2. Create virtual environment</h1>
+<p>python -m venv venv</p>
+<h1 id="3-activate-virtual-environment">3. Activate virtual environment</h1>
+<h1 id="windows-command-prompt">Windows (Command Prompt)</h1>
+<p>venv\Scripts\activate</p>
+<h1 id="windows-powershell">Windows (PowerShell)</h1>
+<p>venv\Scripts\Activate.ps1</p>
+<h1 id="macoslinux">macOS/Linux</h1>
+<p>source venv/bin/activate</p>
+<h1 id="4-install-dependencies">4. Install dependencies</h1>
+<p>pip install -r requirements.txt</p>
+<h1 id="5-create-env-file-with-sandbox-credentials">5. Create .env file with sandbox credentials</h1>
+<p>echo MP_BASE_API_URL=https://api.mercadopago.com &gt; .env
+echo MP_ACCESS_TOKEN=TEST-your-token &gt;&gt; .env
+echo DEBUG=True &gt;&gt; .env
+```</p>
+<h3 id="recommended-extensions-vs-code">Recommended Extensions (VS Code)</h3>
+<table>
+<thead>
+<tr>
+<th>Extension</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Python</strong></td>
+<td>Python language support</td>
+</tr>
+<tr>
+<td><strong>Pylance</strong></td>
+<td>Type checking</td>
+</tr>
+<tr>
+<td><strong>Black Formatter</strong></td>
+<td>Code formatting</td>
+</tr>
+<tr>
+<td><strong>isort</strong></td>
+<td>Import sorting</td>
+</tr>
+<tr>
+<td><strong>GitLens</strong></td>
+<td>Git integration</td>
+</tr>
+<tr>
+<td><strong>REST Client</strong></td>
+<td>API testing</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="running-the-application">Running the Application</h2>
+<h3 id="development-server">Development Server</h3>
+<p>```bash</p>
+<h1 id="start-with-auto-reload">Start with auto-reload</h1>
+<p>uvicorn app:app --reload --host 0.0.0.0 --port 8000
+```</p>
+<h3 id="server-options">Server Options</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--reload</code></td>
+<td>Auto-reload on code changes</td>
+<td>Enabled for development</td>
+</tr>
+<tr>
+<td><code>--host</code></td>
+<td>Network interface</td>
+<td><code>0.0.0.0</code> or <code>127.0.0.1</code></td>
+</tr>
+<tr>
+<td><code>--port</code></td>
+<td>Port number</td>
+<td><code>8000</code> (default)</td>
+</tr>
+<tr>
+<td><code>--log-level</code></td>
+<td>Logging verbosity</td>
+<td><code>debug</code>, <code>info</code>, <code>warning</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="development-commands">Development Commands</h3>
+<p>```bash</p>
+<h1 id="standard-development">Standard development</h1>
+<p>uvicorn app:app --reload</p>
+<h1 id="with-debug-logging">With debug logging</h1>
+<p>uvicorn app:app --reload --log-level debug</p>
+<h1 id="custom-port">Custom port</h1>
+<p>uvicorn app:app --reload --port 8001</p>
+<h1 id="production-like-no-reload">Production-like (no reload)</h1>
+<p>uvicorn app:app --host 0.0.0.0 --port 8000
+```</p>
+<hr />
+<h2 id="code-structure">Code Structure</h2>
+<h3 id="application-flow">Application Flow</h3>
+<pre class="mermaid"><code>flowchart LR
+    A[Request] --&gt; B[app.py]
+    B --&gt; C[Route Handler]
+    C --&gt; D[Validation]
+    D --&gt; E[MercadoPago Service]
+    E --&gt; F[Mercado Pago API]
+    F --&gt; E
+    E --&gt; C
+    C --&gt; G[Response]</code></pre>
+<h3 id="file-responsibilities">File Responsibilities</h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app.py</code></td>
+<td>Routes, request/response handling</td>
+</tr>
+<tr>
+<td><code>services/mercadopago.py</code></td>
+<td>Business logic, API integration</td>
+</tr>
+<tr>
+<td><code>templates/checkout.html</code></td>
+<td>Payment UI</td>
+</tr>
+<tr>
+<td><code>.env</code></td>
+<td>Configuration (not committed)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="adding-new-features">Adding New Features</h2>
+<h3 id="feature-development-workflow">Feature Development Workflow</h3>
+<pre class="mermaid"><code>flowchart TD
+    A[Create Feature Branch] --&gt; B[Write Code]
+    B --&gt; C[Write Tests]
+    C --&gt; D[Run Tests]
+    D --&gt; E{Tests Pass?}
+    E --&gt;|No| B
+    E --&gt;|Yes| F[Code Review]
+    F --&gt; G[Merge to Main]</code></pre>
+<h3 id="step-1-create-feature-branch">Step 1: Create Feature Branch</h3>
+<p>```bash</p>
+<h1 id="create-and-switch-to-new-branch">Create and switch to new branch</h1>
+<p>git checkout -b feature/add-new-payment-method</p>
+<h1 id="branch-naming-conventions">Branch naming conventions:</h1>
+<h1 id="feature">feature/<feature-name></h1>
+<h1 id="bugfix">bugfix/<bug-description></h1>
+<h1 id="docs">docs/<documentation-update></h1>
+<h1 id="refactor">refactor/<refactoring-description></h1>
+<p>```</p>
+<h3 id="step-2-implement-feature">Step 2: Implement Feature</h3>
+<p>Example: Adding a new payment method validation:</p>
+<p>```python</p>
+<h1 id="servicesmercadopagopy">services/mercadopago.py</h1>
+<p>def validate_payment_method(self, method: str) -&gt; bool:
+    """
+    Validate if payment method is supported.</p>
+<pre><code>Args:
+    method: Payment method code
+
+Returns:
+    True if method is supported
+
+Raises:
+    ValueError: If method is not supported
+"""
+supported_methods = ['card', 'pix', 'boleto']
+if method not in supported_methods:
+    raise ValueError(f"Unsupported payment method: {method}")
+return True
+</code></pre>
+<p>```</p>
+<h3 id="step-3-update-routes">Step 3: Update Routes</h3>
+<p>```python</p>
+<h1 id="apppy">app.py</h1>
+<p>@app.post('/create_payment')
+async def create_payment(request: Request):
+    data = await request.json()
+    method = data.get('payment_method')</p>
+<pre><code># Validate payment method
+mp.validate_payment_method(method)
+
+# ... rest of implementation
+</code></pre>
+<p>```</p>
+<h3 id="step-4-write-tests">Step 4: Write Tests</h3>
+<p>```python</p>
+<h1 id="teststest_mercadopagopy">tests/test_mercadopago.py</h1>
+<p>def test_validate_payment_method_supported():
+    mp = MercadoPago()
+    assert mp.validate_payment_method('card') == True
+    assert mp.validate_payment_method('pix') == True
+    assert mp.validate_payment_method('boleto') == True</p>
+<p>def test_validate_payment_method_unsupported():
+    mp = MercadoPago()
+    with pytest.raises(ValueError):
+        mp.validate_payment_method('crypto')
+```</p>
+<hr />
+<h2 id="debugging">Debugging</h2>
+<h3 id="python-debugger-pdb">Python Debugger (pdb)</h3>
+<p>```python</p>
+<h1 id="set-breakpoint">Set breakpoint</h1>
+<p>import pdb; pdb.set_trace()</p>
+<h1 id="or-in-python-37">Or in Python 3.7+</h1>
+<p>breakpoint()</p>
+<h1 id="example-usage">Example usage</h1>
+<p>def create_payment(amount: float):
+    breakpoint()  # Execution stops here
+    if amount &lt;= 0:
+        raise ValueError("Invalid amount")
+    return process_payment(amount)
+```</p>
+<h3 id="common-pdb-commands">Common pdb Commands</h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>n</code> (next)</td>
+<td>Execute next line</td>
+</tr>
+<tr>
+<td><code>s</code> (step)</td>
+<td>Step into function</td>
+</tr>
+<tr>
+<td><code>c</code> (continue)</td>
+<td>Continue execution</td>
+</tr>
+<tr>
+<td><code>l</code> (list)</td>
+<td>Show code context</td>
+</tr>
+<tr>
+<td><code>p &lt;var&gt;</code></td>
+<td>Print variable value</td>
+</tr>
+<tr>
+<td><code>q</code> (quit)</td>
+<td>Quit debugger</td>
+</tr>
+</tbody>
+</table>
+<h3 id="logging-for-debugging">Logging for Debugging</h3>
+<p>```python
+import logging</p>
+<h1 id="configure-logging">Configure logging</h1>
+<p>logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(<strong>name</strong>)</p>
+<h1 id="debug-logging">Debug logging</h1>
+<p>logger.debug(f"Payment amount: {amount}")
+logger.info(f"Payment created: {payment_id}")
+logger.warning(f"Deprecated method called")
+logger.error(f"Payment failed: {error}")
+```</p>
+<h3 id="debug-mode">Debug Mode</h3>
+<p>Enable debug mode in <code>.env</code>:</p>
+<p><code>env
+DEBUG=True</code></p>
+<p>Access interactive debugger at:
+- Swagger UI: <code>http://localhost:8000/docs</code>
+- ReDoc: <code>http://localhost:8000/redoc</code></p>
+<hr />
+<h2 id="hot-reload">Hot Reload</h2>
+<h3 id="auto-reload-configuration">Auto-Reload Configuration</h3>
+<p>The <code>--reload</code> flag enables automatic server restart on code changes:</p>
+<p><code>bash
+uvicorn app:app --reload</code></p>
+<h3 id="watched-directories">Watched Directories</h3>
+<p>By default, Uvicorn watches:</p>
+<ul>
+<li><code>*.py</code> files in current directory</li>
+<li>Changes trigger server restart</li>
+</ul>
+<h3 id="reload-troubleshooting">Reload Troubleshooting</h3>
+<p>If hot reload isn't working:</p>
+<p>```bash</p>
+<h1 id="explicitly-specify-reload-directory">Explicitly specify reload directory</h1>
+<p>uvicorn app:app --reload --reload-dir .</p>
+<h1 id="increase-reload-delay-default-025s">Increase reload delay (default: 0.25s)</h1>
+<p>uvicorn app:app --reload --reload-delay 0.5
+```</p>
+<hr />
+<h2 id="api-documentation">API Documentation</h2>
+<h3 id="interactive-documentation">Interactive Documentation</h3>
+<p>FastAPI auto-generates interactive API docs:</p>
+<table>
+<thead>
+<tr>
+<th>Documentation</th>
+<th>URL</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Swagger UI</strong></td>
+<td><code>/docs</code></td>
+<td>Try-it-out, schemas</td>
+</tr>
+<tr>
+<td><strong>ReDoc</strong></td>
+<td><code>/redoc</code></td>
+<td>Clean documentation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="swagger-ui-features">Swagger UI Features</h3>
+<ol>
+<li><strong>Try it out</strong> - Test endpoints directly</li>
+<li><strong>Request/Response schemas</strong> - View data models</li>
+<li><strong>Authentication</strong> - Configure tokens</li>
+<li><strong>Download spec</strong> - OpenAPI JSON/YAML</li>
+</ol>
+<h3 id="example-testing-via-swagger">Example: Testing via Swagger</h3>
+<ol>
+<li>Navigate to <code>http://localhost:8000/docs</code></li>
+<li>Click on <code>POST /create_payment</code></li>
+<li>Click "Try it out"</li>
+<li>Fill in request body</li>
+<li>Click "Execute"</li>
+<li>View response</li>
+</ol>
+<hr />
+<h2 id="version-control">Version Control</h2>
+<h3 id="git-workflow">Git Workflow</h3>
+<pre class="mermaid"><code>gitGraph
+    commit id: "Initial"
+    branch feature/new-feature
+    checkout feature/new-feature
+    commit id: "Add feature"
+    checkout main
+    merge feature/new-feature
+    commit id: "Release"</code></pre>
+<h3 id="commit-message-format">Commit Message Format</h3>
+<p>```bash</p>
+<h1 id="format">Format</h1>
+<p><type>(<scope>): <subject></p>
+<h1 id="examples">Examples</h1>
+<p>feat(payment): add boleto payment support
+fix(validation): correct CPF validation logic
+docs(readme): update installation instructions
+refactor(service): extract card tokenization method
+test(payment): add integration tests for PIX
+```</p>
+<h3 id="common-git-commands">Common Git Commands</h3>
+<p>```bash</p>
+<h1 id="check-status">Check status</h1>
+<p>git status</p>
+<h1 id="stage-changes">Stage changes</h1>
+<p>git add <file>
+git add .  # All changes</p>
+<h1 id="commit">Commit</h1>
+<p>git commit -m "feat: add new feature"</p>
+<h1 id="push-to-remote">Push to remote</h1>
+<p>git push origin feature/branch-name</p>
+<h1 id="pull-latest-changes">Pull latest changes</h1>
+<p>git pull origin main</p>
+<h1 id="create-pull-request-github-cli">Create pull request (GitHub CLI)</h1>
+<p>gh pr create --title "feat: add new feature" --body "Description"
+```</p>
+<hr />
+<h2 id="code-quality">Code Quality</h2>
+<h3 id="pre-commit-hooks">Pre-commit Hooks</h3>
+<p>Install pre-commit for automatic code quality checks:</p>
+<p>```bash</p>
+<h1 id="install-pre-commit">Install pre-commit</h1>
+<p>pip install pre-commit</p>
+<h1 id="create-pre-commit-configyaml">Create .pre-commit-config.yaml</h1>
+<p>cat &gt; .pre-commit-config.yaml &lt;&lt; EOF
+repos:
+  - repo: https://github.com/psf/black
+    rev: 24.0.0
+    hooks:
+      - id: black
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.0
+    hooks:
+      - id: isort
+EOF</p>
+<h1 id="install-git-hooks">Install git hooks</h1>
+<p>pre-commit install
+```</p>
+<h3 id="running-linters-manually">Running Linters Manually</h3>
+<p>```bash</p>
+<h1 id="format-code-with-black">Format code with black</h1>
+<p>black app.py services/</p>
+<h1 id="sort-imports-with-isort">Sort imports with isort</h1>
+<p>isort app.py services/</p>
+<h1 id="lint-with-flake8">Lint with flake8</h1>
+<p>flake8 app.py services/</p>
+<h1 id="type-check-with-mypy">Type check with mypy</h1>
+<p>mypy app.py services/
+```</p>
+<h3 id="code-quality-checklist">Code Quality Checklist</h3>
+<p>Before committing:</p>
+<ul>
+<li>[ ] Code formatted with black</li>
+<li>[ ] Imports sorted with isort</li>
+<li>[ ] No flake8 warnings</li>
+<li>[ ] Type hints added</li>
+<li>[ ] Docstrings for public functions</li>
+<li>[ ] Tests written and passing</li>
+<li>[ ] No sensitive data in code</li>
+<li>[ ] Commit message follows convention</li>
+</ul>
+<hr />
+<h2 id="development-tips">Development Tips</h2>
+<h3 id="tip-1-use-test-cards">Tip 1: Use Test Cards</h3>
+<p>For testing credit card payments:</p>
+<p>```python</p>
+<h1 id="test-card-data-sandbox">Test card data (Sandbox)</h1>
+<p>TEST_CARD = {
+    'card_number': '5031755734530604',
+    'expiration_month': '11',
+    'expiration_year': '2025',
+    'security_code': '123',
+    'cardholder_name': 'Test User',
+}
+```</p>
+<h3 id="tip-2-mock-external-services">Tip 2: Mock External Services</h3>
+<p>For unit testing without API calls:</p>
+<p>```python
+from unittest.mock import patch, MagicMock</p>
+<p>@patch('services.mercadopago.requests.post')
+def test_payment_creation(mock_post):
+    mock_response = MagicMock()
+    mock_response.json.return_value = {'id': '123', 'status': 'approved'}
+    mock_response.raise_for_status.return_value = None
+    mock_post.return_value = mock_response</p>
+<pre><code>result = mp.pay_with_pix(100.0, "Test", payer)
+assert result['status'] == 'approved'
+</code></pre>
+<p>```</p>
+<h3 id="tip-3-environment-specific-config">Tip 3: Environment-Specific Config</h3>
+<p>```python</p>
+<h1 id="use-different-configs-for-devprod">Use different configs for dev/prod</h1>
+<p>from decouple import config</p>
+<p>DEBUG = config('DEBUG', default=False, cast=bool)</p>
+<p>if DEBUG:
+    # Development settings
+    MP_ACCESS_TOKEN = config('MP_SANDBOX_TOKEN')
+else:
+    # Production settings
+    MP_ACCESS_TOKEN = config('MP_PRODUCTION_TOKEN')
+```</p>
+<h3 id="tip-4-request-timing">Tip 4: Request Timing</h3>
+<p>```python
+import time
+from functools import wraps</p>
+<p>def timing(func):
+    @wraps(func)
+    def wrapper(<em>args, </em><em>kwargs):
+        start = time.time()
+        result = func(</em>args, **kwargs)
+        end = time.time()
+        print(f"{func.<strong>name</strong>} took {end - start:.2f}s")
+        return result
+    return wrapper</p>
+<p>@timing
+def create_payment(...):
+    pass
+```</p>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-development-issues">Common Development Issues</h3>
+<h4 id="issue-1-module-not-found">Issue 1: Module Not Found</h4>
+<p>```bash</p>
+<h1 id="error-modulenotfounderror-no-module-named-fastapi">Error: ModuleNotFoundError: No module named 'fastapi'</h1>
+<h1 id="solution-activate-virtual-environment-and-reinstall">Solution: Activate virtual environment and reinstall</h1>
+<p>venv\Scripts\activate  # Windows
+source venv/bin/activate  # macOS/Linux
+pip install -r requirements.txt
+```</p>
+<h4 id="issue-2-port-already-in-use">Issue 2: Port Already in Use</h4>
+<p>```bash</p>
+<h1 id="error-oserror-errno-48-address-already-in-use">Error: OSError: [Errno 48] Address already in use</h1>
+<h1 id="solution-find-and-kill-process-or-use-different-port">Solution: Find and kill process or use different port</h1>
+<h1 id="windows">Windows</h1>
+<p>netstat -ano | findstr :8000
+taskkill /PID <PID> /F</p>
+<h1 id="macoslinux_1">macOS/Linux</h1>
+<p>lsof -i :8000
+kill -9 <PID></p>
+<h1 id="or-use-different-port">Or use different port</h1>
+<p>uvicorn app:app --reload --port 8001
+```</p>
+<h4 id="issue-3-hot-reload-not-working">Issue 3: Hot Reload Not Working</h4>
+<p>```bash</p>
+<h1 id="solution-check-file-system-events">Solution: Check file system events</h1>
+<h1 id="some-systems-need-explicit-reload-directory">Some systems need explicit reload directory</h1>
+<p>uvicorn app:app --reload --reload-dir .</p>
+<h1 id="or-increase-delay">Or increase delay</h1>
+<p>uvicorn app:app --reload --reload-delay 0.5
+```</p>
+<h4 id="issue-4-environment-variables-not-loading">Issue 4: Environment Variables Not Loading</h4>
+<p>```bash</p>
+<h1 id="verify-env-file-exists">Verify .env file exists</h1>
+<p>ls -la .env</p>
+<h1 id="check-file-encoding-should-be-utf-8">Check file encoding (should be UTF-8)</h1>
+<h1 id="verify-variable-names-match-exactly">Verify variable names match exactly</h1>
+<p>cat .env</p>
+<h1 id="restart-server-after-env-changes">Restart server after .env changes</h1>
+<p>```</p>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<ol>
+<li><a href="../testing/">Testing Guide</a> - Write and run tests</li>
+<li><a href="../deploy/">Deploy Guide</a> - Deploy to production</li>
+<li><a href="../contributing/">Contributing Guide</a> - Contribution guidelines</li>
+</ol>
+<hr />
+<p><strong>Last Updated</strong>: April 2026<br />
+<strong>Version</strong>: 1.0.0</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

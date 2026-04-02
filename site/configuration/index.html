@@ -1,0 +1,1223 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A FastAPI-based payment integration API with Mercado Pago for secure transaction processing, order creation, and webhook notifications.">
+      
+      
+        <meta name="author" content="GabrielDLobo">
+      
+      
+        <link rel="canonical" href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/configuration/">
+      
+      
+        <link rel="prev" href="../installation/">
+      
+      
+        <link rel="next" href="../guidelines/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Configuration - Mercado Pago Payment API</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="navy-blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuration-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mercado Pago Payment API" class="md-header__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mercado Pago Payment API
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mercado Pago Payment API" class="md-nav__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    Mercado Pago Payment API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Variables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mercado-pago-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mercado Pago Credentials
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mercado Pago Credentials">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Obtaining Credentials
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Obtaining Credentials">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-create-mercado-pago-account" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Create Mercado Pago Account
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-access-developer-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Access Developer Dashboard
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-create-new-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Create New Application
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-get-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Get Credentials
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guidelines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guidelines and Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Project Structure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-endpoints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Endpoints
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    System Modeling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authentication-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Authentication and Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deploy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Variables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mercado-pago-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mercado Pago Credentials
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mercado Pago Credentials">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Obtaining Credentials
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Obtaining Credentials">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-create-mercado-pago-account" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Create Mercado Pago Account
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-access-developer-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Access Developer Dashboard
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-create-new-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Create New Application
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-get-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Get Credentials
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="configuration-guide">Configuration Guide</h1>
+<p>This guide covers all configuration aspects of the Mercado Libre Payment API, including environment variables, Mercado Pago credentials, and application settings.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#environment-variables">Environment Variables</a></li>
+<li><a href="#mercado-pago-credentials">Mercado Pago Credentials</a></li>
+<li><a href="#application-settings">Application Settings</a></li>
+<li><a href="#development-vs-production">Development vs Production</a></li>
+<li><a href="#configuration-best-practices">Configuration Best Practices</a></li>
+</ul>
+<hr />
+<h2 id="environment-variables">Environment Variables</h2>
+<p>The application uses environment variables for configuration, managed through the <code>python-decouple</code> library.</p>
+<h3 id="required-variables">Required Variables</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+<th>Example</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MP_BASE_API_URL</code></td>
+<td>Mercado Pago API base URL</td>
+<td><code>https://api.mercadopago.com</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>MP_ACCESS_TOKEN</code></td>
+<td>Mercado Pago access token</td>
+<td><code>APP_USR-xxx-xxx</code></td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h3 id="optional-variables">Optional Variables</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+<th>Default</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APP_HOST</code></td>
+<td>Server host</td>
+<td><code>0.0.0.0</code></td>
+<td><code>127.0.0.1</code></td>
+</tr>
+<tr>
+<td><code>APP_PORT</code></td>
+<td>Server port</td>
+<td><code>8000</code></td>
+<td><code>8080</code></td>
+</tr>
+<tr>
+<td><code>DEBUG</code></td>
+<td>Debug mode</td>
+<td><code>False</code></td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="mercado-pago-credentials">Mercado Pago Credentials</h2>
+<h3 id="obtaining-credentials">Obtaining Credentials</h3>
+<h4 id="step-1-create-mercado-pago-account">Step 1: Create Mercado Pago Account</h4>
+<ol>
+<li>Visit <a href="https://www.mercadopago.com.br/">Mercado Pago</a></li>
+<li>Click "Create Account"</li>
+<li>Complete registration with your information</li>
+</ol>
+<h4 id="step-2-access-developer-dashboard">Step 2: Access Developer Dashboard</h4>
+<ol>
+<li>Go to <a href="https://developers.mercadopago.com/">Mercado Pago Developers</a></li>
+<li>Log in with your Mercado Pago credentials</li>
+<li>Navigate to "Your Applications"</li>
+</ol>
+<h4 id="step-3-create-new-application">Step 3: Create New Application</h4>
+<ol>
+<li>Click "Create Application"</li>
+<li>Select application type: "Payment processing"</li>
+<li>Fill in application details:</li>
+<li><strong>Name</strong>: Your application name</li>
+<li><strong>Description</strong>: Brief description</li>
+<li><strong>Logo</strong>: Upload application logo (optional)</li>
+</ol>
+<h4 id="step-4-get-credentials">Step 4: Get Credentials</h4>
+<p>After creating the application:</p>
+<ol>
+<li>Navigate to "Credentials" tab</li>
+<li>You'll find:</li>
+<li><strong>Access Token</strong> (Production)</li>
+<li><strong>Public Key</strong> (Production)</li>
+<li><strong>Access Token</strong> (Sandbox)</li>
+<li><strong>Public Key</strong> (Sandbox)</li>
+</ol>
+<h3 id="environment-configuration">Environment Configuration</h3>
+<p>Create a <code>.env</code> file in the project root:</p>
+<p>```env</p>
+<h1 id="_1">=============================================================================</h1>
+<h1 id="mercado-pago-api-configuration">MERCADO PAGO API CONFIGURATION</h1>
+<h1 id="_2">=============================================================================</h1>
+<h1 id="production-api-url">Production API URL</h1>
+<p>MP_BASE_API_URL=https://api.mercadopago.com</p>
+<h1 id="production-access-token-for-live-transactions">Production Access Token (for live transactions)</h1>
+<p>MP_ACCESS_TOKEN=APP_USR-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+<h1 id="_3">=============================================================================</h1>
+<h1 id="application-settings">APPLICATION SETTINGS</h1>
+<h1 id="_4">=============================================================================</h1>
+<h1 id="server-configuration">Server configuration</h1>
+<p>APP_HOST=0.0.0.0
+APP_PORT=8000</p>
+<h1 id="debug-mode-set-to-false-in-production">Debug mode (set to False in production)</h1>
+<p>DEBUG=True
+```</p>
+<h3 id="sandbox-mode-testing">Sandbox Mode (Testing)</h3>
+<p>For testing without real transactions, use Sandbox credentials:</p>
+<p>```env</p>
+<h1 id="sandbox-mode">Sandbox Mode</h1>
+<p>MP_BASE_API_URL=https://api.mercadopago.com
+MP_ACCESS_TOKEN=TEST-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```</p>
+<blockquote>
+<p><strong>Note</strong>: Sandbox tokens start with <code>TEST-</code> prefix</p>
+</blockquote>
+<hr />
+<h2 id="application-settings_1">Application Settings</h2>
+<h3 id="server-configuration_1">Server Configuration</h3>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Description</th>
+<th>Development</th>
+<th>Production</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APP_HOST</code></td>
+<td>Network interface</td>
+<td><code>0.0.0.0</code></td>
+<td><code>0.0.0.0</code></td>
+</tr>
+<tr>
+<td><code>APP_PORT</code></td>
+<td>Port number</td>
+<td><code>8000</code></td>
+<td><code>80</code> or <code>443</code></td>
+</tr>
+<tr>
+<td><code>DEBUG</code></td>
+<td>Debug mode</td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="recommended-configuration">Recommended Configuration</h3>
+<h4 id="development-environment">Development Environment</h4>
+<p><code>env
+APP_HOST=127.0.0.1
+APP_PORT=8000
+DEBUG=True</code></p>
+<h4 id="production-environment">Production Environment</h4>
+<p><code>env
+APP_HOST=0.0.0.0
+APP_PORT=8000
+DEBUG=False</code></p>
+<hr />
+<h2 id="development-vs-production">Development vs Production</h2>
+<h3 id="configuration-comparison">Configuration Comparison</h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Development</th>
+<th>Production</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Access Token</strong></td>
+<td>Sandbox token</td>
+<td>Production token</td>
+</tr>
+<tr>
+<td><strong>Debug Mode</strong></td>
+<td>Enabled</td>
+<td>Disabled</td>
+</tr>
+<tr>
+<td><strong>Host</strong></td>
+<td>localhost</td>
+<td>0.0.0.0</td>
+</tr>
+<tr>
+<td><strong>Port</strong></td>
+<td>8000</td>
+<td>80/443 (via proxy)</td>
+</tr>
+<tr>
+<td><strong>HTTPS</strong></td>
+<td>Optional</td>
+<td>Required</td>
+</tr>
+<tr>
+<td><strong>Logging</strong></td>
+<td>Verbose</td>
+<td>Minimal</td>
+</tr>
+</tbody>
+</table>
+<h3 id="environment-specific-files">Environment-Specific Files</h3>
+<p>Recommended structure:</p>
+<p><code>.env                 # Local overrides (gitignored)
+.env.example         # Template for .env (committed)
+.env.production      # Production settings (secure storage)
+.env.development     # Development settings</code></p>
+<h3 id="envexample-template">.env.example Template</h3>
+<p>```env</p>
+<h1 id="copy-this-file-to-env-and-fill-in-your-values">Copy this file to .env and fill in your values</h1>
+<h1 id="mercado-pago-configuration">Mercado Pago Configuration</h1>
+<p>MP_BASE_API_URL=https://api.mercadopago.com
+MP_ACCESS_TOKEN=your-access-token-here</p>
+<h1 id="application-settings_2">Application Settings</h1>
+<p>APP_HOST=0.0.0.0
+APP_PORT=8000
+DEBUG=False
+```</p>
+<hr />
+<h2 id="configuration-best-practices">Configuration Best Practices</h2>
+<h3 id="security-guidelines">Security Guidelines</h3>
+<h4 id="do">✅ DO:</h4>
+<ol>
+<li><strong>Use environment variables</strong> for all sensitive data</li>
+<li><strong>Keep <code>.env</code> files out of version control</strong> (already in <code>.gitignore</code>)</li>
+<li><strong>Use different tokens</strong> for development and production</li>
+<li><strong>Rotate access tokens</strong> periodically</li>
+<li><strong>Use HTTPS</strong> in production environments</li>
+<li><strong>Validate all configuration</strong> on application startup</li>
+</ol>
+<h4 id="dont">❌ DON'T:</h4>
+<ol>
+<li><strong>Never commit</strong> <code>.env</code> files to Git</li>
+<li><strong>Never share</strong> access tokens publicly</li>
+<li><strong>Never use</strong> production tokens in development</li>
+<li><strong>Never hardcode</strong> credentials in source code</li>
+<li><strong>Never log</strong> sensitive configuration values</li>
+</ol>
+<h3 id="configuration-validation">Configuration Validation</h3>
+<p>Add validation on application startup:</p>
+<p>```python</p>
+<h1 id="example-validation-logic">Example validation logic</h1>
+<p>from decouple import config</p>
+<p>MP_ACCESS_TOKEN = config('MP_ACCESS_TOKEN')</p>
+<p>if not MP_ACCESS_TOKEN or MP_ACCESS_TOKEN == 'your-access-token-here':
+    raise ValueError("MP_ACCESS_TOKEN must be configured")
+```</p>
+<h3 id="secret-management">Secret Management</h3>
+<p>For production deployments, consider:</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Secret Management</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AWS</strong></td>
+<td>AWS Secrets Manager / Parameter Store</td>
+</tr>
+<tr>
+<td><strong>Azure</strong></td>
+<td>Azure Key Vault</td>
+</tr>
+<tr>
+<td><strong>GCP</strong></td>
+<td>Google Secret Manager</td>
+</tr>
+<tr>
+<td><strong>Heroku</strong></td>
+<td>Config Vars</td>
+</tr>
+<tr>
+<td><strong>Railway</strong></td>
+<td>Environment Variables</td>
+</tr>
+<tr>
+<td><strong>Render</strong></td>
+<td>Environment Variables</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="configuration-checklist">Configuration Checklist</h2>
+<p>Before deploying to production:</p>
+<ul>
+<li>[ ] Replace sandbox token with production token</li>
+<li>[ ] Set <code>DEBUG=False</code></li>
+<li>[ ] Configure proper <code>APP_HOST</code> and <code>APP_PORT</code></li>
+<li>[ ] Enable HTTPS</li>
+<li>[ ] Set up proper logging</li>
+<li>[ ] Configure firewall rules</li>
+<li>[ ] Test all payment methods</li>
+<li>[ ] Verify webhook configuration</li>
+<li>[ ] Review security settings</li>
+</ul>
+<hr />
+<h2 id="troubleshooting-configuration">Troubleshooting Configuration</h2>
+<h3 id="common-issues">Common Issues</h3>
+<h4 id="1-missing-environment-variable">1. Missing Environment Variable</h4>
+<p><strong>Error</strong>: <code>Required configuration variable not set</code></p>
+<p><strong>Solution</strong>: Ensure all required variables are in <code>.env</code>:</p>
+<p>```bash</p>
+<h1 id="check-if-env-exists">Check if .env exists</h1>
+<p>ls -la .env</p>
+<h1 id="verify-variable-values">Verify variable values</h1>
+<p>cat .env
+```</p>
+<h4 id="2-invalid-access-token">2. Invalid Access Token</h4>
+<p><strong>Error</strong>: <code>401 Unauthorized</code> from Mercado Pago API</p>
+<p><strong>Solution</strong>:
+1. Verify token is correct
+2. Check if token has expired
+3. Ensure using correct environment (sandbox vs production)</p>
+<h4 id="3-configuration-not-loading">3. Configuration Not Loading</h4>
+<p><strong>Error</strong>: Settings not being applied</p>
+<p><strong>Solution</strong>:
+1. Restart the application after <code>.env</code> changes
+2. Verify <code>python-decouple</code> is installed
+3. Check <code>.env</code> file encoding (UTF-8)</p>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<p>After configuration:</p>
+<ol>
+<li><a href="../api-endpoints/">Review API Endpoints</a> - Understand available endpoints</li>
+<li><a href="../system-modeling/">System Modeling</a> - Learn about architecture</li>
+<li><a href="../authentication-security/">Security Guidelines</a> - Implement security best practices</li>
+</ol>
+<hr />
+<p><strong>Last Updated</strong>: April 2026<br />
+<strong>Version</strong>: 1.0.0</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

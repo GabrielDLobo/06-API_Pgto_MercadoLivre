@@ -1,0 +1,1247 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A FastAPI-based payment integration API with Mercado Pago for secure transaction processing, order creation, and webhook notifications.">
+      
+      
+        <meta name="author" content="GabrielDLobo">
+      
+      
+        <link rel="canonical" href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/project-structure/">
+      
+      
+        <link rel="prev" href="../guidelines/">
+      
+      
+        <link rel="next" href="../api-endpoints/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Project Structure - Mercado Pago Payment API</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="navy-blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#project-structure" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mercado Pago Payment API" class="md-header__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mercado Pago Payment API
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Project Structure
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mercado Pago Payment API" class="md-nav__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    Mercado Pago Payment API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guidelines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guidelines and Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Project Structure
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Project Structure
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#directory-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directory Tree
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#root-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Root Files
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Root Files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apppy" class="md-nav__link">
+    <span class="md-ellipsis">
+      app.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirementstxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      requirements.txt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readmemd" class="md-nav__link">
+    <span class="md-ellipsis">
+      README.md
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      .gitignore
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-endpoints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Endpoints
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    System Modeling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authentication-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Authentication and Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deploy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#directory-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directory Tree
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#root-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Root Files
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Root Files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apppy" class="md-nav__link">
+    <span class="md-ellipsis">
+      app.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirementstxt" class="md-nav__link">
+    <span class="md-ellipsis">
+      requirements.txt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readmemd" class="md-nav__link">
+    <span class="md-ellipsis">
+      README.md
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      .gitignore
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="project-structure">Project Structure</h1>
+<p>This document describes the directory structure and file organization of the Mercado Libre Payment API project.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#directory-tree">Directory Tree</a></li>
+<li><a href="#root-files">Root Files</a></li>
+<li><a href="#directories">Directories</a></li>
+<li><a href="#file-descriptions">File Descriptions</a></li>
+<li><a href="#module-organization">Module Organization</a></li>
+</ul>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>The project follows a clean, modular structure that separates concerns between API routes, business logic, and presentation layers.</p>
+<p><code>06-API_Pgto_MercadoLivre/
+├── app.py                    # Main FastAPI application
+├── requirements.txt          # Python dependencies
+├── README.md                 # Project readme
+├── .gitignore               # Git ignore rules
+├── .env                     # Environment variables (not committed)
+├── services/                # Business logic layer
+│   ├── __init__.py         # Package initialization
+│   └── mercadopago.py      # Mercado Pago integration
+├── templates/               # HTML templates
+│   └── checkout.html       # Payment checkout page
+└── docs/                    # Documentation
+    ├── index.md            # Documentation home
+    ├── installation.md     # Installation guide
+    ├── configuration.md    # Configuration guide
+    └── ...                 # Other documentation files</code></p>
+<hr />
+<h2 id="directory-tree">Directory Tree</h2>
+<p><code>C:\Users\Gabri\OneDrive\GitHub\06-API_Pgto_MercadoLivre\
+│
+├── 📄 .gitignore              # Git ignore configuration
+├── 📄 app.py                  # Main application entry point
+├── 📄 README.md               # Project overview and quick start
+├── 📄 requirements.txt        # Python package dependencies
+│
+├── 📁 .git/                   # Git repository data
+│
+├── 📁 __pycache__/            # Python bytecode cache (auto-generated)
+│
+├── 📁 services/               # Service layer (business logic)
+│   ├── 📄 __init__.py        # Package export file
+│   ├── 📄 mercadopago.py     # Mercado Pago API client
+│   └── 📁 __pycache__/       # Compiled Python files
+│
+├── 📁 templates/              # HTML template files
+│   └── 📄 checkout.html      # Payment form template
+│
+├── 📁 venv/                   # Python virtual environment
+│   ├── Scripts/              # Windows virtual env scripts
+│   ├── Lib/                  # Python libraries
+│   └── pyvenv.cfg            # Virtual env configuration
+│
+└── 📁 docs/                   # Project documentation
+    ├── 📄 index.md           # Documentation home
+    ├── 📄 installation.md    # Installation instructions
+    ├── 📄 configuration.md   # Configuration guide
+    ├── 📄 guidelines.md      # Coding standards
+    ├── 📄 project-structure.md # This file
+    ├── 📄 api-endpoints.md   # API reference
+    ├── 📄 system-modeling.md # Architecture diagrams
+    ├── 📄 authentication-security.md # Security docs
+    ├── 📄 development.md     # Development guide
+    ├── 📄 testing.md         # Testing documentation
+    ├── 📄 deploy.md          # Deployment guide
+    ├── 📄 contributing.md    # Contribution guidelines
+    ├── 📄 release-notes.md   # Version history
+    └── 📁 images/            # Documentation images</code></p>
+<hr />
+<h2 id="root-files">Root Files</h2>
+<h3 id="apppy"><code>app.py</code></h3>
+<p><strong>Purpose</strong>: Main FastAPI application file containing all API routes and request handlers.</p>
+<p><strong>Responsibilities</strong>:
+- FastAPI application initialization
+- Route definitions (endpoints)
+- Request/Response handling
+- Template rendering
+- Service layer integration</p>
+<p><strong>Key Components</strong>:
+```python
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
+from services import MercadoPago</p>
+<p>app = FastAPI()
+templates = Jinja2Templates(directory='templates')
+mp = MercadoPago()
+```</p>
+<hr />
+<h3 id="requirementstxt"><code>requirements.txt</code></h3>
+<p><strong>Purpose</strong>: Lists all Python package dependencies for the project.</p>
+<p><strong>Contents</strong>:
+<code>fastapi==0.115.12
+uvicorn==0.34.2
+pydantic==2.11.4
+requests==2.32.3
+Jinja2==3.1.6
+python-decouple==3.8
+starlette==0.46.2
+...</code></p>
+<p><strong>Usage</strong>:
+<code>bash
+pip install -r requirements.txt</code></p>
+<hr />
+<h3 id="readmemd"><code>README.md</code></h3>
+<p><strong>Purpose</strong>: Project overview, features, and quick start guide.</p>
+<p><strong>Sections</strong>:
+- Project description
+- Main features
+- Technologies used
+- Installation instructions
+- API endpoints overview
+- Configuration guide
+- Security considerations</p>
+<hr />
+<h3 id="gitignore"><code>.gitignore</code></h3>
+<p><strong>Purpose</strong>: Specifies files and directories that Git should ignore.</p>
+<p><strong>Typical Contents</strong>:
+```</p>
+<h1 id="python">Python</h1>
+<p><strong>pycache</strong>/
+<em>.py[cod]
+</em>.env
+venv/
+.env</p>
+<h1 id="ide">IDE</h1>
+<p>.vscode/
+.idea/
+*.swp</p>
+<h1 id="os">OS</h1>
+<p>.DS_Store
+Thumbs.db
+```</p>
+<hr />
+<h2 id="directories">Directories</h2>
+<h3 id="services"><code>services/</code></h3>
+<p><strong>Purpose</strong>: Contains business logic and external service integrations.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>__init__.py</code></td>
+<td>Package initialization and exports</td>
+</tr>
+<tr>
+<td><code>mercadopago.py</code></td>
+<td>Mercado Pago API client implementation</td>
+</tr>
+</tbody>
+</table>
+<h4 id="services__init__py"><code>services/__init__.py</code></h4>
+<p>Exports the <code>MercadoPago</code> class for easy importing:</p>
+<p>```python
+from .mercadopago import MercadoPago</p>
+<p><strong>all</strong> = ['MercadoPago']
+```</p>
+<h4 id="servicesmercadopagopy"><code>services/mercadopago.py</code></h4>
+<p><strong>Purpose</strong>: Implements the Mercado Pago API client.</p>
+<p><strong>Class</strong>: <code>MercadoPago</code></p>
+<p><strong>Methods</strong>:
+| Method | Visibility | Description |
+|--------|------------|-------------|
+| <code>__init__</code> | Public | Initialize with API credentials |
+| <code>__post</code> | Private | Generic POST request handler |
+| <code>__get_card_token</code> | Private | Tokenize credit card data |
+| <code>__create_payment</code> | Private | Create payment in Mercado Pago |
+| <code>pay_with_card</code> | Public | Process credit card payment |
+| <code>pay_with_pix</code> | Public | Process PIX payment |
+| <code>pay_with_boleto</code> | Public | Process boleto payment |</p>
+<hr />
+<h3 id="templates"><code>templates/</code></h3>
+<p><strong>Purpose</strong>: Contains HTML templates rendered by Jinja2.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>checkout.html</code></td>
+<td>Payment checkout form with multiple payment methods</td>
+</tr>
+</tbody>
+</table>
+<h4 id="templatescheckouthtml"><code>templates/checkout.html</code></h4>
+<p><strong>Features</strong>:
+- Responsive design with Tailwind CSS
+- Multiple payment method selection (Card, PIX, Boleto)
+- Dynamic form fields based on payment method
+- Loading states and success/error feedback
+- AJAX payment submission</p>
+<p><strong>Technologies</strong>:
+- HTML5
+- Tailwind CSS (via CDN)
+- Vanilla JavaScript
+- Fetch API</p>
+<hr />
+<h3 id="venv"><code>venv/</code></h3>
+<p><strong>Purpose</strong>: Python virtual environment for dependency isolation.</p>
+<p><strong>Structure</strong>:
+<code>venv/
+├── Scripts/           # Executables (Windows)
+│   ├── activate       # Activation script
+│   ├── python.exe     # Python interpreter
+│   └── pip.exe        # Package installer
+├── Lib/              # Installed packages
+│   └── site-packages/
+└── pyvenv.cfg        # Configuration file</code></p>
+<p><strong>Note</strong>: This directory is excluded from version control via <code>.gitignore</code>.</p>
+<hr />
+<h3 id="docs"><code>docs/</code></h3>
+<p><strong>Purpose</strong>: Project documentation in Markdown format.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>index.md</code></td>
+<td>Documentation home page</td>
+</tr>
+<tr>
+<td><code>installation.md</code></td>
+<td>Installation and setup guide</td>
+</tr>
+<tr>
+<td><code>configuration.md</code></td>
+<td>Configuration instructions</td>
+</tr>
+<tr>
+<td><code>guidelines.md</code></td>
+<td>Coding standards and guidelines</td>
+</tr>
+<tr>
+<td><code>project-structure.md</code></td>
+<td>This file - project organization</td>
+</tr>
+<tr>
+<td><code>api-endpoints.md</code></td>
+<td>API endpoint reference</td>
+</tr>
+<tr>
+<td><code>system-modeling.md</code></td>
+<td>Architecture and flow diagrams</td>
+</tr>
+<tr>
+<td><code>authentication-security.md</code></td>
+<td>Security documentation</td>
+</tr>
+<tr>
+<td><code>development.md</code></td>
+<td>Development workflow guide</td>
+</tr>
+<tr>
+<td><code>testing.md</code></td>
+<td>Testing procedures</td>
+</tr>
+<tr>
+<td><code>deploy.md</code></td>
+<td>Deployment instructions</td>
+</tr>
+<tr>
+<td><code>contributing.md</code></td>
+<td>Contribution guidelines</td>
+</tr>
+<tr>
+<td><code>release-notes.md</code></td>
+<td>Version history and changelog</td>
+</tr>
+<tr>
+<td><code>images/</code></td>
+<td>Images used in documentation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="file-descriptions">File Descriptions</h2>
+<h3 id="configuration-files">Configuration Files</h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.env</code></td>
+<td>Environment variables (local, not committed)</td>
+</tr>
+<tr>
+<td><code>.gitignore</code></td>
+<td>Git ignore rules</td>
+</tr>
+<tr>
+<td><code>requirements.txt</code></td>
+<td>Python dependencies</td>
+</tr>
+</tbody>
+</table>
+<h3 id="source-code-files">Source Code Files</h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+<th>Lines (approx)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app.py</code></td>
+<td>Main application</td>
+<td>~80</td>
+</tr>
+<tr>
+<td><code>services/__init__.py</code></td>
+<td>Package exports</td>
+<td>~5</td>
+</tr>
+<tr>
+<td><code>services/mercadopago.py</code></td>
+<td>API client</td>
+<td>~70</td>
+</tr>
+<tr>
+<td><code>templates/checkout.html</code></td>
+<td>Payment UI</td>
+<td>~150</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="module-organization">Module Organization</h2>
+<h3 id="import-structure">Import Structure</h3>
+<p>```
+app.py
+├── fastapi (framework)
+├── Jinja2Templates (templating)
+└── services.mercadopago (business logic)</p>
+<p>services/mercadopago.py
+├── requests (HTTP client)
+├── uuid (idempotency)
+└── decouple (configuration)
+```</p>
+<h3 id="dependency-flow">Dependency Flow</h3>
+<pre class="mermaid"><code>graph TD
+    A[app.py] --&gt; B[FastAPI]
+    A --&gt; C[Jinja2Templates]
+    A --&gt; D[MercadoPago Service]
+    D --&gt; E[requests]
+    D --&gt; F[python-decouple]
+    C --&gt; G[checkout.html]</code></pre>
+<hr />
+<h2 id="architecture-layers">Architecture Layers</h2>
+<p><code>┌─────────────────────────────────────┐
+│         Presentation Layer          │
+│         (templates/checkout.html)   │
+└─────────────────┬───────────────────┘
+                  │
+                  ▼
+┌─────────────────────────────────────┐
+│           API Layer                 │
+│           (app.py)                  │
+│   - Routes                          │
+│   - Request/Response Handling       │
+│   - Validation                      │
+└─────────────────┬───────────────────┘
+                  │
+                  ▼
+┌─────────────────────────────────────┐
+│         Service Layer               │
+│         (services/mercadopago.py)   │
+│   - Business Logic                  │
+│   - External API Integration        │
+│   - Error Handling                  │
+└─────────────────┬───────────────────┘
+                  │
+                  ▼
+┌─────────────────────────────────────┐
+│      External Services              │
+│      (Mercado Pago API)             │
+└─────────────────────────────────────┘</code></p>
+<hr />
+<h2 id="file-naming-conventions">File Naming Conventions</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Convention</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Python modules</strong></td>
+<td>snake_case</td>
+<td><code>mercadopago.py</code></td>
+</tr>
+<tr>
+<td><strong>HTML templates</strong></td>
+<td>snake_case</td>
+<td><code>checkout.html</code></td>
+</tr>
+<tr>
+<td><strong>Documentation</strong></td>
+<td>kebab-case</td>
+<td><code>project-structure.md</code></td>
+</tr>
+<tr>
+<td><strong>Configuration</strong></td>
+<td>dot prefix</td>
+<td><code>.gitignore</code>, <code>.env</code></td>
+</tr>
+<tr>
+<td><strong>Packages</strong></td>
+<td>snake_case</td>
+<td><code>services/</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="code-organization-principles">Code Organization Principles</h2>
+<p>The project follows these organizational principles:</p>
+<ol>
+<li><strong>Separation of Concerns</strong>: API routes separate from business logic</li>
+<li><strong>Single Responsibility</strong>: Each module has one clear purpose</li>
+<li><strong>Modularity</strong>: Services can be reused across different routes</li>
+<li><strong>Encapsulation</strong>: Private methods prefixed with <code>__</code></li>
+<li><strong>Explicit Exports</strong>: <code>__all__</code> defines public API</li>
+</ol>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<ol>
+<li><a href="../api-endpoints/">API Endpoints</a> - Explore available endpoints</li>
+<li><a href="../system-modeling/">System Modeling</a> - Understand architecture diagrams</li>
+<li><a href="../development/">Development Guide</a> - Start developing features</li>
+</ol>
+<hr />
+<p><strong>Last Updated</strong>: April 2026<br />
+<strong>Version</strong>: 1.0.0</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

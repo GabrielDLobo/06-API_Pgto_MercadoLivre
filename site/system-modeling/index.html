@@ -1,0 +1,1963 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A FastAPI-based payment integration API with Mercado Pago for secure transaction processing, order creation, and webhook notifications.">
+      
+      
+        <meta name="author" content="GabrielDLobo">
+      
+      
+        <link rel="canonical" href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/system-modeling/">
+      
+      
+        <link rel="prev" href="../api-endpoints/">
+      
+      
+        <link rel="next" href="../authentication-security/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>System Modeling - Mercado Pago Payment API</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="navy-blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#system-modeling" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mercado Pago Payment API" class="md-header__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mercado Pago Payment API
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              System Modeling
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mercado Pago Payment API" class="md-nav__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    Mercado Pago Payment API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guidelines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guidelines and Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Project Structure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-endpoints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Endpoints
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    System Modeling
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    System Modeling
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-models-erd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Models (ERD)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Models (ERD)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-model-descriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Model Descriptions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Model Descriptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#payment-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Entity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-method-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Method Entity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payer-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payer Entity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transaction-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transaction Entity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="System Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Layers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication Flow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication Components
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Headers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crud-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      CRUD Flow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CRUD Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crud-operations-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      CRUD Operations Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Flow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#security-measures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Measures
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#payment-processing-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Processing Flow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Payment Processing Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#payment-status-transitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Status Transitions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#component-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component Diagram
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Diagram
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment Diagram">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Components
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authentication-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Authentication and Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deploy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-models-erd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Models (ERD)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Models (ERD)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-model-descriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Model Descriptions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Model Descriptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#payment-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Entity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-method-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Method Entity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payer-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payer Entity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transaction-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transaction Entity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="System Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Layers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication Flow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication Components
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Headers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crud-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      CRUD Flow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CRUD Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crud-operations-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      CRUD Operations Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Flow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#security-measures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Measures
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#payment-processing-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Processing Flow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Payment Processing Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#payment-status-transitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Status Transitions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#component-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component Diagram
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Diagram
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment Diagram">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Components
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="system-modeling">System Modeling</h1>
+<p>This document provides comprehensive system modeling diagrams for the Mercado Libre Payment API, including data models, architecture, and process flows.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#data-models-erd">Data Models (ERD)</a></li>
+<li><a href="#system-architecture">System Architecture</a></li>
+<li><a href="#authentication-flow">Authentication Flow</a></li>
+<li><a href="#crud-flow">CRUD Flow</a></li>
+<li><a href="#security-flow">Security Flow</a></li>
+<li><a href="#payment-processing-flow">Payment Processing Flow</a></li>
+<li><a href="#component-diagram">Component Diagram</a></li>
+<li><a href="#deployment-diagram">Deployment Diagram</a></li>
+</ul>
+<hr />
+<h2 id="data-models-erd">Data Models (ERD)</h2>
+<p>The following Entity Relationship Diagram represents the data models used in the payment system:</p>
+<pre class="mermaid"><code>erDiagram
+    PAYMENT ||--o{ PAYMENT_METHOD : "uses"
+    PAYMENT ||--|| PAYER : "belongs to"
+    PAYMENT ||--o{ TRANSACTION : "generates"
+
+    PAYMENT {
+        string id PK
+        decimal transaction_amount
+        string description
+        string status
+        string status_detail
+        datetime date_created
+        datetime date_approved
+        string payment_method_id
+    }
+
+    PAYMENT_METHOD {
+        string type PK
+        string card_number
+        string expiration_month
+        string expiration_year
+        string security_code
+        int installments
+    }
+
+    PAYER {
+        string email PK
+        string identification_type
+        string identification_number
+        string first_name
+        string last_name
+        string zip_code
+        string street_name
+        string street_number
+        string neighborhood
+        string city
+        string federal_unit
+    }
+
+    TRANSACTION {
+        string id PK
+        string payment_id FK
+        string external_resource_url
+        string qr_code
+        string qr_code_base64
+        string ticket_url
+    }</code></pre>
+<h3 id="data-model-descriptions">Data Model Descriptions</h3>
+<h4 id="payment-entity">Payment Entity</h4>
+<p>Core entity representing a payment transaction.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>Unique payment identifier from Mercado Pago</td>
+</tr>
+<tr>
+<td><code>transaction_amount</code></td>
+<td>decimal</td>
+<td>Payment amount in BRL</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>Payment description/purpose</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td>Current payment status</td>
+</tr>
+<tr>
+<td><code>status_detail</code></td>
+<td>string</td>
+<td>Detailed status information</td>
+</tr>
+<tr>
+<td><code>date_created</code></td>
+<td>datetime</td>
+<td>Payment creation timestamp</td>
+</tr>
+<tr>
+<td><code>date_approved</code></td>
+<td>datetime</td>
+<td>Payment approval timestamp</td>
+</tr>
+<tr>
+<td><code>payment_method_id</code></td>
+<td>string</td>
+<td>Payment method identifier</td>
+</tr>
+</tbody>
+</table>
+<h4 id="payment-method-entity">Payment Method Entity</h4>
+<p>Stores payment method-specific information.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td>Payment method type (card, pix, boleto)</td>
+</tr>
+<tr>
+<td><code>card_number</code></td>
+<td>string</td>
+<td>Credit card number (tokenized)</td>
+</tr>
+<tr>
+<td><code>expiration_month</code></td>
+<td>string</td>
+<td>Card expiration month</td>
+</tr>
+<tr>
+<td><code>expiration_year</code></td>
+<td>string</td>
+<td>Card expiration year</td>
+</tr>
+<tr>
+<td><code>security_code</code></td>
+<td>string</td>
+<td>CVV/CVC code</td>
+</tr>
+<tr>
+<td><code>installments</code></td>
+<td>int</td>
+<td>Number of installments</td>
+</tr>
+</tbody>
+</table>
+<h4 id="payer-entity">Payer Entity</h4>
+<p>Contains payer information.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>email</code></td>
+<td>string</td>
+<td>Payer's email address</td>
+</tr>
+<tr>
+<td><code>identification_type</code></td>
+<td>string</td>
+<td>ID type (CPF, CNPJ)</td>
+</tr>
+<tr>
+<td><code>identification_number</code></td>
+<td>string</td>
+<td>Tax ID number</td>
+</tr>
+<tr>
+<td><code>first_name</code></td>
+<td>string</td>
+<td>First name (boleto only)</td>
+</tr>
+<tr>
+<td><code>last_name</code></td>
+<td>string</td>
+<td>Last name (boleto only)</td>
+</tr>
+<tr>
+<td><code>zip_code</code></td>
+<td>string</td>
+<td>Postal code (boleto only)</td>
+</tr>
+<tr>
+<td><code>street_name</code></td>
+<td>string</td>
+<td>Street name (boleto only)</td>
+</tr>
+<tr>
+<td><code>street_number</code></td>
+<td>string</td>
+<td>Street number (boleto only)</td>
+</tr>
+<tr>
+<td><code>neighborhood</code></td>
+<td>string</td>
+<td>Neighborhood (boleto only)</td>
+</tr>
+<tr>
+<td><code>city</code></td>
+<td>string</td>
+<td>City (boleto only)</td>
+</tr>
+<tr>
+<td><code>federal_unit</code></td>
+<td>string</td>
+<td>State abbreviation (boleto only)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="transaction-entity">Transaction Entity</h4>
+<p>Stores transaction-specific details.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>Transaction identifier</td>
+</tr>
+<tr>
+<td><code>payment_id</code></td>
+<td>string</td>
+<td>Reference to payment</td>
+</tr>
+<tr>
+<td><code>external_resource_url</code></td>
+<td>string</td>
+<td>External payment URL (boleto)</td>
+</tr>
+<tr>
+<td><code>qr_code</code></td>
+<td>string</td>
+<td>PIX QR code string</td>
+</tr>
+<tr>
+<td><code>qr_code_base64</code></td>
+<td>string</td>
+<td>PIX QR code as base64 image</td>
+</tr>
+<tr>
+<td><code>ticket_url</code></td>
+<td>string</td>
+<td>Payment ticket URL</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="system-architecture">System Architecture</h2>
+<p>High-level architecture diagram showing system components and their interactions:</p>
+<pre class="mermaid"><code>graph TB
+    subgraph Client["Client Layer"]
+        Browser[Web Browser]
+        MobileApp[Mobile Application]
+        APIConsumer[API Consumer]
+    end
+
+    subgraph API["API Layer - FastAPI"]
+        Routes[API Routes]
+        Middleware[Middleware]
+        Validation[Request Validation]
+        Templates[Jinja2 Templates]
+    end
+
+    subgraph Services["Service Layer"]
+        MPService[MercadoPago Service]
+        TokenService[Card Token Service]
+        PaymentService[Payment Service]
+    end
+
+    subgraph External["External Services"]
+        MPAPI[Mercado Pago API]
+    end
+
+    subgraph Storage["Configuration"]
+        EnvVars[Environment Variables]
+        Secrets[Access Tokens]
+    end
+
+    Browser --&gt;|HTTP/HTTPS| Routes
+    MobileApp --&gt;|HTTP/HTTPS| Routes
+    APIConsumer --&gt;|HTTP/HTTPS| Routes
+
+    Routes --&gt; Middleware
+    Routes --&gt; Validation
+    Routes --&gt; Templates
+
+    Middleware --&gt; MPService
+    Validation --&gt; MPService
+
+    MPService --&gt; TokenService
+    MPService --&gt; PaymentService
+
+    TokenService --&gt;|POST /v1/card_tokens| MPAPI
+    PaymentService --&gt;|POST /v1/payments| MPAPI
+
+    MPService --&gt; EnvVars
+    MPService --&gt; Secrets
+
+    style Client fill:#e1f5ff
+    style API fill:#fff4e1
+    style Services fill:#e8f5e9
+    style External fill:#fce4ec
+    style Storage fill:#f3e5f5</code></pre>
+<h3 id="architecture-layers">Architecture Layers</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Components</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Client</strong></td>
+<td>Browser, Mobile App, API Consumer</td>
+<td>User interface and API consumption</td>
+</tr>
+<tr>
+<td><strong>API</strong></td>
+<td>Routes, Middleware, Validation, Templates</td>
+<td>Request handling and response generation</td>
+</tr>
+<tr>
+<td><strong>Services</strong></td>
+<td>MercadoPago, Token, Payment Services</td>
+<td>Business logic and external integration</td>
+</tr>
+<tr>
+<td><strong>External</strong></td>
+<td>Mercado Pago API</td>
+<td>Payment processing</td>
+</tr>
+<tr>
+<td><strong>Storage</strong></td>
+<td>Environment Variables, Secrets</td>
+<td>Configuration management</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="authentication-flow">Authentication Flow</h2>
+<p>Authentication flow for API access and Mercado Pago integration:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant Dev as Developer
+    participant App as Application
+    participant Env as Environment
+    participant MP as Mercado Pago API
+
+    Note over Dev,MP: Setup Phase
+    Dev-&gt;&gt;Env: Configure MP_ACCESS_TOKEN
+    Env-&gt;&gt;App: Load token at startup
+
+    Note over Dev,MP: Runtime - Card Payment
+    App-&gt;&gt;App: Read token from environment
+    App-&gt;&gt;App: Generate X-Idempotency-Key (UUID)
+    App-&gt;&gt;MP: POST /v1/card_tokens&lt;br/&gt;Headers: Authorization, X-Idempotency-Key
+    MP--&gt;&gt;App: Return card token
+
+    App-&gt;&gt;App: Build payment payload with token
+    App-&gt;&gt;App: Generate new X-Idempotency-Key
+    App-&gt;&gt;MP: POST /v1/payments&lt;br/&gt;Headers: Authorization, X-Idempotency-Key
+    MP--&gt;&gt;App: Payment response
+
+    Note over Dev,MP: Token Management
+    App-&gt;&gt;Env: Refresh token if expired
+    Env--&gt;&gt;App: New access token</code></pre>
+<h3 id="authentication-components">Authentication Components</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Purpose</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Access Token</strong></td>
+<td>API authentication</td>
+<td>Bearer token in Authorization header</td>
+</tr>
+<tr>
+<td><strong>Idempotency Key</strong></td>
+<td>Prevent duplicate transactions</td>
+<td>UUID per request</td>
+</tr>
+<tr>
+<td><strong>Environment Variables</strong></td>
+<td>Secure credential storage</td>
+<td>python-decouple</td>
+</tr>
+</tbody>
+</table>
+<h3 id="security-headers">Security Headers</h3>
+<p><code>http
+Authorization: Bearer APP_USR-xxxxxxxxxxxxxxxx
+Content-Type: application/json
+X-Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000</code></p>
+<hr />
+<h2 id="crud-flow">CRUD Flow</h2>
+<p>Complete CRUD (Create, Read, Update, Delete) flow for all project operations:</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph Create["CREATE - Payment Creation"]
+        C1[User selects payment method] --&gt; C2[Fill payment details]
+        C2 --&gt; C3[Submit payment form]
+        C3 --&gt; C4[POST /create_payment]
+        C4 --&gt; C5{Payment Method?}
+        C5 --&gt;|Card| C6[Tokenize card]
+        C5 --&gt;|PIX| C7[Generate PIX]
+        C5 --&gt;|Boleto| C8[Generate Boleto]
+        C6 --&gt; C9[Create payment in MP]
+        C7 --&gt; C9
+        C8 --&gt; C9
+        C9 --&gt; C10[Return payment result]
+    end
+
+    subgraph Read["READ - Payment Retrieval"]
+        R1[Request payment status] --&gt; R2[GET payment by ID]
+        R2 --&gt; R3[Query Mercado Pago API]
+        R3 --&gt; R4[Return payment details]
+    end
+
+    subgraph Update["UPDATE - Payment Status"]
+        U1[MP processes payment] --&gt; U2[Status change event]
+        U2 --&gt; U3[Webhook notification]
+        U3 --&gt; U4[Update local state]
+    end
+
+    subgraph Delete["DELETE - Payment Cancellation"]
+        D1[User requests cancellation] --&gt; D2[Validate payment status]
+        D2 --&gt; D3{Can cancel?}
+        D3 --&gt;|Yes| D4[Call MP cancellation API]
+        D3 --&gt;|No| D5[Return error]
+        D4 --&gt; D6[Update payment status]
+    end
+
+    Create --&gt; Read
+    Read --&gt; Update
+    Update --&gt; Delete
+
+    style Create fill:#e8f5e9
+    style Read fill:#e3f2fd
+    style Update fill:#fff3e0
+    style Delete fill:#ffebee</code></pre>
+<h3 id="crud-operations-summary">CRUD Operations Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Endpoint</th>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Create</strong></td>
+<td><code>/create_payment</code></td>
+<td>POST</td>
+<td>Create new payment</td>
+</tr>
+<tr>
+<td><strong>Read</strong></td>
+<td>(via MP API)</td>
+<td>GET</td>
+<td>Retrieve payment status</td>
+</tr>
+<tr>
+<td><strong>Update</strong></td>
+<td>(via Webhook)</td>
+<td>POST</td>
+<td>Payment status updates</td>
+</tr>
+<tr>
+<td><strong>Delete</strong></td>
+<td>(via MP API)</td>
+<td>PUT</td>
+<td>Cancel payment</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="security-flow">Security Flow</h2>
+<p>Security flow showing request validation, authentication, and data protection:</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph Input["Request Input"]
+        Req[Incoming Request]
+    end
+
+    subgraph Validation["Validation Layer"]
+        V1{HTTPS?}
+        V2[Validate Content-Type]
+        V3{Required fields present?}
+        V4{Valid payment method?}
+        V5{Valid amount &gt; 0?}
+        V6{Valid card data?}
+    end
+
+    subgraph Auth["Authentication Layer"]
+        A1[Load access token from env]
+        A2{Token valid?}
+        A3[Generate idempotency key]
+    end
+
+    subgraph Processing["Processing Layer"]
+        P1[Tokenize sensitive data]
+        P2[Encrypt transmission]
+        P3[Log non-sensitive data]
+    end
+
+    subgraph Response["Response Layer"]
+        R1{Success?}
+        R2[Return payment data]
+        R3[Return error message]
+        R4[Mask sensitive data]
+    end
+
+    Req --&gt; V1
+    V1 --&gt;|No| R3
+    V1 --&gt;|Yes| V2
+    V2 --&gt; V3
+    V3 --&gt;|No| R3
+    V3 --&gt;|Yes| V4
+    V4 --&gt;|No| R3
+    V4 --&gt;|Yes| V5
+    V5 --&gt;|No| R3
+    V5 --&gt;|Yes| V6
+    V6 --&gt;|No| R3
+    V6 --&gt;|Yes| A1
+
+    A1 --&gt; A2
+    A2 --&gt;|No| R3
+    A2 --&gt;|Yes| A3
+    A3 --&gt; P1
+    P1 --&gt; P2
+    P2 --&gt; P3
+    P3 --&gt; R1
+
+    R1 --&gt;|Yes| R2
+    R1 --&gt;|No| R3
+    R2 --&gt; R4
+    R3 --&gt; R4
+
+    style Input fill:#e3f2fd
+    style Validation fill:#fff3e0
+    style Auth fill:#e8f5e9
+    style Processing fill:#f3e5f5
+    style Response fill:#ffebee</code></pre>
+<h3 id="security-measures">Security Measures</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Measure</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Transport</strong></td>
+<td>HTTPS</td>
+<td>TLS/SSL encryption</td>
+</tr>
+<tr>
+<td><strong>Authentication</strong></td>
+<td>Bearer Token</td>
+<td>Mercado Pago access token</td>
+</tr>
+<tr>
+<td><strong>Validation</strong></td>
+<td>Input sanitization</td>
+<td>Pydantic validation</td>
+</tr>
+<tr>
+<td><strong>Idempotency</strong></td>
+<td>UUID keys</td>
+<td>Prevent duplicate charges</td>
+</tr>
+<tr>
+<td><strong>Data Protection</strong></td>
+<td>Tokenization</td>
+<td>Card data tokenized by MP</td>
+</tr>
+<tr>
+<td><strong>Logging</strong></td>
+<td>Sensitive data masking</td>
+<td>No card numbers in logs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="payment-processing-flow">Payment Processing Flow</h2>
+<p>Detailed payment processing flow for each payment method:</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph Card["Credit Card Flow"]
+        C1[User enters card data] --&gt; C2[POST /create_payment]
+        C2 --&gt; C3[Validate card data]
+        C3 --&gt; C4[POST /v1/card_tokens]
+        C4 --&gt; C5[Receive card token]
+        C5 --&gt; C6[POST /v1/payments with token]
+        C6 --&gt; C7{Payment approved?}
+        C7 --&gt;|Yes| C8[Return success + card info]
+        C7 --&gt;|No| C9[Return rejection reason]
+    end
+
+    subgraph PIX["PIX Flow"]
+        P1[User selects PIX] --&gt; P2[POST /create_payment]
+        P2 --&gt; P3[Validate payer data]
+        P3 --&gt; P4[POST /v1/payments&lt;br/&gt;payment_method_id: pix]
+        P4 --&gt; P5[Generate QR Code]
+        P5 --&gt; P6[Return QR Code + ticket_url]
+        P6 --&gt; P7[User scans QR Code]
+        P7 --&gt; P8[Payment confirmation via webhook]
+    end
+
+    subgraph Boleto["Boleto Flow"]
+        B1[User selects Boleto] --&gt; B2[POST /create_payment]
+        B2 --&gt; B3[Validate payer + address data]
+        B3 --&gt; B4[POST /v1/payments&lt;br/&gt;payment_method_id: bolbradesco]
+        B4 --&gt; B5[Generate boleto]
+        B5 --&gt; B6[Return external_resource_url]
+        B6 --&gt; B7[User redirected to bank]
+        B7 --&gt; B8[Payment confirmation via webhook]
+    end
+
+    Card --&gt; End
+    PIX --&gt; End
+    Boleto --&gt; End
+
+    End([End])
+
+    style Card fill:#e8f5e9
+    style PIX fill:#e3f2fd
+    style Boleto fill:#fff3e0</code></pre>
+<h3 id="payment-status-transitions">Payment Status Transitions</h3>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; pending: Payment created
+
+    pending --&gt; approved: Payment approved
+    pending --&gt; rejected: Payment rejected
+    pending --&gt; in_process: Under review
+    pending --&gt; cancelled: Cancelled
+
+    in_process --&gt; approved: Review completed
+    in_process --&gt; rejected: Review failed
+
+    approved --&gt; refunded: Refund issued
+    approved --&gt; charged_back: Chargeback
+
+    rejected --&gt; [*]: Final state
+    cancelled --&gt; [*]: Final state
+    refunded --&gt; [*]: Final state
+    charged_back --&gt; [*]: Final state
+    approved --&gt; [*]: Final state
+
+    note right of pending
+        Awaiting payment
+        or bank processing
+    end note
+
+    note right of in_process
+        Manual review
+        or fraud check
+    end note
+
+    note right of approved
+        Payment successful
+        and accredited
+    end note</code></pre>
+<hr />
+<h2 id="component-diagram">Component Diagram</h2>
+<p>UML Component diagram showing system modules and dependencies:</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph Frontend["Frontend Components"]
+        HTML[checkout.html]
+        JS[JavaScript Logic]
+        CSS[Tailwind CSS]
+    end
+
+    subgraph Backend["Backend Components"]
+        App[app.py - FastAPI]
+        Routes[Route Handlers]
+        Templates[Jinja2 Templates]
+    end
+
+    subgraph Services["Service Components"]
+        MP[mercadopago.py]
+        CardToken[Card Tokenization]
+        Payment[Payment Processing]
+        HTTP[HTTP Client]
+    end
+
+    subgraph Config["Configuration"]
+        Env[Environment Variables]
+        Decouple[python-decouple]
+    end
+
+    HTML --&gt; JS
+    JS --&gt; CSS
+    JS --&gt; Routes
+
+    Routes --&gt; App
+    App --&gt; Templates
+    App --&gt; MP
+
+    MP --&gt; CardToken
+    MP --&gt; Payment
+    MP --&gt; HTTP
+    MP --&gt; Decouple
+
+    Decouple --&gt; Env
+
+    CardToken --&gt; HTTP
+    Payment --&gt; HTTP
+
+    style Frontend fill:#e3f2fd
+    style Backend fill:#e8f5e9
+    style Services fill:#fff3e0
+    style Config fill:#f3e5f5</code></pre>
+<hr />
+<h2 id="deployment-diagram">Deployment Diagram</h2>
+<p>Physical deployment architecture:</p>
+<pre class="mermaid"><code>flowchart TB
+    subgraph Internet["Internet"]
+        User[End User]
+        MP[Mercado Pago API]
+    end
+
+    subgraph CDN["CDN"]
+        Tailwind[Tailwind CSS CDN]
+    end
+
+    subgraph Cloud["Cloud Platform"]
+        LB[Load Balancer]
+
+        subgraph AppServer["Application Server"]
+            App1[FastAPI Instance 1]
+            App2[FastAPI Instance 2]
+        end
+
+        subgraph Env["Environment"]
+            Vars[Environment Variables]
+            Secrets[Secrets Manager]
+        end
+    end
+
+    User --&gt;|HTTPS| LB
+    LB --&gt; App1
+    LB --&gt; App2
+
+    App1 --&gt;|HTTPS| MP
+    App2 --&gt;|HTTPS| MP
+
+    App1 --&gt; Tailwind
+    App2 --&gt; Tailwind
+
+    App1 --&gt; Vars
+    App2 --&gt; Vars
+
+    Vars --&gt; Secrets
+
+    style Internet fill:#e3f2fd
+    style CDN fill:#fff3e0
+    style Cloud fill:#e8f5e9
+    style AppServer fill:#f3e5f5</code></pre>
+<h3 id="deployment-components">Deployment Components</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Purpose</th>
+<th>Technology</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Load Balancer</strong></td>
+<td>Traffic distribution</td>
+<td>Nginx, AWS ALB</td>
+</tr>
+<tr>
+<td><strong>Application Server</strong></td>
+<td>FastAPI runtime</td>
+<td>Uvicorn, Gunicorn</td>
+</tr>
+<tr>
+<td><strong>Environment</strong></td>
+<td>Configuration</td>
+<td>Docker, Kubernetes</td>
+</tr>
+<tr>
+<td><strong>Secrets Manager</strong></td>
+<td>Credential storage</td>
+<td>AWS Secrets, Vault</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<ol>
+<li><a href="../authentication-security/">Authentication &amp; Security</a> - Security implementation details</li>
+<li><a href="../development/">Development Guide</a> - Development workflow</li>
+<li><a href="../deploy/">Deploy Guide</a> - Deployment instructions</li>
+</ol>
+<hr />
+<p><strong>Last Updated</strong>: April 2026<br />
+<strong>Version</strong>: 1.0.0</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
