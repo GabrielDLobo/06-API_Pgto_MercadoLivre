@@ -1,4 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap");
+
 :root {
+  --md-text-font: "Manrope", sans-serif;
+  --md-code-font: "JetBrains Mono", monospace;
   --mp-navy: #0b2c4d;
   --mp-navy-2: #113f6a;
   --mp-blue: #2457d6;
@@ -17,6 +21,67 @@ body {
     radial-gradient(circle at top left, rgba(42, 167, 255, 0.12), transparent 30%),
     radial-gradient(circle at top right, rgba(246, 184, 68, 0.11), transparent 34%),
     linear-gradient(180deg, #fbfdff 0%, #f4f8fc 100%);
+}
+
+.md-header {
+  background: linear-gradient(105deg, rgba(11, 44, 77, 0.98), rgba(27, 89, 150, 0.95));
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 28px rgba(6, 19, 33, 0.2);
+}
+
+.md-header__title,
+.md-header__topic,
+.md-header__button {
+  color: #f8fbff;
+}
+
+.md-tabs {
+  background: linear-gradient(90deg, rgba(11, 44, 77, 0.9), rgba(17, 63, 106, 0.9));
+}
+
+.md-main__inner {
+  gap: 1.2rem;
+}
+
+.md-sidebar .md-sidebar__inner {
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(11, 44, 77, 0.08);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.md-nav__link {
+  border-radius: 0.6rem;
+  transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.md-nav__link:hover {
+  background: rgba(36, 87, 214, 0.08);
+  color: var(--mp-navy);
+  transform: translateX(2px);
+}
+
+.md-nav__link--active,
+.md-nav__link--active:hover {
+  background: rgba(36, 87, 214, 0.12);
+  color: var(--mp-navy-2);
+  font-weight: 700;
+}
+
+.md-content {
+  animation: page-enter 420ms ease both;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .md-main__inner {
@@ -253,9 +318,44 @@ body {
   border-radius: 1rem;
 }
 
+.md-typeset {
+  line-height: 1.72;
+}
+
+.md-typeset > h1,
+.md-typeset > h2,
+.md-typeset > h3 {
+  font-weight: 800;
+}
+
+.md-content__inner {
+  padding: 1.35rem 1.4rem;
+  border: 1px solid rgba(11, 44, 77, 0.08);
+  border-radius: 1.1rem;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+}
+
+.md-typeset .grid.cards > ul > li {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.md-typeset .grid.cards > ul > li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.11);
+}
+
+.md-footer {
+  background: linear-gradient(115deg, #0b2c4d, #0f3a64);
+}
+
 @media screen and (max-width: 76.234375em) {
   .page-hero {
     grid-template-columns: 1fr;
+  }
+
+  .md-content__inner {
+    padding: 1.15rem;
   }
 
   .page-hero h1 {
