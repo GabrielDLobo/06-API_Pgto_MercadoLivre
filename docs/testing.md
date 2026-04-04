@@ -145,10 +145,10 @@ def valid_boleto_data():
         'last_name': 'User',
         'identification_number': '12345678900',
         'zip_code': '01001-000',
-        'street_name': 'Rua Teste',
+        'street_name': 'Test Street',
         'street_number': '100',
         'neighborhood': 'Centro',
-        'city': 'São Paulo',
+        'city': 'Sao Paulo',
         'federal_unit': 'SP',
     }
 ```
@@ -346,7 +346,7 @@ class TestCheckoutPage:
         """Test that checkout page shows all payment methods."""
         response = client.get('/')
         assert response.status_code == 200
-        assert b'Cartão de Crédito' in response.content or b'card' in response.content
+        assert b'Credit Card' in response.content or b'card' in response.content
         assert b'PIX' in response.content or b'pix' in response.content
         assert b'Boleto' in response.content or b'boleto' in response.content
 
@@ -445,10 +445,10 @@ class TestCreatePayment:
             'last_name': 'User',
             'identification_number': '12345678900',
             'zip_code': '01001-000',
-            'street_name': 'Rua Teste',
+            'street_name': 'Test Street',
             'street_number': '100',
             'neighborhood': 'Centro',
-            'city': 'São Paulo',
+            'city': 'Sao Paulo',
             'federal_unit': 'SP',
         })
         
@@ -528,7 +528,7 @@ class TestEndToEndPaymentFlow:
         
         # Verify page contains all payment method options
         content = response.content.decode()
-        assert 'card' in content.lower() or 'cartão' in content.lower()
+        assert 'card' in content.lower() or 'credit card' in content.lower()
         assert 'pix' in content.lower()
         assert 'boleto' in content.lower()
 ```
@@ -572,10 +572,10 @@ VALID_CPFS = [
 TEST_ADDRESSES = {
     'sp': {
         'zip_code': '01001-000',
-        'street_name': 'Praça da Sé',
+        'street_name': 'Se Square',
         'street_number': '100',
-        'neighborhood': 'Sé',
-        'city': 'São Paulo',
+        'neighborhood': 'Se',
+        'city': 'Sao Paulo',
         'federal_unit': 'SP',
     },
     'rj': {

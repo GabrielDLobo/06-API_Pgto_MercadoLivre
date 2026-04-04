@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/</loc>
+         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/</loc>
          <lastmod>2026-04-04</lastmod>
     </url>
     <url>
-         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/api-endpoints/</loc>
+         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/api-endpoints/</loc>
          <lastmod>2026-04-04</lastmod>
     </url>
     <url>
-         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/authentication-security/</loc>
+         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/authentication-security/</loc>
          <lastmod>2026-04-04</lastmod>
     </url>
     <url>
-         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/configuration/</loc>
+         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/configuration/</loc>
          <lastmod>2026-04-04</lastmod>
     </url>
     <url>
-         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/contributing/</loc>
+         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/contributing/</loc>
          <lastmod>2026-04-04</lastmod>
     </url>
     <url>
-         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/deploy/</loc>
+         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/deploy/</loc>
          <lastmod>2026-04-04</lastmod>
     </url>
     <url>
-         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/development/</loc>
+         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/development/</loc>
          <lastmod>2026-04-04</lastmod>
     </url>
     <url>
-         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/guidelines/</loc>
+         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/guidelines/</loc>
          <lastmod>2026-04-04</lastmod>
     </url>
     <url>
-         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/installation/</loc>
+         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/installation/</loc>
          <lastmod>2026-04-04</lastmod>
     </url>
     <url>
-         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/project-structure/</loc>
+         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/project-structure/</loc>
          <lastmod>2026-04-04</lastmod>
     </url>
     <url>
-         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/release-notes/</loc>
+         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/release-notes/</loc>
          <lastmod>2026-04-04</lastmod>
     </url>
     <url>
-         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/system-modeling/</loc>
+         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/system-modeling/</loc>
          <lastmod>2026-04-04</lastmod>
     </url>
     <url>
-         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/testing/</loc>
+         <loc>https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/testing/</loc>
          <lastmod>2026-04-04</lastmod>
     </url>
 </urlset>

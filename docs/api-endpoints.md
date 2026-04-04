@@ -230,10 +230,10 @@ The request body varies based on the payment method selected.
   "last_name": "Doe",
   "identification_number": "12345678900",
   "zip_code": "01001-000",
-  "street_name": "Praça da Sé",
+  "street_name": "Se Square",
   "street_number": "100",
-  "neighborhood": "Sé",
-  "city": "São Paulo",
+  "neighborhood": "Se",
+  "city": "Sao Paulo",
   "federal_unit": "SP"
 }
 ```
@@ -343,7 +343,7 @@ curl -X POST http://localhost:8000/create_payment \
     "last_name": "Smith",
     "identification_number": "98765432100",
     "zip_code": "20000-000",
-    "street_name": "Rua do Comércio",
+    "street_name": "Commerce Street",
     "street_number": "500",
     "neighborhood": "Centro",
     "city": "Rio de Janeiro",

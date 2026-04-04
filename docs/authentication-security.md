@@ -430,7 +430,7 @@ Data protection compliance:
 | Standard | Description |
 |----------|-------------|
 | **PCI-DSS** | Payment Card Industry Data Security Standard |
-| **LGPD** | Lei Geral de Proteção de Dados (Brazil) |
+| **LGPD** | Brazilian General Data Protection Law |
 | **OWASP** | Open Web Application Security Project |
 
 ---

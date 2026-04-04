@@ -101,7 +101,7 @@ MAJOR.MINOR.PATCH
 payment_methods = {
     'card': 'Credit Card',
     'pix': 'PIX (Instant Payment)',
-    'boleto': 'Boleto Bancário',
+  'boleto': 'Bank Slip',
 }
 ```
 
