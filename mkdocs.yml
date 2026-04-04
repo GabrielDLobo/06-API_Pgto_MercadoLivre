@@ -22,9 +22,6 @@ theme:
   icon:
     logo: material/credit-card-check-outline
 
-extra_css:
-  - stylesheets/theme-02.css
-
 nav:
   - Home: index.md
   - Installation: installation.md
