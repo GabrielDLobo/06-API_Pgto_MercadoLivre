@@ -5,23 +5,23 @@ A FastAPI-based payment integration API connected to Mercado Pago for secure tra
 ## Documentation
 
 Full project documentation is available at:
-<a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/" target="_blank" rel="noopener noreferrer">https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/</a>
+<a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/" target="_blank" rel="noopener noreferrer">https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/</a>
 
 ### Documentation Sections
 
-- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/" target="_blank" rel="noopener noreferrer">Home</a>
-- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/installation/" target="_blank" rel="noopener noreferrer">Installation</a>
-- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/configuration/" target="_blank" rel="noopener noreferrer">Configuration</a>
-- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/guidelines/" target="_blank" rel="noopener noreferrer">Guidelines and Standards</a>
-- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/project-structure/" target="_blank" rel="noopener noreferrer">Project Structure</a>
-- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/api-endpoints/" target="_blank" rel="noopener noreferrer">API Endpoints</a>
-- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/system-modeling/" target="_blank" rel="noopener noreferrer">System Modeling</a>
-- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/authentication-security/" target="_blank" rel="noopener noreferrer">Authentication and Security</a>
-- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/development/" target="_blank" rel="noopener noreferrer">Development</a>
-- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/testing/" target="_blank" rel="noopener noreferrer">Testing</a>
-- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/deploy/" target="_blank" rel="noopener noreferrer">Deploy</a>
-- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/contributing/" target="_blank" rel="noopener noreferrer">Contributing</a>
-- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/release-notes/" target="_blank" rel="noopener noreferrer">Release Notes</a>
+- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/" target="_blank" rel="noopener noreferrer">Home</a>
+- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/installation/" target="_blank" rel="noopener noreferrer">Installation</a>
+- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/configuration/" target="_blank" rel="noopener noreferrer">Configuration</a>
+- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/guidelines/" target="_blank" rel="noopener noreferrer">Guidelines and Standards</a>
+- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/project-structure/" target="_blank" rel="noopener noreferrer">Project Structure</a>
+- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/api-endpoints/" target="_blank" rel="noopener noreferrer">API Endpoints</a>
+- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/system-modeling/" target="_blank" rel="noopener noreferrer">System Modeling</a>
+- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/authentication-security/" target="_blank" rel="noopener noreferrer">Authentication and Security</a>
+- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/development/" target="_blank" rel="noopener noreferrer">Development</a>
+- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/testing/" target="_blank" rel="noopener noreferrer">Testing</a>
+- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/deploy/" target="_blank" rel="noopener noreferrer">Deploy</a>
+- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/contributing/" target="_blank" rel="noopener noreferrer">Contributing</a>
+- <a href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/release-notes/" target="_blank" rel="noopener noreferrer">Release Notes</a>
 
 ### Local preview
 
@@ -30,7 +30,7 @@ mkdocs serve -a 127.0.0.1:8001
 ```
 
 Open:
-<a href="http://127.0.0.1:8001/06-API_Pgto_MercadoLivre/" target="_blank" rel="noopener noreferrer">http://127.0.0.1:8001/06-API_Pgto_MercadoLivre/</a>
+<a href="http://127.0.0.1:8001/site/" target="_blank" rel="noopener noreferrer">http://127.0.0.1:8001/site/</a>
 
 ### Docs source
 
@@ -119,7 +119,7 @@ mkdocs serve -a 127.0.0.1:8001
 
 Open:
 
-- http://127.0.0.1:8001/06-API_Pgto_MercadoLivre/
+- http://127.0.0.1:8001/site/
 
 ## License
 
