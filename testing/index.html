@@ -1,0 +1,2193 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A FastAPI-based payment integration API with Mercado Pago for secure transaction processing, order creation, and webhook notifications.">
+      
+      
+        <meta name="author" content="GabrielDLobo">
+      
+      
+        <link rel="canonical" href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/testing/">
+      
+      
+        <link rel="prev" href="../system-modeling/">
+      
+      
+        <link rel="next" href="../deploy/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
+    
+    
+      
+        <title>Testing - Mercado Pago Payment API</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.35f28582.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#testing-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mercado Pago Payment API" class="md-header__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mercado Pago Payment API
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Testing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mercado Pago Payment API" class="md-nav__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    Mercado Pago Payment API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-endpoints/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Endpoints
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authentication-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authentication and Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guidelines/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guidelines and Standards
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-structure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Project Structure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-modeling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    System Modeling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Testing
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Testing
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testing-pyramid" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Pyramid
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Environment Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Environment Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-testing-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install Testing Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-directory-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Directory Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-configuration-conftestpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Configuration (conftest.py)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unit-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unit Testing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Unit Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#service-layer-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Service Layer Tests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-validation-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Validation Tests
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Testing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-endpoint-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Endpoint Tests
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      End-to-End Testing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="End-to-End Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#full-payment-flow-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full Payment Flow Test
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-cards-and-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Cards and Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Cards and Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mercado-pago-test-cards-sandbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mercado Pago Test Cards (Sandbox)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mercado Pago Test Cards (Sandbox)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approved-payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Approved Payments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rejected-payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rejected Payments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-data-fixtures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Data Fixtures
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running Tests
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running Tests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-test-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Test Commands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-with-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test with Coverage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-output-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Output Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Coverage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Coverage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coverage-report-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coverage Report Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coverage-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coverage Goals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coverage-configuration-pyprojecttoml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coverage Configuration (pyproject.toml)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cicd-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      CI/CD Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CI/CD Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#github-actions-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      GitHub Actions Workflow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-commit-test-hook" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-commit Test Hook
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dos" class="md-nav__link">
+    <span class="md-ellipsis">
+      DO's ✅
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#donts" class="md-nav__link">
+    <span class="md-ellipsis">
+      DON'Ts ❌
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deploy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testing-pyramid" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Pyramid
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Environment Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Environment Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-testing-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install Testing Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-directory-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Directory Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-configuration-conftestpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Configuration (conftest.py)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unit-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unit Testing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Unit Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#service-layer-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Service Layer Tests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-validation-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Validation Tests
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Testing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-endpoint-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Endpoint Tests
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      End-to-End Testing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="End-to-End Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#full-payment-flow-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full Payment Flow Test
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-cards-and-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Cards and Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Cards and Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mercado-pago-test-cards-sandbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mercado Pago Test Cards (Sandbox)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mercado Pago Test Cards (Sandbox)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approved-payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Approved Payments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rejected-payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rejected Payments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-data-fixtures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Data Fixtures
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running Tests
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running Tests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-test-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Test Commands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-with-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test with Coverage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-output-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Output Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Coverage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Coverage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coverage-report-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coverage Report Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coverage-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coverage Goals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coverage-configuration-pyprojecttoml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coverage Configuration (pyproject.toml)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cicd-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      CI/CD Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CI/CD Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#github-actions-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      GitHub Actions Workflow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-commit-test-hook" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-commit Test Hook
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dos" class="md-nav__link">
+    <span class="md-ellipsis">
+      DO's ✅
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#donts" class="md-nav__link">
+    <span class="md-ellipsis">
+      DON'Ts ❌
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="testing-guide">Testing Guide</h1>
+<p>This guide covers testing strategies, frameworks, and procedures for the Mercado Libre Payment API.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#testing-overview">Testing Overview</a></li>
+<li><a href="#test-environment-setup">Test Environment Setup</a></li>
+<li><a href="#unit-testing">Unit Testing</a></li>
+<li><a href="#integration-testing">Integration Testing</a></li>
+<li><a href="#end-to-end-testing">End-to-End Testing</a></li>
+<li><a href="#test-cards-and-data">Test Cards and Data</a></li>
+<li><a href="#running-tests">Running Tests</a></li>
+<li><a href="#test-coverage">Test Coverage</a></li>
+<li><a href="#cicd-integration">CI/CD Integration</a></li>
+</ul>
+<hr />
+<h2 id="testing-overview">Testing Overview</h2>
+<h3 id="testing-pyramid">Testing Pyramid</h3>
+<pre class="mermaid"><code>flowchart BT
+    E2E[End-to-End Tests&lt;br/&gt;Few, Slow] --&gt; I[Integration Tests&lt;br/&gt;Some, Medium]
+    I --&gt; U[Unit Tests&lt;br/&gt;Many, Fast]
+
+    style U fill:#e8f5e9
+    style I fill:#fff3e0
+    style E2E fill:#e3f2fd</code></pre>
+<h3 id="test-types">Test Types</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Purpose</th>
+<th>Speed</th>
+<th>Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Unit Tests</strong></td>
+<td>Test individual functions</td>
+<td>Fast</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>Integration Tests</strong></td>
+<td>Test component interactions</td>
+<td>Medium</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>E2E Tests</strong></td>
+<td>Test complete user flows</td>
+<td>Slow</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<h3 id="testing-framework">Testing Framework</h3>
+<p>The project uses <strong>pytest</strong> as the testing framework:</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simple syntax</td>
+<td>Easy to write tests</td>
+</tr>
+<tr>
+<td>Fixtures</td>
+<td>Reusable test setup</td>
+</tr>
+<tr>
+<td>Parametrization</td>
+<td>Run tests with multiple inputs</td>
+</tr>
+<tr>
+<td>Plugins</td>
+<td>Extensive ecosystem</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="test-environment-setup">Test Environment Setup</h2>
+<h3 id="install-testing-dependencies">Install Testing Dependencies</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create test requirements file</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>requirements-test.txt<span class="w"> </span><span class="s">&lt;&lt; EOF</span>
+<span class="s">-r requirements.txt</span>
+<span class="s">pytest==8.0.0</span>
+<span class="s">pytest-cov==4.1.0</span>
+<span class="s">pytest-asyncio==0.23.0</span>
+<span class="s">httpx==0.27.0</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Install testing dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-test.txt
+</code></pre></div>
+<h3 id="test-directory-structure">Test Directory Structure</h3>
+<div class="highlight"><pre><span></span><code>tests/
+├── __init__.py
+├── conftest.py          # Pytest fixtures and configuration
+├── test_app.py          # API endpoint tests
+├── test_mercadopago.py  # Service layer tests
+└── test_integration.py  # Integration tests
+</code></pre></div>
+<h3 id="test-configuration-conftestpy">Test Configuration (conftest.py)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># tests/conftest.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">unittest.mock</span><span class="w"> </span><span class="kn">import</span> <span class="n">MagicMock</span><span class="p">,</span> <span class="n">patch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.testclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">client</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create test client.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span> <span class="k">as</span> <span class="n">test_client</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">test_client</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mock_mercadopago</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mock MercadoPago service.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;app.MercadoPago&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock</span><span class="p">:</span>
+        <span class="n">mp_instance</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">mock</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mp_instance</span>
+        <span class="k">yield</span> <span class="n">mp_instance</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">valid_card_data</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Valid test card data.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;card&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mf">100.00</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Payment&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;card_number&#39;</span><span class="p">:</span> <span class="s1">&#39;5031755734530604&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;expiration_month&#39;</span><span class="p">:</span> <span class="s1">&#39;11&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;expiration_year&#39;</span><span class="p">:</span> <span class="s1">&#39;2025&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;security_code&#39;</span><span class="p">:</span> <span class="s1">&#39;123&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;cardholder_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test User&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;identification_number&#39;</span><span class="p">:</span> <span class="s1">&#39;12345678900&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;installments&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">}</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">valid_pix_data</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Valid test PIX data.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;pix&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mf">50.00</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test PIX&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;pix@example.com&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;identification_number&#39;</span><span class="p">:</span> <span class="s1">&#39;12345678900&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">valid_boleto_data</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Valid test boleto data.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;boleto&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mf">75.00</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Boleto&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;boleto@example.com&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;identification_number&#39;</span><span class="p">:</span> <span class="s1">&#39;12345678900&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;zip_code&#39;</span><span class="p">:</span> <span class="s1">&#39;01001-000&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;street_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Rua Teste&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;street_number&#39;</span><span class="p">:</span> <span class="s1">&#39;100&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;neighborhood&#39;</span><span class="p">:</span> <span class="s1">&#39;Centro&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;federal_unit&#39;</span><span class="p">:</span> <span class="s1">&#39;SP&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="unit-testing">Unit Testing</h2>
+<h3 id="service-layer-tests">Service Layer Tests</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># tests/test_mercadopago.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">unittest.mock</span><span class="w"> </span><span class="kn">import</span> <span class="n">patch</span><span class="p">,</span> <span class="n">MagicMock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">services.mercadopago</span><span class="w"> </span><span class="kn">import</span> <span class="n">MercadoPago</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestMercadoPago</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests for MercadoPago service.&quot;&quot;&quot;</span>
+
+    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;services.mercadopago.requests.post&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_pay_with_pix_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_post</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test successful PIX payment creation.&quot;&quot;&quot;</span>
+        <span class="c1"># Arrange</span>
+        <span class="n">mock_response</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">mock_response</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;123456&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;pending&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;payment_method_id&#39;</span><span class="p">:</span> <span class="s1">&#39;pix&#39;</span>
+        <span class="p">}</span>
+        <span class="n">mock_response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">mock_post</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_response</span>
+
+        <span class="n">mp</span> <span class="o">=</span> <span class="n">MercadoPago</span><span class="p">()</span>
+        <span class="n">payer</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">}</span>
+
+        <span class="c1"># Act</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">pay_with_pix</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="mf">100.00</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Test Payment&#39;</span><span class="p">,</span>
+            <span class="n">payer</span><span class="o">=</span><span class="n">payer</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Assert</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;123456&#39;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;pending&#39;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;payment_method_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;pix&#39;</span>
+        <span class="n">mock_post</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+
+    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;services.mercadopago.requests.post&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_pay_with_card_tokenization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_post</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test card tokenization before payment.&quot;&quot;&quot;</span>
+        <span class="c1"># Arrange</span>
+        <span class="n">token_response</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">token_response</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;token_123&#39;</span><span class="p">}</span>
+        <span class="n">token_response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">payment_response</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">payment_response</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;789012&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;approved&#39;</span>
+        <span class="p">}</span>
+        <span class="n">payment_response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">mock_post</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="p">[</span><span class="n">token_response</span><span class="p">,</span> <span class="n">payment_response</span><span class="p">]</span>
+
+        <span class="n">mp</span> <span class="o">=</span> <span class="n">MercadoPago</span><span class="p">()</span>
+        <span class="n">card_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;card_number&#39;</span><span class="p">:</span> <span class="s1">&#39;5031755734530604&#39;</span><span class="p">}</span>
+        <span class="n">payer</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">}</span>
+
+        <span class="c1"># Act</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">pay_with_card</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="mf">100.00</span><span class="p">,</span>
+            <span class="n">installments</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Test&#39;</span><span class="p">,</span>
+            <span class="n">card_data</span><span class="o">=</span><span class="n">card_data</span><span class="p">,</span>
+            <span class="n">payer</span><span class="o">=</span><span class="n">payer</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Assert</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span>
+        <span class="k">assert</span> <span class="n">mock_post</span><span class="o">.</span><span class="n">call_count</span> <span class="o">==</span> <span class="mi">2</span>  <span class="c1"># Token + Payment</span>
+
+    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;services.mercadopago.requests.post&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_api_error_handling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_post</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test API error handling.&quot;&quot;&quot;</span>
+        <span class="c1"># Arrange</span>
+        <span class="n">mock_response</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">mock_response</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Invalid card&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;bad_request&#39;</span>
+        <span class="p">}</span>
+        <span class="n">mock_response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;HTTP Error&quot;</span><span class="p">)</span>
+        <span class="n">mock_post</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_response</span>
+
+        <span class="n">mp</span> <span class="o">=</span> <span class="n">MercadoPago</span><span class="p">()</span>
+
+        <span class="c1"># Act &amp; Assert</span>
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+            <span class="n">mp</span><span class="o">.</span><span class="n">pay_with_pix</span><span class="p">(</span><span class="mf">100.00</span><span class="p">,</span> <span class="s1">&#39;Test&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">})</span>
+</code></pre></div>
+<h3 id="input-validation-tests">Input Validation Tests</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># tests/test_validation.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.testclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestClient</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestPaymentValidation</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests for payment input validation.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_payment_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test rejection of invalid payment method.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/create_payment&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;crypto&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mf">100.00</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span>
+        <span class="p">})</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">400</span>
+        <span class="k">assert</span> <span class="s1">&#39;payment method&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;detail&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_negative_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test rejection of negative amounts.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/create_payment&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;pix&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">50.00</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span>
+        <span class="p">})</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">400</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_zero_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test rejection of zero amounts.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/create_payment&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;pix&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span>
+        <span class="p">})</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">400</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_missing_required_field</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test rejection when required field is missing.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/create_payment&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;pix&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mf">100.00</span><span class="p">,</span>
+            <span class="c1"># Missing description</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span>
+        <span class="p">})</span>
+        <span class="c1"># Should handle gracefully or return appropriate error</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">422</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_email_format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test handling of invalid email format.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/create_payment&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;pix&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mf">100.00</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;invalid-email&#39;</span>
+        <span class="p">})</span>
+        <span class="c1"># Application should validate email format</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">]</span>
+</code></pre></div>
+<hr />
+<h2 id="integration-testing">Integration Testing</h2>
+<h3 id="api-endpoint-tests">API Endpoint Tests</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># tests/test_app.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.testclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">unittest.mock</span><span class="w"> </span><span class="kn">import</span> <span class="n">patch</span><span class="p">,</span> <span class="n">MagicMock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestCheckoutPage</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests for checkout page endpoint.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_checkout_page_loads</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that checkout page renders successfully.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+        <span class="k">assert</span> <span class="s1">&#39;text/html&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;content-type&#39;</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="sa">b</span><span class="s1">&#39;Checkout&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_checkout_contains_payment_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that checkout page shows all payment methods.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+        <span class="k">assert</span> <span class="sa">b</span><span class="s1">&#39;Cartão de Crédito&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span> <span class="ow">or</span> <span class="sa">b</span><span class="s1">&#39;card&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
+        <span class="k">assert</span> <span class="sa">b</span><span class="s1">&#39;PIX&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span> <span class="ow">or</span> <span class="sa">b</span><span class="s1">&#39;pix&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
+        <span class="k">assert</span> <span class="sa">b</span><span class="s1">&#39;Boleto&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span> <span class="ow">or</span> <span class="sa">b</span><span class="s1">&#39;boleto&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestCreatePayment</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests for payment creation endpoint.&quot;&quot;&quot;</span>
+
+    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;app.MercadoPago&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_create_card_payment_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_mp_class</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test successful credit card payment creation.&quot;&quot;&quot;</span>
+        <span class="c1"># Arrange</span>
+        <span class="n">mock_mp</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">mock_mp</span><span class="o">.</span><span class="n">pay_with_card</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;123456&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;approved&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mf">100.00</span>
+        <span class="p">}</span>
+        <span class="n">mock_mp_class</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_mp</span>
+
+        <span class="c1"># Act</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/create_payment&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;card&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mf">100.00</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Payment&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;card_number&#39;</span><span class="p">:</span> <span class="s1">&#39;5031755734530604&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;expiration_month&#39;</span><span class="p">:</span> <span class="s1">&#39;11&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;expiration_year&#39;</span><span class="p">:</span> <span class="s1">&#39;2025&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;security_code&#39;</span><span class="p">:</span> <span class="s1">&#39;123&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;cardholder_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test User&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;identification_number&#39;</span><span class="p">:</span> <span class="s1">&#39;12345678900&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;installments&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="p">})</span>
+
+        <span class="c1"># Assert</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span>
+        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;123456&#39;</span>
+
+    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;app.MercadoPago&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_create_pix_payment_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_mp_class</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test successful PIX payment creation.&quot;&quot;&quot;</span>
+        <span class="c1"># Arrange</span>
+        <span class="n">mock_mp</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">mock_mp</span><span class="o">.</span><span class="n">pay_with_pix</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;789012&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;pending&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;payment_method_id&#39;</span><span class="p">:</span> <span class="s1">&#39;pix&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;point_of_interaction&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;transaction_data&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;qr_code&#39;</span><span class="p">:</span> <span class="s1">&#39;00020126580014BR.GOV.BCB.PIX...&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;ticket_url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://mercadopago.com.br/pix/...&#39;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">mock_mp_class</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_mp</span>
+
+        <span class="c1"># Act</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/create_payment&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;pix&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mf">50.00</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test PIX&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;pix@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;identification_number&#39;</span><span class="p">:</span> <span class="s1">&#39;12345678900&#39;</span><span class="p">,</span>
+        <span class="p">})</span>
+
+        <span class="c1"># Assert</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;pending&#39;</span>
+        <span class="k">assert</span> <span class="s1">&#39;point_of_interaction&#39;</span> <span class="ow">in</span> <span class="n">data</span>
+
+    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;app.MercadoPago&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_create_boleto_payment_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_mp_class</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test successful boleto payment creation.&quot;&quot;&quot;</span>
+        <span class="c1"># Arrange</span>
+        <span class="n">mock_mp</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">mock_mp</span><span class="o">.</span><span class="n">pay_with_boleto</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;345678&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;pending&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;payment_method_id&#39;</span><span class="p">:</span> <span class="s1">&#39;bolbradesco&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;transaction_details&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;external_resource_url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://mercadopago.com.br/boleto/...&#39;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">mock_mp_class</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_mp</span>
+
+        <span class="c1"># Act</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/create_payment&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;boleto&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mf">75.00</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Boleto&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;boleto@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;identification_number&#39;</span><span class="p">:</span> <span class="s1">&#39;12345678900&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;zip_code&#39;</span><span class="p">:</span> <span class="s1">&#39;01001-000&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;street_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Rua Teste&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;street_number&#39;</span><span class="p">:</span> <span class="s1">&#39;100&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;neighborhood&#39;</span><span class="p">:</span> <span class="s1">&#39;Centro&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;federal_unit&#39;</span><span class="p">:</span> <span class="s1">&#39;SP&#39;</span><span class="p">,</span>
+        <span class="p">})</span>
+
+        <span class="c1"># Assert</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;pending&#39;</span>
+        <span class="k">assert</span> <span class="s1">&#39;external_resource_url&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;transaction_details&#39;</span><span class="p">,</span> <span class="p">{})</span>
+
+    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;app.MercadoPago&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_payment_creation_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_mp_class</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test payment creation error handling.&quot;&quot;&quot;</span>
+        <span class="c1"># Arrange</span>
+        <span class="n">mock_mp</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">mock_mp</span><span class="o">.</span><span class="n">pay_with_pix</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;API Error&quot;</span><span class="p">)</span>
+        <span class="n">mock_mp_class</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_mp</span>
+
+        <span class="c1"># Act</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/create_payment&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;pix&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mf">100.00</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;identification_number&#39;</span><span class="p">:</span> <span class="s1">&#39;12345678900&#39;</span><span class="p">,</span>
+        <span class="p">})</span>
+
+        <span class="c1"># Assert</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">502</span>
+</code></pre></div>
+<hr />
+<h2 id="end-to-end-testing">End-to-End Testing</h2>
+<h3 id="full-payment-flow-test">Full Payment Flow Test</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># tests/test_e2e.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.testclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestEndToEndPaymentFlow</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;End-to-end tests for complete payment flows.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_complete_pix_payment_flow</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test complete PIX payment flow from start to finish.&quot;&quot;&quot;</span>
+        <span class="c1"># Step 1: Load checkout page</span>
+        <span class="n">page_response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">page_response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+
+        <span class="c1"># Step 2: Create PIX payment</span>
+        <span class="n">payment_response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/create_payment&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;pix&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mf">100.00</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;E2E Test Payment&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;e2e@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;identification_number&#39;</span><span class="p">:</span> <span class="s1">&#39;12345678900&#39;</span><span class="p">,</span>
+        <span class="p">})</span>
+
+        <span class="c1"># Step 3: Verify payment response</span>
+        <span class="k">assert</span> <span class="n">payment_response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+        <span class="n">payment_data</span> <span class="o">=</span> <span class="n">payment_response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="s1">&#39;id&#39;</span> <span class="ow">in</span> <span class="n">payment_data</span>
+        <span class="k">assert</span> <span class="n">payment_data</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;pending&#39;</span><span class="p">,</span> <span class="s1">&#39;approved&#39;</span><span class="p">]</span>
+
+        <span class="c1"># Step 4: Verify QR code or ticket URL is present</span>
+        <span class="k">if</span> <span class="n">payment_data</span><span class="p">[</span><span class="s1">&#39;payment_method_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;pix&#39;</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="s1">&#39;point_of_interaction&#39;</span> <span class="ow">in</span> <span class="n">payment_data</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_payment_method_selection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that all payment methods are available.&quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+
+        <span class="c1"># Verify page contains all payment method options</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="s1">&#39;card&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;cartão&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="s1">&#39;pix&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="s1">&#39;boleto&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h2 id="test-cards-and-data">Test Cards and Data</h2>
+<h3 id="mercado-pago-test-cards-sandbox">Mercado Pago Test Cards (Sandbox)</h3>
+<p>Use these test cards in sandbox mode:</p>
+<h4 id="approved-payments">Approved Payments</h4>
+<table>
+<thead>
+<tr>
+<th>Card Type</th>
+<th>Card Number</th>
+<th>CVV</th>
+<th>Expiration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Visa</strong></td>
+<td>4013 5406 8274 6224</td>
+<td>123</td>
+<td>11/25</td>
+</tr>
+<tr>
+<td><strong>Mastercard</strong></td>
+<td>5031 7557 3453 0604</td>
+<td>123</td>
+<td>11/25</td>
+</tr>
+<tr>
+<td><strong>Elo</strong></td>
+<td>5066 9920 6000 0004</td>
+<td>123</td>
+<td>11/25</td>
+</tr>
+</tbody>
+</table>
+<h4 id="rejected-payments">Rejected Payments</h4>
+<table>
+<thead>
+<tr>
+<th>Card Type</th>
+<th>Card Number</th>
+<th>CVV</th>
+<th>Expiration</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Visa</strong></td>
+<td>4013 5406 8274 6224</td>
+<td>123</td>
+<td>11/25</td>
+<td>General rejection</td>
+</tr>
+<tr>
+<td><strong>Mastercard</strong></td>
+<td>5031 4332 1540 6351</td>
+<td>123</td>
+<td>11/25</td>
+<td>Insufficient funds</td>
+</tr>
+</tbody>
+</table>
+<h3 id="test-data-fixtures">Test Data Fixtures</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># tests/test_data.py</span>
+
+<span class="c1"># Valid CPF numbers (for testing only)</span>
+<span class="n">VALID_CPFS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;12345678900&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;98765432100&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;11144477735&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># Valid test addresses</span>
+<span class="n">TEST_ADDRESSES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;sp&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;zip_code&#39;</span><span class="p">:</span> <span class="s1">&#39;01001-000&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;street_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Praça da Sé&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;street_number&#39;</span><span class="p">:</span> <span class="s1">&#39;100&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;neighborhood&#39;</span><span class="p">:</span> <span class="s1">&#39;Sé&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;federal_unit&#39;</span><span class="p">:</span> <span class="s1">&#39;SP&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;rj&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;zip_code&#39;</span><span class="p">:</span> <span class="s1">&#39;20000-000&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;street_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Av. Rio Branco&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;street_number&#39;</span><span class="p">:</span> <span class="s1">&#39;500&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;neighborhood&#39;</span><span class="p">:</span> <span class="s1">&#39;Centro&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Rio de Janeiro&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;federal_unit&#39;</span><span class="p">:</span> <span class="s1">&#39;RJ&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="c1"># Test emails</span>
+<span class="n">TEST_EMAILS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;approved&#39;</span><span class="p">:</span> <span class="s1">&#39;approved@test.com&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;rejected&#39;</span><span class="p">:</span> <span class="s1">&#39;rejected@test.com&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;pending&#39;</span><span class="p">:</span> <span class="s1">&#39;pending@test.com&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="running-tests">Running Tests</h2>
+<h3 id="basic-test-commands">Basic Test Commands</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run all tests</span>
+pytest
+
+<span class="c1"># Run with verbose output</span>
+pytest<span class="w"> </span>-v
+
+<span class="c1"># Run specific test file</span>
+pytest<span class="w"> </span>tests/test_app.py
+
+<span class="c1"># Run specific test class</span>
+pytest<span class="w"> </span>tests/test_app.py::TestCreatePayment
+
+<span class="c1"># Run specific test function</span>
+pytest<span class="w"> </span>tests/test_app.py::TestCreatePayment::test_create_pix_payment_success
+
+<span class="c1"># Run tests matching a pattern</span>
+pytest<span class="w"> </span>-k<span class="w"> </span><span class="s2">&quot;pix&quot;</span>
+pytest<span class="w"> </span>-k<span class="w"> </span><span class="s2">&quot;card&quot;</span>
+</code></pre></div>
+<h3 id="test-with-coverage">Test with Coverage</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run tests with coverage report</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>app<span class="w"> </span>--cov<span class="o">=</span>services<span class="w"> </span>--cov-report<span class="o">=</span>html
+
+<span class="c1"># Run with terminal coverage report</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>app<span class="w"> </span>--cov<span class="o">=</span>services<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
+
+<span class="c1"># Run with coverage and fail below threshold</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>app<span class="w"> </span>--cov-fail-under<span class="o">=</span><span class="m">80</span>
+</code></pre></div>
+<h3 id="test-output-options">Test Output Options</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Generate JUnit XML report</span>
+pytest<span class="w"> </span>--junitxml<span class="o">=</span>test-results.xml
+
+<span class="c1"># Generate HTML report</span>
+pytest<span class="w"> </span>--html<span class="o">=</span>report.html
+
+<span class="c1"># Show local variables on failure</span>
+pytest<span class="w"> </span>-l
+
+<span class="c1"># Show print statements</span>
+pytest<span class="w"> </span>-s
+</code></pre></div>
+<hr />
+<h2 id="test-coverage">Test Coverage</h2>
+<h3 id="coverage-report-example">Coverage Report Example</h3>
+<div class="highlight"><pre><span></span><code>Name                        Stmts   Miss  Cover   Missing
+---------------------------------------------------------
+app.py                         45      2    96%   75-77
+services/mercadopago.py        52      3    94%   45-47
+---------------------------------------------------------
+TOTAL                          97      5    95%
+</code></pre></div>
+<h3 id="coverage-goals">Coverage Goals</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Minimum Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Services</strong></td>
+<td>90%</td>
+</tr>
+<tr>
+<td><strong>API Routes</strong></td>
+<td>85%</td>
+</tr>
+<tr>
+<td><strong>Overall</strong></td>
+<td>85%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="coverage-configuration-pyprojecttoml">Coverage Configuration (pyproject.toml)</h3>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.pytest.ini_options]</span>
+<span class="n">addopts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;--cov=app --cov=services --cov-report=html --cov-report=term-missing&quot;</span>
+
+<span class="k">[tool.coverage.run]</span>
+<span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;app.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;services/&quot;</span><span class="p">]</span>
+<span class="n">omit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;tests/*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;venv/*&quot;</span><span class="p">]</span>
+
+<span class="k">[tool.coverage.report]</span>
+<span class="n">exclude_lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;pragma: no cover&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;def __repr__&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;raise AssertionError&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;raise NotImplementedError&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+<hr />
+<h2 id="cicd-integration">CI/CD Integration</h2>
+<h3 id="github-actions-workflow">GitHub Actions Workflow</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># .github/workflows/tests.yml</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tests</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">develop</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">test</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up Python</span>
+<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v5</span>
+<span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.11&#39;</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">python -m pip install --upgrade pip</span>
+<span class="w">        </span><span class="no">pip install -r requirements.txt</span>
+<span class="w">        </span><span class="no">pip install -r requirements-test.txt</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run tests with coverage</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">pytest --cov=app --cov=services --cov-report=xml --cov-report=term-missing</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Upload coverage to Codecov</span>
+<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">codecov/codecov-action@v3</span>
+<span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./coverage.xml</span>
+</code></pre></div>
+<h3 id="pre-commit-test-hook">Pre-commit Test Hook</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># .pre-commit-config.yaml</span>
+<span class="nt">repos</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest</span>
+<span class="w">        </span><span class="nt">entry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest</span>
+<span class="w">        </span><span class="nt">language</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">system</span>
+<span class="w">        </span><span class="nt">pass_filenames</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">        </span><span class="nt">always_run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<hr />
+<h2 id="test-best-practices">Test Best Practices</h2>
+<h3 id="dos">DO's ✅</h3>
+<ol>
+<li><strong>Use descriptive test names</strong> - <code>test_pay_with_pix_success()</code></li>
+<li><strong>Follow AAA pattern</strong> - Arrange, Act, Assert</li>
+<li><strong>Mock external services</strong> - Don't call real API in unit tests</li>
+<li><strong>Test edge cases</strong> - Invalid inputs, boundary values</li>
+<li><strong>Keep tests independent</strong> - No test should depend on another</li>
+<li><strong>Use fixtures</strong> - Reusable test setup</li>
+<li><strong>Assert specific values</strong> - Not just status codes</li>
+</ol>
+<h3 id="donts">DON'Ts ❌</h3>
+<ol>
+<li><strong>Don't use real credentials</strong> in tests</li>
+<li><strong>Don't make real API calls</strong> in unit tests</li>
+<li><strong>Don't test implementation details</strong> - Test behavior</li>
+<li><strong>Don't skip tests</strong> without reason</li>
+<li><strong>Don't hardcode sensitive data</strong> in test files</li>
+</ol>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<ol>
+<li><a href="../deploy/">Deploy Guide</a> - Deploy to production</li>
+<li><a href="../contributing/">Contributing Guide</a> - Contribution guidelines</li>
+<li><a href="../release-notes/">Release Notes</a> - Version history</li>
+</ol>
+<hr />
+<p><strong>Last Updated</strong>: April 2026<br />
+<strong>Version</strong>: 1.0.0</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56dfad97.min.js"></script>
+      
+    
+  </body>
+</html>

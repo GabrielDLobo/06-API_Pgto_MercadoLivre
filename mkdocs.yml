@@ -1,7 +1,7 @@
 site_name: Mercado Pago Payment API
 site_description: A FastAPI-based payment integration API with Mercado Pago for secure transaction processing, order creation, and webhook notifications.
 site_author: GabrielDLobo
-site_url: https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/
+site_url: https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/
 
 docs_dir: docs
 site_dir: site

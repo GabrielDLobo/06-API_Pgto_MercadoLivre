@@ -1,0 +1,2011 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A FastAPI-based payment integration API with Mercado Pago for secure transaction processing, order creation, and webhook notifications.">
+      
+      
+        <meta name="author" content="GabrielDLobo">
+      
+      
+        <link rel="canonical" href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/api-endpoints/">
+      
+      
+        <link rel="prev" href="../configuration/">
+      
+      
+        <link rel="next" href="../authentication-security/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
+    
+    
+      
+        <title>API Endpoints - Mercado Pago Payment API</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.35f28582.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-endpoints" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mercado Pago Payment API" class="md-header__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mercado Pago Payment API
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Endpoints
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mercado Pago Payment API" class="md-nav__button md-logo" aria-label="Mercado Pago Payment API" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19c0-.34.04-.67.09-1H3v-6h16v1c.7 0 1.37.13 2 .35V6c0-1.11-.89-2-2-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h10.09c-.05-.33-.09-.66-.09-1M3 6h16v2H3zm14.75 16L15 19l1.16-1.16 1.59 1.59 3.59-3.59 1.16 1.41z"/></svg>
+
+    </a>
+    Mercado Pago Payment API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    API Endpoints
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    API Endpoints
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#base-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      Base URL
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Endpoints
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checkout-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkout Page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-payment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create Payment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create Payment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-fields-all-payment-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Fields (All Payment Methods)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-method-credit-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Method: Credit Card
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-method-pix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Method: PIX
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-method-boleto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Method: Boleto
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#payment-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Payment Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supported-card-brands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Card Brands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installment-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installment Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requestresponse-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request/Response Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Request/Response Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#curl-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      cURL Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="cURL Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#credit-card-payment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credit Card Payment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pix-payment" class="md-nav__link">
+    <span class="md-ellipsis">
+      PIX Payment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boleto-payment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Boleto Payment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#javascript-fetch-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      JavaScript (Fetch API)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python (Requests)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Codes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Codes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#http-status-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP Status Codes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-response-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Response Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Errors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rate-limiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rate Limiting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rate Limiting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mercado-pago-api-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mercado Pago API Limits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retry-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retry Strategy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-documentation-interactive" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Documentation (Interactive)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Documentation (Interactive)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#swagger-ui-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Swagger UI Features
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authentication-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authentication and Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guidelines/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guidelines and Standards
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-structure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Project Structure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-modeling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    System Modeling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deploy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#base-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      Base URL
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Endpoints
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checkout-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkout Page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-payment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create Payment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create Payment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-fields-all-payment-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Fields (All Payment Methods)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-method-credit-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Method: Credit Card
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-method-pix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Method: PIX
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-method-boleto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Method: Boleto
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#payment-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Payment Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supported-card-brands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Card Brands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installment-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installment Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requestresponse-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request/Response Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Request/Response Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#curl-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      cURL Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="cURL Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#credit-card-payment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credit Card Payment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pix-payment" class="md-nav__link">
+    <span class="md-ellipsis">
+      PIX Payment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boleto-payment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Boleto Payment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#javascript-fetch-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      JavaScript (Fetch API)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python (Requests)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Codes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Codes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#http-status-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP Status Codes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-response-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Response Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Errors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rate-limiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rate Limiting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rate Limiting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mercado-pago-api-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mercado Pago API Limits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retry-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retry Strategy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-documentation-interactive" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Documentation (Interactive)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Documentation (Interactive)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#swagger-ui-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Swagger UI Features
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="api-endpoints">API Endpoints</h1>
+<p>This document provides a comprehensive reference for all API endpoints available in the Mercado Libre Payment API.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#base-url">Base URL</a></li>
+<li><a href="#endpoints">Endpoints</a></li>
+<li><a href="#checkout-page">Checkout Page</a></li>
+<li><a href="#create-payment">Create Payment</a></li>
+<li><a href="#payment-methods">Payment Methods</a></li>
+<li><a href="#requestresponse-examples">Request/Response Examples</a></li>
+<li><a href="#error-codes">Error Codes</a></li>
+<li><a href="#rate-limiting">Rate Limiting</a></li>
+</ul>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>The API provides endpoints for processing payments through Mercado Pago. All endpoints follow RESTful conventions and return JSON responses.</p>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Protocol</strong></td>
+<td>HTTP/HTTPS</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td><code>application/json</code></td>
+</tr>
+<tr>
+<td><strong>Character Encoding</strong></td>
+<td>UTF-8</td>
+</tr>
+<tr>
+<td><strong>Authentication</strong></td>
+<td>Bearer Token (via service layer)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="base-url">Base URL</h2>
+<table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Development</strong></td>
+<td><code>http://localhost:8000</code></td>
+</tr>
+<tr>
+<td><strong>Production</strong></td>
+<td><code>https://your-domain.com</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="endpoints">Endpoints</h2>
+<h3 id="checkout-page">Checkout Page</h3>
+<p>Renders the payment checkout HTML page.</p>
+<div class="highlight"><pre><span></span><code>GET /
+</code></pre></div>
+<p><strong>Headers:</strong>
+| Header | Value | Required |
+|--------|-------|----------|
+| <code>Accept</code> | <code>text/html</code> | Yes |</p>
+<p><strong>Response:</strong>
+- <strong>Content-Type</strong>: <code>text/html; charset=utf-8</code>
+- <strong>Status</strong>: <code>200 OK</code></p>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://localhost:8000/
+</code></pre></div></p>
+<p><strong>Response:</strong> HTML page with payment form</p>
+<hr />
+<h3 id="create-payment">Create Payment</h3>
+<p>Creates a new payment transaction with Mercado Pago.</p>
+<div class="highlight"><pre><span></span><code>POST /create_payment
+</code></pre></div>
+<p><strong>Headers:</strong>
+| Header | Value | Required |
+|--------|-------|----------|
+| <code>Content-Type</code> | <code>application/json</code> | Yes |</p>
+<p><strong>Request Body:</strong></p>
+<p>The request body varies based on the payment method selected.</p>
+<h4 id="common-fields-all-payment-methods">Common Fields (All Payment Methods)</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>payment_method</code></td>
+<td>string</td>
+<td>✅</td>
+<td>Payment method: <code>card</code>, <code>pix</code>, or <code>boleto</code></td>
+</tr>
+<tr>
+<td><code>transaction_amount</code></td>
+<td>number</td>
+<td>✅</td>
+<td>Transaction amount in BRL</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>✅</td>
+<td>Payment description</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>string</td>
+<td>✅</td>
+<td>Payer's email address</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="payment-method-credit-card">Payment Method: Credit Card</h3>
+<p><strong>Additional Required Fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>card_number</code></td>
+<td>string</td>
+<td>Credit card number</td>
+</tr>
+<tr>
+<td><code>expiration_month</code></td>
+<td>string</td>
+<td>Expiration month (MM)</td>
+</tr>
+<tr>
+<td><code>expiration_year</code></td>
+<td>string</td>
+<td>Expiration year (YYYY)</td>
+</tr>
+<tr>
+<td><code>security_code</code></td>
+<td>string</td>
+<td>CVV/CVC code</td>
+</tr>
+<tr>
+<td><code>cardholder_name</code></td>
+<td>string</td>
+<td>Cardholder's full name</td>
+</tr>
+<tr>
+<td><code>identification_number</code></td>
+<td>string</td>
+<td>CPF (Brazilian tax ID)</td>
+</tr>
+<tr>
+<td><code>installments</code></td>
+<td>integer</td>
+<td>Number of installments</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Request:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;payment_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;card&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transaction_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">100.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test Payment&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;card_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5031755734530604&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;expiration_month&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;11&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;expiration_year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;security_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;cardholder_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;identification_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;installments&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Example Response (Success):</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678901&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;approved&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status_detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;accredited&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transaction_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">100.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;payment_method_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;visa&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;date_created&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-01T10:00:00.000-03:00&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;date_approved&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-01T10:00:01.000-03:00&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;payer&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;identification&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CPF&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;card&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;first_six_digits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;503175&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_four_digits&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0604&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;cardholder&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h3 id="payment-method-pix">Payment Method: PIX</h3>
+<p><strong>Additional Required Fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>identification_number</code></td>
+<td>string</td>
+<td>CPF (Brazilian tax ID)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Request:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;payment_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pix&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transaction_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">100.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test PIX Payment&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;identification_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Example Response (Success):</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678902&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pending&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status_detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pending_payment&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transaction_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">100.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;payment_method_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pix&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;date_created&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-01T10:00:00.000-03:00&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;point_of_interaction&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;transaction_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;qr_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00020126580014BR.GOV.BCB.PIX...&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;qr_code_base64&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;iVBORw0KGgoAAAANSUhEUgAA...&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;ticket_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://www.mercadopago.com.br/qr/...&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;payer&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;identification&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CPF&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h3 id="payment-method-boleto">Payment Method: Boleto</h3>
+<p><strong>Additional Required Fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>first_name</code></td>
+<td>string</td>
+<td>Payer's first name</td>
+</tr>
+<tr>
+<td><code>last_name</code></td>
+<td>string</td>
+<td>Payer's last name</td>
+</tr>
+<tr>
+<td><code>identification_number</code></td>
+<td>string</td>
+<td>CPF (Brazilian tax ID)</td>
+</tr>
+<tr>
+<td><code>zip_code</code></td>
+<td>string</td>
+<td>ZIP/Postal code</td>
+</tr>
+<tr>
+<td><code>street_name</code></td>
+<td>string</td>
+<td>Street name</td>
+</tr>
+<tr>
+<td><code>street_number</code></td>
+<td>string</td>
+<td>Street number</td>
+</tr>
+<tr>
+<td><code>neighborhood</code></td>
+<td>string</td>
+<td>Neighborhood</td>
+</tr>
+<tr>
+<td><code>city</code></td>
+<td>string</td>
+<td>City</td>
+</tr>
+<tr>
+<td><code>federal_unit</code></td>
+<td>string</td>
+<td>State (UF) - 2 letters</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example Request:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;payment_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boleto&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transaction_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">100.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test Boleto Payment&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Doe&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;identification_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;zip_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01001-000&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;street_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Praça da Sé&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;street_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;100&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;neighborhood&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sé&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;São Paulo&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;federal_unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SP&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Example Response (Success):</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678903&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pending&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status_detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pending_payment&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transaction_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">100.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;payment_method_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bolbradesco&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;date_created&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-01T10:00:00.000-03:00&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transaction_details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;external_resource_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://www.mercadopago.com.br/boleto/...&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;payer&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;identification&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CPF&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h2 id="payment-methods">Payment Methods</h2>
+<h3 id="summary">Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Code</th>
+<th>Processing Time</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Credit Card</strong></td>
+<td><code>card</code></td>
+<td>Instant</td>
+<td>Installments, Tokenization</td>
+</tr>
+<tr>
+<td><strong>PIX</strong></td>
+<td><code>pix</code></td>
+<td>Instant</td>
+<td>QR Code, Copy &amp; Paste</td>
+</tr>
+<tr>
+<td><strong>Boleto</strong></td>
+<td><code>boleto</code></td>
+<td>1-3 business days</td>
+<td>Bank Slip, External URL</td>
+</tr>
+</tbody>
+</table>
+<h3 id="supported-card-brands">Supported Card Brands</h3>
+<ul>
+<li>Visa</li>
+<li>Mastercard</li>
+<li>Elo</li>
+<li>American Express</li>
+<li>Hipercard</li>
+<li>Aura</li>
+</ul>
+<h3 id="installment-options">Installment Options</h3>
+<table>
+<thead>
+<tr>
+<th>Card Type</th>
+<th>Minimum</th>
+<th>Maximum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Visa/Mastercard</strong></td>
+<td>1</td>
+<td>12</td>
+</tr>
+<tr>
+<td><strong>Elo</strong></td>
+<td>1</td>
+<td>12</td>
+</tr>
+<tr>
+<td><strong>Amex</strong></td>
+<td>1</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="requestresponse-examples">Request/Response Examples</h2>
+<h3 id="curl-examples">cURL Examples</h3>
+<h4 id="credit-card-payment">Credit Card Payment</h4>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/create_payment<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;payment_method&quot;: &quot;card&quot;,</span>
+<span class="s1">    &quot;transaction_amount&quot;: 100.00,</span>
+<span class="s1">    &quot;description&quot;: &quot;Test Payment&quot;,</span>
+<span class="s1">    &quot;email&quot;: &quot;test@example.com&quot;,</span>
+<span class="s1">    &quot;card_number&quot;: &quot;5031755734530604&quot;,</span>
+<span class="s1">    &quot;expiration_month&quot;: &quot;11&quot;,</span>
+<span class="s1">    &quot;expiration_year&quot;: &quot;2025&quot;,</span>
+<span class="s1">    &quot;security_code&quot;: &quot;123&quot;,</span>
+<span class="s1">    &quot;cardholder_name&quot;: &quot;John Doe&quot;,</span>
+<span class="s1">    &quot;identification_number&quot;: &quot;12345678900&quot;,</span>
+<span class="s1">    &quot;installments&quot;: 1</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
+<h4 id="pix-payment">PIX Payment</h4>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/create_payment<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;payment_method&quot;: &quot;pix&quot;,</span>
+<span class="s1">    &quot;transaction_amount&quot;: 50.00,</span>
+<span class="s1">    &quot;description&quot;: &quot;PIX Test&quot;,</span>
+<span class="s1">    &quot;email&quot;: &quot;pix@example.com&quot;,</span>
+<span class="s1">    &quot;identification_number&quot;: &quot;12345678900&quot;</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
+<h4 id="boleto-payment">Boleto Payment</h4>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/create_payment<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;payment_method&quot;: &quot;boleto&quot;,</span>
+<span class="s1">    &quot;transaction_amount&quot;: 75.50,</span>
+<span class="s1">    &quot;description&quot;: &quot;Boleto Test&quot;,</span>
+<span class="s1">    &quot;email&quot;: &quot;boleto@example.com&quot;,</span>
+<span class="s1">    &quot;first_name&quot;: &quot;Jane&quot;,</span>
+<span class="s1">    &quot;last_name&quot;: &quot;Smith&quot;,</span>
+<span class="s1">    &quot;identification_number&quot;: &quot;98765432100&quot;,</span>
+<span class="s1">    &quot;zip_code&quot;: &quot;20000-000&quot;,</span>
+<span class="s1">    &quot;street_name&quot;: &quot;Rua do Comércio&quot;,</span>
+<span class="s1">    &quot;street_number&quot;: &quot;500&quot;,</span>
+<span class="s1">    &quot;neighborhood&quot;: &quot;Centro&quot;,</span>
+<span class="s1">    &quot;city&quot;: &quot;Rio de Janeiro&quot;,</span>
+<span class="s1">    &quot;federal_unit&quot;: &quot;RJ&quot;</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
+<h3 id="javascript-fetch-api">JavaScript (Fetch API)</h3>
+<div class="highlight"><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">createPayment</span><span class="p">(</span><span class="nx">paymentData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/create_payment&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">paymentData</span><span class="p">),</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">payment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">payment_method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;card&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">transaction_amount</span><span class="o">:</span><span class="w"> </span><span class="mf">100.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Test Payment&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">card_number</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;5031755734530604&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">expiration_month</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;11&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">expiration_year</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;2025&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">security_code</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;123&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">cardholder_name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;John Doe&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">identification_number</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;12345678900&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">installments</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="nx">createPayment</span><span class="p">(</span><span class="nx">payment</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Payment created:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Payment failed:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<h3 id="python-requests">Python (Requests)</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_payment</span><span class="p">(</span><span class="n">payment_data</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+        <span class="s1">&#39;http://localhost:8000/create_payment&#39;</span><span class="p">,</span>
+        <span class="n">json</span><span class="o">=</span><span class="n">payment_data</span><span class="p">,</span>
+        <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="c1"># Usage</span>
+<span class="n">payment</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;payment_method&#39;</span><span class="p">:</span> <span class="s1">&#39;pix&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;transaction_amount&#39;</span><span class="p">:</span> <span class="mf">100.00</span><span class="p">,</span>
+    <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Payment&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;identification_number&#39;</span><span class="p">:</span> <span class="s1">&#39;12345678900&#39;</span>
+<span class="p">}</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">create_payment</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Payment ID: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="error-codes">Error Codes</h2>
+<h3 id="http-status-codes">HTTP Status Codes</h3>
+<table>
+<thead>
+<tr>
+<th>Status Code</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td>OK</td>
+<td>Request successful</td>
+</tr>
+<tr>
+<td><code>400</code></td>
+<td>Bad Request</td>
+<td>Invalid payment data</td>
+</tr>
+<tr>
+<td><code>401</code></td>
+<td>Unauthorized</td>
+<td>Invalid credentials</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td>Not Found</td>
+<td>Resource not found</td>
+</tr>
+<tr>
+<td><code>422</code></td>
+<td>Unprocessable Entity</td>
+<td>Validation error</td>
+</tr>
+<tr>
+<td><code>500</code></td>
+<td>Internal Server Error</td>
+<td>Server error</td>
+</tr>
+<tr>
+<td><code>502</code></td>
+<td>Bad Gateway</td>
+<td>Mercado Pago API error</td>
+</tr>
+</tbody>
+</table>
+<h3 id="error-response-format">Error Response Format</h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error description here&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="common-errors">Common Errors</h3>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Status</th>
+<th>Cause</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Invalid payment method</code></td>
+<td>400</td>
+<td>Unknown payment_method value</td>
+<td>Use: card, pix, or boleto</td>
+</tr>
+<tr>
+<td><code>Invalid amount</code></td>
+<td>400</td>
+<td>Amount &lt;= 0 or invalid format</td>
+<td>Use positive decimal number</td>
+</tr>
+<tr>
+<td><code>Missing required field</code></td>
+<td>400</td>
+<td>Required field not provided</td>
+<td>Check required fields for method</td>
+</tr>
+<tr>
+<td><code>Invalid card number</code></td>
+<td>400</td>
+<td>Card number failed validation</td>
+<td>Use valid test card numbers</td>
+</tr>
+<tr>
+<td><code>Erro MP 401</code></td>
+<td>502</td>
+<td>Invalid access token</td>
+<td>Check MP_ACCESS_TOKEN</td>
+</tr>
+<tr>
+<td><code>Erro MP 400</code></td>
+<td>502</td>
+<td>Mercado Pago validation error</td>
+<td>Review payment data</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="rate-limiting">Rate Limiting</h2>
+<h3 id="mercado-pago-api-limits">Mercado Pago API Limits</h3>
+<table>
+<thead>
+<tr>
+<th>Limit Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requests per minute</strong></td>
+<td>100</td>
+</tr>
+<tr>
+<td><strong>Requests per hour</strong></td>
+<td>1000</td>
+</tr>
+<tr>
+<td><strong>Requests per day</strong></td>
+<td>10000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="best-practices">Best Practices</h3>
+<ol>
+<li><strong>Implement retry logic</strong> with exponential backoff</li>
+<li><strong>Cache responses</strong> when appropriate</li>
+<li><strong>Use idempotency keys</strong> for payment creation</li>
+<li><strong>Monitor API usage</strong> to avoid hitting limits</li>
+</ol>
+<h3 id="retry-strategy">Retry Strategy</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">requests.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">RequestException</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_payment_with_retry</span><span class="p">(</span><span class="n">payment_data</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_retries</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">pay_with_pix</span><span class="p">(</span>
+                <span class="n">amount</span><span class="o">=</span><span class="n">payment_data</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">],</span>
+                <span class="n">description</span><span class="o">=</span><span class="n">payment_data</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">],</span>
+                <span class="n">payer</span><span class="o">=</span><span class="n">payment_data</span><span class="p">[</span><span class="s1">&#39;payer&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">except</span> <span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">attempt</span> <span class="o">==</span> <span class="n">max_retries</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span>
+            <span class="n">wait_time</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">attempt</span>  <span class="c1"># Exponential backoff</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait_time</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="api-documentation-interactive">API Documentation (Interactive)</h2>
+<p>The API includes interactive documentation:</p>
+<table>
+<thead>
+<tr>
+<th>Documentation</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Swagger UI</strong></td>
+<td><code>http://localhost:8000/docs</code></td>
+</tr>
+<tr>
+<td><strong>ReDoc</strong></td>
+<td><code>http://localhost:8000/redoc</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="swagger-ui-features">Swagger UI Features</h3>
+<ul>
+<li>Interactive API testing</li>
+<li>Request/response schema visualization</li>
+<li>Try-it-out functionality</li>
+<li>Authentication management</li>
+</ul>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<ol>
+<li><a href="../system-modeling/">System Modeling</a> - Architecture diagrams</li>
+<li><a href="../authentication-security/">Authentication &amp; Security</a> - Security implementation</li>
+<li><a href="../testing/">Testing Guide</a> - Test payment flows</li>
+</ol>
+<hr />
+<p><strong>Last Updated</strong>: April 2026<br />
+<strong>Version</strong>: 1.0.0</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56dfad97.min.js"></script>
+      
+    
+  </body>
+</html>
