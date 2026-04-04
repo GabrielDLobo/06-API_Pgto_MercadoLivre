@@ -13,7 +13,7 @@ This guide provides comprehensive instructions for deploying the Mercado Libre P
 - [Platform-Specific Guides](#platform-specific-guides)
 - [Environment Configuration](#environment-configuration)
 - [SSL/HTTPS Setup](#sslhttps-setup)
-- [Monitoring & Logging](#monitoring--logging)
+- [Monitoring & Logging](#monitoring-logging)
 - [Post-Deployment Verification](#post-deployment-verification)
 - [Rollback Procedures](#rollback-procedures)
 

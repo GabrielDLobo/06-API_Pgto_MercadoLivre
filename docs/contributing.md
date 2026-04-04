@@ -52,7 +52,7 @@ Before contributing, ensure you have:
 - [ ] Git installed and configured
 - [ ] Python 3.8+ installed
 - [ ] GitHub account
-- [ ] Read the [README](../README.md)
+- [ ] Read the [documentation home](index.md)
 - [ ] Reviewed the [Documentation](index.md)
 
 ### Fork and Clone
@@ -503,7 +503,7 @@ git merge main
 
 Contributors are recognized in:
 
-- [CONTRIBUTORS.md](CONTRIBUTORS.md) file
+- contributors list file
 - Release notes
 - Project documentation
 

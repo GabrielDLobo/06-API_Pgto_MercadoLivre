@@ -13,7 +13,7 @@ This document details the authentication mechanisms, security measures, and best
 - [Secure Communication](#secure-communication)
 - [Input Validation](#input-validation)
 - [Error Handling](#error-handling)
-- [Logging & Auditing](#logging--auditing)
+- [Logging & Auditing](#logging-auditing)
 - [Security Best Practices](#security-best-practices)
 - [Compliance](#compliance)
 

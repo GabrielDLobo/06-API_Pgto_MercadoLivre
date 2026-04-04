@@ -455,7 +455,7 @@ When reporting issues, include:
 
 ## License
 
-This project is open source. See [LICENSE](../LICENSE) for details.
+This project is open source. See the repository root for licensing details.
 
 ---
 

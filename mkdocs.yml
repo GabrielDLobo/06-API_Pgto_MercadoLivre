@@ -17,8 +17,7 @@ theme:
   palette:
     primary: navy blue
     accent: indigo
-  font:
-    text: Roboto
+  font: false
   icon:
     logo: material/credit-card-check-outline
 
