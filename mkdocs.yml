@@ -15,9 +15,10 @@ theme:
     - content.code.copy
     - search.highlight
   palette:
-    primary: navy blue
+    primary: green
     accent: indigo
-  font: false
+  font:
+    text: Roboto
   icon:
     logo: material/credit-card-check-outline
 
