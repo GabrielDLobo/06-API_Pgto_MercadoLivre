@@ -12,7 +12,7 @@
         <meta name="author" content="GabrielDLobo">
       
       
-        <link rel="canonical" href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/">
+        <link rel="canonical" href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/">
       
       
       
@@ -249,9 +249,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#visao-geral" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      Visão Geral
+      Overview
     </span>
   </a>
   
@@ -276,9 +276,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#navegue-pela-documentacao" class="md-nav__link">
+  <a href="#browse-the-documentation" class="md-nav__link">
     <span class="md-ellipsis">
-      Navegue pela documentação
+      Browse the documentation
     </span>
   </a>
   
@@ -288,15 +288,6 @@
   <a href="#payment-flow" class="md-nav__link">
     <span class="md-ellipsis">
       Payment Flow
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#atalhos-uteis" class="md-nav__link">
-    <span class="md-ellipsis">
-      Atalhos Úteis
     </span>
   </a>
   
@@ -586,9 +577,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#visao-geral" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      Visão Geral
+      Overview
     </span>
   </a>
   
@@ -613,9 +604,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#navegue-pela-documentacao" class="md-nav__link">
+  <a href="#browse-the-documentation" class="md-nav__link">
     <span class="md-ellipsis">
-      Navegue pela documentação
+      Browse the documentation
     </span>
   </a>
   
@@ -625,15 +616,6 @@
   <a href="#payment-flow" class="md-nav__link">
     <span class="md-ellipsis">
       Payment Flow
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#atalhos-uteis" class="md-nav__link">
-    <span class="md-ellipsis">
-      Atalhos Úteis
     </span>
   </a>
   
@@ -668,53 +650,51 @@
 <div class="page-hero">
    <div class="hero-copy">
       <p class="hero-eyebrow">FastAPI + Mercado Pago</p>
-      <h1>Pagamentos online com fluxo claro, seguro e rápido</h1>
+      <h1>Online payments with a clear, secure, and fast flow</h1>
       <p>
-         Documentação central do projeto de pagamentos com integração ao Mercado Pago.
-         Aqui você encontra instalação, configuração, endpoints, segurança, testes e deploy em um só lugar.
+         Central documentation for the payment project integrated with Mercado Pago.
+         Find installation, configuration, endpoints, security, testing, and deployment in one place.
       </p>
       <div class="hero-actions">
-         <a class="md-button md-button--primary" href="installation.md">Começar agora</a>
-         <a class="md-button" href="api-endpoints.md">Ver endpoints</a>
-         <a class="md-button" href="system-modeling.md">Arquitetura</a>
+         <a class="md-button md-button--primary" href="installation.md">Get started</a>
+         <a class="md-button" href="api-endpoints.md">View endpoints</a>
+         <a class="md-button" href="system-modeling.md">Architecture</a>
       </div>
    </div>
    <div class="hero-panel">
       <div class="hero-stat">
          <span class="hero-stat__value">3</span>
-         <span class="hero-stat__label">métodos de pagamento</span>
+         <span class="hero-stat__label">payment methods</span>
       </div>
       <div class="hero-stat">
          <span class="hero-stat__value">1</span>
-         <span class="hero-stat__label">API com foco em checkout</span>
+         <span class="hero-stat__label">checkout-focused API</span>
       </div>
       <div class="hero-stat">
          <span class="hero-stat__value">100%</span>
-         <span class="hero-stat__label">documentação navegável</span>
+         <span class="hero-stat__label">navigable documentation</span>
       </div>
    </div>
 </div>
 
-<h2 id="visao-geral">Visão Geral</h2>
+<h2 id="overview">Overview</h2>
 <div class="grid cards metric-grid">
 <ul>
-<li>
-<p>:material-credit-card-check-outline: <strong>Checkout unificado</strong></p>
-<p>Cartão, PIX e boleto com fluxo consistente para o front-end.</p>
-</li>
-<li>
-<p>:material-shield-check-outline: <strong>Segurança aplicada</strong></p>
-<p>Token, validação de entrada e tratamento de erros na integração.</p>
-</li>
-<li>
-<p>:material-flash-outline: <strong>Resposta em tempo real</strong></p>
-<p>Retorno rápido para confirmar o estado da transação.</p>
-</li>
-<li>
-<p>:material-api: <strong>Integração REST organizada</strong></p>
-<p>Endpoints separados para checkout, consulta e operação.</p>
-</li>
+<li>:material-credit-card-check-outline: <strong>Unified checkout</strong></li>
 </ul>
+<p>Card, PIX, and boleto with a consistent front-end flow.</p>
+<ul>
+<li>:material-shield-check-outline: <strong>Built-in security</strong></li>
+</ul>
+<p>Token handling, input validation, and error handling in the integration.</p>
+<ul>
+<li>:material-flash-outline: <strong>Real-time response</strong></li>
+</ul>
+<p>Fast feedback to confirm transaction status.</p>
+<ul>
+<li>:material-api: <strong>Structured REST integration</strong></li>
+</ul>
+<p>Separate endpoints for checkout, lookup, and operations.</p>
 </div>
 <h2 id="documentation-index">Documentation Index</h2>
 <div class="grid cards">
@@ -754,28 +734,28 @@ uvicorn<span class="w"> </span>app:app<span class="w"> </span>--reload<span clas
 <li>ReDoc: <code>http://localhost:8000/redoc</code></li>
 </ul>
 <p>:::</p>
-<h2 id="navegue-pela-documentacao">Navegue pela documentação</h2>
+<h2 id="browse-the-documentation">Browse the documentation</h2>
 <div class="grid cards doc-grid">
 <ul>
-<li><strong>Instalação e configuração</strong></li>
+<li><strong>Installation and setup</strong></li>
 </ul>
 <p><a href="installation/">Installation</a><br />
 <a href="configuration/">Configuration</a><br />
 <a href="development/">Development</a></p>
 <ul>
-<li><strong>Arquitetura e API</strong></li>
+<li><strong>Architecture and API</strong></li>
 </ul>
 <p><a href="api-endpoints/">API Endpoints</a><br />
 <a href="authentication-security/">Authentication and Security</a><br />
 <a href="system-modeling/">System Modeling</a></p>
 <ul>
-<li><strong>Boas práticas e operação</strong></li>
+<li><strong>Best practices and operations</strong></li>
 </ul>
 <p><a href="guidelines/">Guidelines and Standards</a><br />
 <a href="testing/">Testing</a><br />
 <a href="deploy/">Deploy</a></p>
 <ul>
-<li><strong>Contribuição e histórico</strong></li>
+<li><strong>Contribution and history</strong></li>
 </ul>
 <p><a href="contributing/">Contributing</a><br />
 <a href="release-notes/">Release Notes</a></p>
@@ -787,18 +767,18 @@ uvicorn<span class="w"> </span>app:app<span class="w"> </span>--reload<span clas
       participant API
       participant MercadoPago
 
-      User-&gt;&gt;Frontend: Escolhe metodo de pagamento
+      User-&gt;&gt;Frontend: Selects payment method
       Frontend-&gt;&gt;API: POST /create_payment
-      API-&gt;&gt;MercadoPago: Cria cobranca
-      MercadoPago--&gt;&gt;API: Retorna status
-      API--&gt;&gt;Frontend: Resultado da transacao
-      Frontend-&gt;&gt;User: Exibe confirmacao</code></pre>
+      API-&gt;&gt;MercadoPago: Creates charge
+      MercadoPago--&gt;&gt;API: Returns status
+      API--&gt;&gt;Frontend: Transaction result
+      Frontend-&gt;&gt;User: Shows confirmation</code></pre>
 <p>## Tech Stack</p>
 <table>
 <thead>
 <tr>
-<th>Camada</th>
-<th>Tecnologia</th>
+<th>Layer</th>
+<th>Technology</th>
 </tr>
 </thead>
 <tbody>
@@ -807,15 +787,15 @@ uvicorn<span class="w"> </span>app:app<span class="w"> </span>--reload<span clas
 <td>FastAPI 0.115.12</td>
 </tr>
 <tr>
-<td>Servidor</td>
+<td>Server</td>
 <td>Uvicorn 0.34.2</td>
 </tr>
 <tr>
-<td>Validacao</td>
+<td>Validation</td>
 <td>Pydantic 2.11.4</td>
 </tr>
 <tr>
-<td>Cliente HTTP</td>
+<td>HTTP Client</td>
 <td>Requests 2.32.3</td>
 </tr>
 <tr>
@@ -823,16 +803,16 @@ uvicorn<span class="w"> </span>app:app<span class="w"> </span>--reload<span clas
 <td>Jinja2 3.1.6</td>
 </tr>
 <tr>
-<td>Configuracao</td>
+<td>Configuration</td>
 <td>python-decouple 3.8</td>
 </tr>
 </tbody>
 </table>
-<h2 id="atalhos-uteis">Atalhos Úteis</h2>
+<p>## Useful Shortcuts</p>
 <div class="highlight-box">
-<strong>Repositório:</strong> <a href="https://github.com/GabrielDLobo/06-API_Pgto_MercadoLivre" target="_blank" rel="noopener noreferrer">06-API_Pgto_MercadoLivre</a><br>
-<strong>Docs locais:</strong> `mkdocs serve -a 127.0.0.1:8001`<br>
-<strong>API local:</strong> `uvicorn app:app --reload --host 0.0.0.0 --port 8000`
+   <strong>Repository:</strong> <a href="https://github.com/GabrielDLobo/06-API_Pgto_MercadoLivre" target="_blank" rel="noopener noreferrer">06-API_Pgto_MercadoLivre</a><br>
+   <strong>Local docs:</strong> `mkdocs serve -a 127.0.0.1:8001`<br>
+   <strong>Local API:</strong> `uvicorn app:app --reload --host 0.0.0.0 --port 8000`
 </div>
 
 <h2 id="repository">Repository</h2>

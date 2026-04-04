@@ -12,7 +12,7 @@
         <meta name="author" content="GabrielDLobo">
       
       
-        <link rel="canonical" href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/site/testing/">
+        <link rel="canonical" href="https://gabrieldlobo.github.io/06-API_Pgto_MercadoLivre/testing/">
       
       
         <link rel="prev" href="../system-modeling/">
@@ -1487,10 +1487,10 @@ pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </s
         <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
         <span class="s1">&#39;identification_number&#39;</span><span class="p">:</span> <span class="s1">&#39;12345678900&#39;</span><span class="p">,</span>
         <span class="s1">&#39;zip_code&#39;</span><span class="p">:</span> <span class="s1">&#39;01001-000&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;street_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Rua Teste&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;street_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Street&#39;</span><span class="p">,</span>
         <span class="s1">&#39;street_number&#39;</span><span class="p">:</span> <span class="s1">&#39;100&#39;</span><span class="p">,</span>
         <span class="s1">&#39;neighborhood&#39;</span><span class="p">:</span> <span class="s1">&#39;Centro&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Sao Paulo&#39;</span><span class="p">,</span>
         <span class="s1">&#39;federal_unit&#39;</span><span class="p">:</span> <span class="s1">&#39;SP&#39;</span><span class="p">,</span>
     <span class="p">}</span>
 </code></pre></div>
@@ -1675,7 +1675,7 @@ pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </s
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that checkout page shows all payment methods.&quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
         <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
-        <span class="k">assert</span> <span class="sa">b</span><span class="s1">&#39;Cartão de Crédito&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span> <span class="ow">or</span> <span class="sa">b</span><span class="s1">&#39;card&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
+        <span class="k">assert</span> <span class="sa">b</span><span class="s1">&#39;Credit Card&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span> <span class="ow">or</span> <span class="sa">b</span><span class="s1">&#39;card&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
         <span class="k">assert</span> <span class="sa">b</span><span class="s1">&#39;PIX&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span> <span class="ow">or</span> <span class="sa">b</span><span class="s1">&#39;pix&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
         <span class="k">assert</span> <span class="sa">b</span><span class="s1">&#39;Boleto&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span> <span class="ow">or</span> <span class="sa">b</span><span class="s1">&#39;boleto&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
 
@@ -1774,10 +1774,10 @@ pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </s
             <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
             <span class="s1">&#39;identification_number&#39;</span><span class="p">:</span> <span class="s1">&#39;12345678900&#39;</span><span class="p">,</span>
             <span class="s1">&#39;zip_code&#39;</span><span class="p">:</span> <span class="s1">&#39;01001-000&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;street_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Rua Teste&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;street_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Street&#39;</span><span class="p">,</span>
             <span class="s1">&#39;street_number&#39;</span><span class="p">:</span> <span class="s1">&#39;100&#39;</span><span class="p">,</span>
             <span class="s1">&#39;neighborhood&#39;</span><span class="p">:</span> <span class="s1">&#39;Centro&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Sao Paulo&#39;</span><span class="p">,</span>
             <span class="s1">&#39;federal_unit&#39;</span><span class="p">:</span> <span class="s1">&#39;SP&#39;</span><span class="p">,</span>
         <span class="p">})</span>
 
@@ -1852,7 +1852,7 @@ pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </s
 
         <span class="c1"># Verify page contains all payment method options</span>
         <span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
-        <span class="k">assert</span> <span class="s1">&#39;card&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;cartão&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="s1">&#39;card&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;credit card&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="k">assert</span> <span class="s1">&#39;pix&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="k">assert</span> <span class="s1">&#39;boleto&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 </code></pre></div>
@@ -1933,10 +1933,10 @@ pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </s
 <span class="n">TEST_ADDRESSES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;sp&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;zip_code&#39;</span><span class="p">:</span> <span class="s1">&#39;01001-000&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;street_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Praça da Sé&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;street_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Se Square&#39;</span><span class="p">,</span>
         <span class="s1">&#39;street_number&#39;</span><span class="p">:</span> <span class="s1">&#39;100&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;neighborhood&#39;</span><span class="p">:</span> <span class="s1">&#39;Sé&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;São Paulo&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;neighborhood&#39;</span><span class="p">:</span> <span class="s1">&#39;Se&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Sao Paulo&#39;</span><span class="p">,</span>
         <span class="s1">&#39;federal_unit&#39;</span><span class="p">:</span> <span class="s1">&#39;SP&#39;</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="s1">&#39;rj&#39;</span><span class="p">:</span> <span class="p">{</span>
