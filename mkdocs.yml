@@ -23,7 +23,7 @@ theme:
     logo: material/credit-card-check-outline
 
 extra_css:
-  - stylesheets/extra.css
+  - stylesheets/theme-02.css
 
 nav:
   - Home: index.md
