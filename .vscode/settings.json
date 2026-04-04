@@ -1,0 +1,9 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^mkdocs build --clean --strict$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "git add": true
+    }
+}
